@@ -21,7 +21,9 @@ hideInToc: true
 - <carbon-book/> **開発言語** - Python, JavaScript
 - <carbon-bookmark/> **資格・スキル** - 基本情報処理, G検定, 2025松尾研LLM講座<br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CyberAgent Tech Lounge1期生
-- <carbon-bar/> **趣味** - 旅行、近代建築
-- <carbon-activity/> **研究(Todo)** - 医療被ばく相談ベンチマーク作成、医療被ばく管理グラフィカルモデリング
+- <carbon-group/> **所属学会** - 放射線技術学会、人工知能学会、言語処理学会
+- <carbon-bar/> **趣味** - 旅行、近代建築巡り
+- <carbon-activity/> **研究(Todo)** - 医療被ばく相談ベンチマーク作成、<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;医療被ばく管理グラフィカルモデリング
 </div>
 </div>

@@ -42,6 +42,7 @@ src: ./pages/who_am_i.md
 
 ---
 hideInToc: true
+src: ./pages/resources.md
 ---
 
 # 本日の学習目標
@@ -1005,7 +1006,7 @@ layout: section
 
 ---
 
-# 次回予告
+# 次回
 
 ***
 
@@ -1044,24 +1045,6 @@ layout: section
 </div>
 </div>
 </div>
-
-<div class="mt-8 text-lg text-purple-600">
-<mdi-star class="inline mr-2" />
-お楽しみに！
-</div>
 </div>
 
----
-layout: center
-class: text-center
----
 
-# ご清聴ありがとうございました
-
-<div class="mt-8">
-<mdi-map-search class="text-blue-500 text-8xl opacity-60" />
-</div>
-
-<div class="mt-6 text-lg opacity-70">
-次回から本格的な冒険が始まります
-</div>
