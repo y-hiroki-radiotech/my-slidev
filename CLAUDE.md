@@ -32,12 +32,18 @@ This project is a template for creating slide presentations using Slidev.
 │   │   ├── interactive-medical-presenter.md
 │   │   ├── medical-slidev-architect.md
 │   │   └── radiation-therapy-educator.md
-│   └── commands/               # Slash commands (実行可能なコマンド)
+│   ├── skills/                 # Skills (スラッシュコマンド)
+│   │   ├── README.md           # Skills documentation
+│   │   ├── add-slide.md        # /add-slide skill
+│   │   ├── create-lecture.md   # /create-lecture skill
+│   │   ├── create-abstract.md  # /create-abstract skill
+│   │   └── prepare-pdf.md      # /prepare-pdf skill
+│   └── commands/               # Commands (詳細な実行手順書・参照用)
 │       ├── README.md           # Command documentation
-│       ├── add-slide.md        # /add-slide command
-│       ├── create-lecture.md   # /create-lecture command
-│       ├── create-abstract.md  # /create-abstract command
-│       └── prepare-pdf.md      # /prepare-pdf command
+│       ├── add-slide.md        # add-slide詳細手順
+│       ├── create-lecture.md   # create-lecture詳細手順
+│       ├── create-abstract.md  # create-abstract詳細手順
+│       └── prepare-pdf.md      # prepare-pdf詳細手順
 ├── lesson_plan/                 # Lesson plan documents
 │   ├── 第1回授業の全体像.md       # Overall structure of the first lesson
 │   └── 本論部分の詳細.md         # Detailed content for main sections

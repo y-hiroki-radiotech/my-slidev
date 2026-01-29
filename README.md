@@ -1,16 +1,32 @@
 # Claude Code統合機能
 
-このプロジェクトでは、Claude Codeの2つの機能を活用してスライド作成を支援します。
+このプロジェクトでは、Claude Codeの3つの機能を活用してスライド作成を支援します。
 
-## Commands vs Agents
+## Skills / Commands / Agents の違い
 
-### Commands（コマンド）- `.claude/commands/`
-**ユーザーが直接呼び出す具体的なアクション**
+### Skills（スキル）- `.claude/skills/`
+**実行可能なスラッシュコマンド**
 
 - スラッシュコマンドとして直接実行（例: `/add-slide`）
 - 明確な入出力と成果物がある
-- ステップバイステップの実行フロー
+- 完全自動実行（ユーザー介入なし）
 - 即座に実行可能なタスク
+
+**利用可能なスキル:**
+- `/add-slide` - 新規スライドセクション追加
+- `/create-lecture` - 講義全体の自動生成
+- `/create-abstract` - 抄読会スライド生成
+- `/prepare-pdf` - PDF出力用最適化
+
+詳細は `.claude/skills/README.md` を参照してください。
+
+### Commands（コマンド）- `.claude/commands/`
+**詳細な実行手順書（参照用）**
+
+- Skillsの詳細版・参照用ドキュメント
+- 完全な実行フローの記述
+- トラブルシューティング情報
+- Claude Codeが内部的に参照
 
 ### Agents（エージェント）- `.claude/agents/`
 **特定分野の専門家として振る舞う自律的システム**
