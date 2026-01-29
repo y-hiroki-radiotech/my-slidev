@@ -24,13 +24,20 @@ This project is a template for creating slide presentations using Slidev.
 │   └── Counter.vue             # Counter component
 ├── layouts/                     # Custom layouts
 │   └── global-bottom.vue       # Global bottom layout
-├── agents/                      # AI agent configurations
-│   ├── README.md               # Agent documentation
-│   ├── adaptive-content-structure.md
-│   ├── adaptive-lecture-designer.md
-│   ├── interactive-medical-presenter.md
-│   ├── meical-slidev-architect.md
-│   └── radiation-therapy-educator.md
+├── .claude/                     # Claude Code configurations
+│   ├── agents/                 # AI agents (専門家システム)
+│   │   ├── README.md           # Agent documentation
+│   │   ├── adaptive-content-structure.md
+│   │   ├── adaptive-lecture-designer.md
+│   │   ├── interactive-medical-presenter.md
+│   │   ├── medical-slidev-architect.md
+│   │   └── radiation-therapy-educator.md
+│   └── commands/               # Slash commands (実行可能なコマンド)
+│       ├── README.md           # Command documentation
+│       ├── add-slide.md        # /add-slide command
+│       ├── create-lecture.md   # /create-lecture command
+│       ├── create-abstract.md  # /create-abstract command
+│       └── prepare-pdf.md      # /prepare-pdf command
 ├── lesson_plan/                 # Lesson plan documents
 │   ├── 第1回授業の全体像.md       # Overall structure of the first lesson
 │   └── 本論部分の詳細.md         # Detailed content for main sections

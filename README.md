@@ -1,6 +1,39 @@
+# Claude Code統合機能
+
+このプロジェクトでは、Claude Codeの2つの機能を活用してスライド作成を支援します。
+
+## Commands vs Agents
+
+### Commands（コマンド）- `.claude/commands/`
+**ユーザーが直接呼び出す具体的なアクション**
+
+- スラッシュコマンドとして直接実行（例: `/add-slide`）
+- 明確な入出力と成果物がある
+- ステップバイステップの実行フロー
+- 即座に実行可能なタスク
+
+### Agents（エージェント）- `.claude/agents/`
+**特定分野の専門家として振る舞う自律的システム**
+
+- Taskツールやプロンプトで起動
+- 専門知識と判断能力を持つ
+- 複雑な問題解決プロセス
+- 分析・設計・相談のサポート
+
+**利用可能なエージェント:**
+- `radiation-therapy-educator` - 放射線治療教育の専門家
+- `medical-slidev-architect` - Slidev設計アーキテクト
+- `adaptive-lecture-designer` - 講義設計の専門家
+- `adaptive-content-structurer` - コンテンツ構造化の専門家
+- `interactive-medical-presenter` - インタラクティブ実装の専門家
+
+詳細は `.claude/agents/README.md` を参照してください。
+
+---
+
 # スラッシュコマンド（完全自動スライド作成）
 
-このプロジェクトでは、Claude Codeのスラッシュコマンド機能を使って、スライド作成を完全自動化できます。
+Claude Codeのスラッシュコマンド機能を使って、スライド作成を完全自動化できます。
 
 ## 利用可能なコマンド
 
