@@ -141,6 +141,102 @@ Skillsは、ユーザーが直接呼び出す具体的なアクションです�
 
 ---
 
+### 5. `/slide-style-rector` - スタイル自動整形
+
+スタイルガイドとレイアウトパターンに基づいてスライドを自動整形します。
+
+**使用方法:**
+```
+# 全スライドを整形
+/slide-style-rector slides.md
+
+# 範囲指定で整形
+/slide-style-rector slides.md 10-20
+
+# 特定のページを整形
+/slide-style-rector pages/flowchart.md
+```
+
+**引数:** スライドファイルパス、オプションで範囲指定
+
+**成果物:**
+- 整形されたスライドファイル
+- 自動git commit
+
+**機能:**
+- `docs/style-guide.md`のルールに従った整形
+- `format/layout-patterns.md`から最適なパターンを選択
+- 文体ルールの自動適用
+- 1スライド1メッセージの徹底
+- 本文28pt以上の維持
+- 適切な余白の確保
+
+**詳細:** `slide-style-rector.md` を参照
+
+---
+
+### 6. `/layout-fix` - レイアウト崩れ自動修正
+
+スライドのレイアウト崩れを検出して自動修正します。
+
+**使用方法:**
+```
+# レイアウトチェックと修正
+/layout-fix slides.md
+
+# 特定のページをチェック
+/layout-fix pages/flowchart.md
+```
+
+**引数:** スライドファイルパス
+
+**成果物:**
+- 修正されたスライドファイル
+- レイアウト分析レポート
+- 自動git commit
+
+**機能:**
+- リスト項目過多の検出（5個以上）
+- テキストオーバーフローの検出（300文字超）
+- 画像サイズの確認
+- タイトル間隔の検証
+- 不適切なレイアウトの検出と修正提案
+- 開発サーバーとの連携
+
+**詳細:** `layout-fix.md` を参照
+
+---
+
+### 7. `/slidev-diagram` - 図解生成とスライド挿入
+
+AI画像生成を使用して図解を作成し、スライドに挿入します。
+
+**使用方法:**
+```
+# 図解を生成してページに挿入
+/slidev-diagram リニアックの構造を図解して。ページ7に挿入、slides.md
+
+# 図解を生成（ページ指定なし）
+/slidev-diagram 放射線治療の流れを図解して
+```
+
+**引数:** 図解の内容説明、オプションでページ番号とファイル名
+
+**成果物:**
+- 生成された図解画像（images/フォルダ）
+- 更新されたスライドファイル
+
+**機能:**
+- AI画像生成
+- ユーザー承認フロー
+- レイアウト選択（center, two-cols, image-right等）
+- 既存コンテンツの維持
+- プレビュー確認
+
+**詳細:** `slidev-diagram.md` を参照
+
+---
+
 ## Skillsの特徴
 
 すべてのスキルは以下の特徴を持ちます：
@@ -203,21 +299,34 @@ Skillsは、ユーザーが直接呼び出す具体的なアクションです�
 ### 新しい講義を作成する場合
 1. `lesson_plan/`ディレクトリに授業計画を作成・更新
 2. `/create-lecture [講義名]`で講義全体を生成
-3. プレビューで確認（`npm run dev`）
-4. 必要に応じて`/add-slide`で追加セクションを作成
-5. `/prepare-pdf`でPDF出力
+3. `/slide-style-rector slides.md`でスタイル整形
+4. `/slidev-diagram`で必要な図解を追加
+5. `/layout-fix slides.md`でレイアウト確認
+6. プレビューで確認（`npm run dev`）
+7. `/prepare-pdf`でPDF出力
 
 ### 既存の講義に追加する場合
 1. `lesson_plan/`で授業計画を確認
 2. `/add-slide [セクション名]`で新しいセクションを追加
-3. プレビューで確認
-4. 必要に応じて`/prepare-pdf`でPDF更新
+3. `/slide-style-rector slides.md`でスタイル統一
+4. `/layout-fix slides.md`でレイアウト確認
+5. プレビューで確認
+6. 必要に応じて`/prepare-pdf`でPDF更新
 
 ### 抄読会の準備をする場合
 1. 論文情報（DOI、タイトル、PDF等）を用意
 2. `/create-abstract [論文情報]`でスライド生成
-3. プレビューで内容確認
-4. `/prepare-pdf pages/abstract-xxx.md`でPDF出力
+3. `/slide-style-rector pages/abstract-xxx.md`でスタイル整形
+4. `/slidev-diagram`で図解を追加（必要に応じて）
+5. `/layout-fix pages/abstract-xxx.md`でレイアウト確認
+6. プレビューで内容確認
+7. `/prepare-pdf pages/abstract-xxx.md`でPDF出力
+
+### スタイル改善のみを行う場合
+1. `/slide-style-rector slides.md`でスタイル整形
+2. `/layout-fix slides.md`でレイアウト確認
+3. プレビューで確認
+4. 問題があれば再度`/slide-style-rector`を実行
 
 ### Agentsと組み合わせる場合
 1. **計画**: Agentsに相談して設計を固める

@@ -58,6 +58,46 @@
 
 ---
 
+### `/slide-style-rector` - スタイル自動整形
+
+スタイルガイドとレイアウトパターンに基づいてスライドを自動整形します。
+
+**使用例:**
+```bash
+/slide-style-rector slides.md
+/slide-style-rector slides.md 10-20
+```
+
+**詳細:** `slide-style-rector.md` を参照
+
+---
+
+### `/layout-fix` - レイアウト崩れ自動修正
+
+スライドのレイアウト崩れを検出して自動修正します。
+
+**使用例:**
+```bash
+/layout-fix slides.md
+```
+
+**詳細:** `layout-fix.md` を参照
+
+---
+
+### `/slidev-diagram` - 図解生成とスライド挿入
+
+AI画像生成を使用して図解を作成し、スライドに挿入します。
+
+**使用例:**
+```bash
+/slidev-diagram リニアックの構造を図解して。ページ7に挿入、slides.md
+```
+
+**詳細:** `slidev-diagram.md` を参照
+
+---
+
 ## コマンドの特徴
 
 すべてのコマンドは以下の特徴を持ちます：
