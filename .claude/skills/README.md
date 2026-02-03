@@ -6,6 +6,34 @@
 
 Skillsは、ユーザーが直接呼び出す具体的なアクションです。スラッシュコマンド（例: `/add-slide`）として実行され、明確な成果物を生成します。
 
+## ディレクトリ構造
+
+各スキルは専用のディレクトリを持ち、その中に`SKILL.md`ファイルを配置します。
+
+```
+.claude/skills/
+├── add-slide/
+│   └── SKILL.md
+├── create-lecture/
+│   └── SKILL.md
+├── create-abstract/
+│   └── SKILL.md
+├── prepare-pdf/
+│   └── SKILL.md
+├── slide-style-rector/
+│   └── SKILL.md
+├── layout-fix/
+│   └── SKILL.md
+├── slidev-diagram/
+│   └── SKILL.md
+└── README.md
+```
+
+各`SKILL.md`ファイルには以下の構造があります:
+- **YAMLフロントマター**: name, description, tools
+- **引数の説明**: スキルの使用方法
+- **実行フロー**: ステップバイステップの詳細手順
+
 ## 利用可能なスキル
 
 ### 1. `/add-slide` - 新規スライドセクション追加
