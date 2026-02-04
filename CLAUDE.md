@@ -137,7 +137,7 @@ npm run export        # PDF出力
 
 ## Skills Overview
 
-### Slidev特化スキル (7)
+### Slidev特化スキル (8)
 
 1. **add-slide** - 新規スライドセクション追加
 2. **create-lecture** - 講義全体の自動生成
@@ -146,6 +146,7 @@ npm run export        # PDF出力
 5. **layout-fix** - レイアウト崩れ自動修正
 6. **slidev-diagram** - 図解生成とスライド挿入
 7. **prepare-pdf** - PDF出力用最適化
+8. **archive-lecture** - 講義アーカイブ
 
 ### Orchestra統合スキル (3)
 

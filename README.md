@@ -121,7 +121,7 @@ my-slidev/
 │   │   ├── medical-slidev-architect.md
 │   │   └── ...                  # 医学教育特化エージェント
 │   │
-│   ├── skills/                  # 10スキル
+│   ├── skills/                  # 11スキル
 │   │   ├── create-lecture/      # 講義全体生成
 │   │   ├── add-slide/           # スライド追加
 │   │   ├── create-abstract/     # 抄読会スライド
@@ -129,6 +129,7 @@ my-slidev/
 │   │   ├── layout-fix/          # レイアウト修正
 │   │   ├── slidev-diagram/      # 図解生成
 │   │   ├── prepare-pdf/         # PDF出力
+│   │   ├── archive-lecture/     # 講義アーカイブ
 │   │   ├── plan/                # 実装計画
 │   │   ├── design-tracker/      # 設計記録
 │   │   └── checkpointing/       # ワークフロー保存
@@ -270,6 +271,22 @@ PDF出力用に最適化し、自動的にPDFを生成します。
 - 文字色を黒系統に調整
 - レイアウト確認
 - slidev export 実行
+
+### `/archive-lecture` — 講義アーカイブ
+
+現在のslides.mdを適切な名前でprevious_lecture/にアーカイブします。
+
+```
+/archive-lecture
+/archive-lecture --custom-name "special-lecture"
+/archive-lecture --no-commit
+```
+
+**ワークフロー:**
+1. slides.mdからタイトル・メタデータを抽出
+2. `lecture-{番号}-{スラッグ化したタイトル}-{日付}.md` として保存
+3. previous_lecture/にコピー
+4. git commit（オプション）
 
 ### `/plan` — 実装計画
 

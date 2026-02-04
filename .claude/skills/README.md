@@ -26,6 +26,8 @@ Skillsは、ユーザーが直接呼び出す具体的なアクションです�
 │   └── SKILL.md
 ├── slidev-diagram/
 │   └── SKILL.md
+├── archive-lecture/
+│   └── SKILL.md
 ├── plan/                      # orchestra統合
 │   └── SKILL.md
 ├── design-tracker/            # orchestra統合
@@ -271,7 +273,43 @@ AI画像生成を使用して図解を作成し、スライドに挿入します
 
 ---
 
-### 8. `/plan` - 実装前の計画作成
+### 8. `/archive-lecture` - 講義アーカイブ
+
+現在のslides.mdを内容から適切な名前を付けてprevious_lectureディレクトリにアーカイブします。
+
+**使用方法:**
+```
+/archive-lecture
+/archive-lecture --custom-name "special-lecture"
+/archive-lecture --no-commit
+```
+
+**引数:**
+- `--custom-name`: カスタムファイル名を指定（オプション）
+- `--no-commit`: git commitをスキップ（オプション）
+
+**成果物:**
+- previous_lecture/内のアーカイブファイル
+- git commit（オプション）
+
+**機能:**
+- slides.mdの内容を分析してタイトル・講義番号を抽出
+- 適切なファイル名を自動生成（例: `lecture-01-radiation-therapy-introduction-2024-02-04.md`）
+- previous_lecture/ディレクトリにコピー
+- 重複チェックとタイムスタンプ追加
+- git commitで記録
+
+**ファイル名生成ルール:**
+- フロントマターや最初のタイトルから講義名を抽出
+- 講義番号を検出（「第1回」→ `01`）
+- 日本語をスラッグ化（英語化、ハイフン区切り）
+- 日付を自動追加
+
+**詳細:** `archive-lecture/SKILL.md` を参照
+
+---
+
+### 9. `/plan` - 実装前の計画作成
 
 複雑な講義作成や大規模な変更の前に、実装計画を立てます。
 
@@ -296,7 +334,7 @@ AI画像生成を使用して図解を作成し、スライドに挿入します
 
 ---
 
-### 9. `/design-tracker` - 設計決定の自動記録
+### 10. `/design-tracker` - 設計決定の自動記録
 
 スライド設計決定を自動的に `.claude/docs/DESIGN.md` に記録します。
 
@@ -324,7 +362,7 @@ AI画像生成を使用して図解を作成し、スライドに挿入します
 
 ---
 
-### 10. `/checkpointing` - ワークフローの保存とパターン発見
+### 11. `/checkpointing` - ワークフローの保存とパターン発見
 
 プレゼンテーション作成のワークフローを保存し、再利用可能なパターンを発見します。
 
