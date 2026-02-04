@@ -12,6 +12,64 @@ tools: [Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion]
 
 ## 実行フロー
 
+### Phase 0.5: プレゼンテーション要件確認
+
+AskUserQuestion tool で以下を確認:
+
+**Question 1: プレゼンテーションの用途**
+- Header: "用途"
+- multiSelect: false
+- Options:
+  - label: "講義・授業資料"
+    description: "教育目的のスライド"
+  - label: "研究発表・学会"
+    description: "研究成果の発表"
+  - label: "ビジネスプレゼン"
+    description: "企業向けプレゼンテーション"
+  - label: "技術セミナー"
+    description: "技術的な内容の説明"
+
+**Question 2: 聴衆の属性**
+- Header: "聴衆"
+- multiSelect: false
+- Options:
+  - label: "学生・初学者"
+    description: "基礎から説明が必要"
+  - label: "専門家・研究者"
+    description: "高度な内容を期待"
+  - label: "一般向け"
+    description: "専門用語を避けた説明"
+  - label: "混合（専門家+一般）"
+    description: "バランスの取れた内容"
+
+**Question 3: 予備知識レベル**
+- Header: "予備知識"
+- multiSelect: false
+- Options:
+  - label: "ほぼなし"
+    description: "基本概念から説明"
+  - label: "基礎レベル"
+    description: "基本的な用語は理解している"
+  - label: "中級レベル"
+    description: "ある程度の専門知識あり"
+  - label: "専門家レベル"
+    description: "高度な知識を前提"
+
+**Question 4: 内容の充実度**
+- Header: "詳細度"
+- multiSelect: false
+- Options:
+  - label: "概要のみ"
+    description: "要点を簡潔に"
+  - label: "標準的な詳しさ"
+    description: "バランスの取れた内容"
+  - label: "詳細まで網羅"
+    description: "詳しい説明と例"
+  - label: "完全網羅"
+    description: "すべての側面をカバー"
+
+これらの回答を受けて、スライド生成の方針（詳細度、専門用語の使用、例の多さ等）を調整する。
+
 ### ステップ1: 準備とコンテキスト設定
 
 1. 現在のタスクコンテキストを確立:

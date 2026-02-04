@@ -1,27 +1,27 @@
-# Slidev Medical Education Framework
+# Slidev General Purpose Presentation Framework
 
-**AI駆動の医学教育プレゼンテーション自動生成システム**
+**AI駆動の汎用プレゼンテーション自動生成システム**
 
 ![slide system](https://storage.googleapis.com/zenn-user-upload/c219b1c77e2d-20260204.png)
 
 ```
-Claude Code (Orchestrator) ─┬─ Gemini CLI (Medical Research)
+Claude Code (Orchestrator) ─┬─ Gemini CLI (Content Research)
                             └─ Slidev Skills (Presentation Generation)
 ```
 
-高品質な放射線治療学スライドを自動生成。医学的正確性と教育効果を両立。
+高品質なプレゼンテーションスライドを自動生成。内容の正確性とプレゼンテーション効果を両立。
 
 ## Quick Start
 
-### 新規講義を作成
+### 新規プレゼンテーションを作成
 
 ```bash
-# 1. 授業計画を作成
-# lesson_plan/第2回授業の全体像.md を作成
+# 1. プレゼンテーション計画を作成
+# lesson_plan/プレゼンテーション計画.md を作成
 
 # 2. Claude Codeでスライド生成
 claude
-> /create-lecture 第2回
+> /create-presentation プロジェクト概要
 
 # 3. プレビュー
 npm run dev
@@ -30,21 +30,21 @@ npm run dev
 > /prepare-pdf
 ```
 
-### 抄読会スライド作成
+### 文書要約スライド作成
 
 ```bash
 claude
-> /create-abstract 10.1016/j.ijrobp.2024.xxxxx
+> /create-document-summary 10.1016/j.example.2024.xxxxx
 
 # または PDFから
-> /create-abstract --pdf /path/to/paper.pdf
+> /create-document-summary --pdf /path/to/document.pdf
 ```
 
 ### 既存スライドに追加
 
 ```bash
 claude
-> /add-slide 放射線の生物学的効果
+> /add-slide 技術概要
 > /slide-style-rector slides.md
 ```
 
@@ -86,9 +86,9 @@ npm install
 │  │                                                       │  │
 │  │              ┌──────────────┐                         │  │
 │  │              │  Gemini CLI  │                         │  │
-│  │              │  医学調査    │                         │  │
-│  │              │  論文分析    │                         │  │
-│  │              │  教育設計    │                         │  │
+│  │              │  専門調査    │                         │  │
+│  │              │  文書分析    │                         │  │
+│  │              │  設計支援    │                         │  │
 │  │              └──────────────┘                         │  │
 │  └───────────────────────────────────────────────────────┘  │
 └─────────────────────────────────────────────────────────────┘
@@ -96,13 +96,13 @@ npm install
 
 ### コンテキスト管理（重要）
 
-メインオーケストレーターのコンテキストを節約するため、医学調査・論文分析はサブエージェント経由で実行します。
+メインオーケストレーターのコンテキストを節約するため、専門調査・文書分析はサブエージェント経由で実行します。
 
 | 状況                   | 推奨方法                            |
 | ---------------------- | ----------------------------------- |
-| 医学的正確性確認       | サブエージェント経由                |
-| 論文分析               | サブエージェント経由 → ファイル保存 |
-| 教育設計相談           | サブエージェント経由                |
+| 専門性の確認           | サブエージェント経由                |
+| 文書分析               | サブエージェント経由 → ファイル保存 |
+| プレゼンテーション設計 | サブエージェント経由                |
 | 簡単な質問             | 直接回答OK                          |
 
 ## Directory Structure
@@ -116,20 +116,17 @@ my-slidev/
 │
 ├── .claude/
 │   ├── agents/
-│   │   ├── general-purpose.md   # Gemini連携サブエージェント
-│   │   ├── radiation-therapy-educator.md
-│   │   ├── medical-slidev-architect.md
-│   │   └── ...                  # 医学教育特化エージェント
+│   │   └── general-purpose.md   # Gemini連携サブエージェント
 │   │
 │   ├── skills/                  # 11スキル
-│   │   ├── create-lecture/      # 講義全体生成
+│   │   ├── create-presentation/ # プレゼンテーション全体生成
 │   │   ├── add-slide/           # スライド追加
-│   │   ├── create-abstract/     # 抄読会スライド
+│   │   ├── create-document-summary/ # 文書要約スライド
 │   │   ├── slide-style-rector/  # スタイル整形
 │   │   ├── layout-fix/          # レイアウト修正
 │   │   ├── slidev-diagram/      # 図解生成
 │   │   ├── prepare-pdf/         # PDF出力
-│   │   ├── archive-lecture/     # 講義アーカイブ
+│   │   ├── archive-lecture/     # プレゼンテーションアーカイブ
 │   │   ├── plan/                # 実装計画
 │   │   ├── design-tracker/      # 設計記録
 │   │   └── checkpointing/       # ワークフロー保存
@@ -148,20 +145,19 @@ my-slidev/
 │   ├── docs/
 │   │   ├── DESIGN.md            # プレゼンテーション設計記録
 │   │   ├── style-guide.md       # ビジュアルデザイン原則
-│   │   └── research/            # Gemini医学調査結果
+│   │   └── research/            # Gemini調査結果
 │   │
 │   └── logs/
 │       └── cli-tools.jsonl      # Gemini入出力ログ
 │
 ├── .gemini/                     # Gemini CLI設定
-│   ├── GEMINI.md                # 医学教育特化の役割定義
+│   ├── GEMINI.md                # 役割定義
 │   ├── settings.json
 │   └── skills/
 │       └── context-loader/      # コンテキスト自動読み込み
 │
-├── lesson_plan/                 # 授業計画
-│   ├── 第1回授業の全体像.md
-│   └── 本論部分の詳細.md
+├── lesson_plan/                 # プレゼンテーション計画
+│   └── (プレゼンテーション計画ファイル)
 │
 ├── format/                      # テンプレート
 │   ├── layout-patterns.md       # 40種類のレイアウトパターン
@@ -174,47 +170,49 @@ my-slidev/
 
 ## Skills
 
-### `/create-lecture` — 講義全体生成
+### `/create-presentation` — プレゼンテーション全体生成
 
-授業計画から講義全体のスライドを一括生成します。
+プレゼンテーション計画から全体のスライドを一括生成します。
 
 ```
-/create-lecture 第1回
+/create-presentation プロジェクト概要
 ```
 
 **ワークフロー:**
-1. `lesson_plan/` から授業計画を読み込み
-2. フロントマター・導入・本論・まとめを自動生成
-3. スタイルガイドに準拠
-4. git commit
+1. `lesson_plan/` からプレゼンテーション計画を読み込み
+2. 用途・聴衆・レベルを確認（AskUserQuestion）
+3. フロントマター・導入・本論・まとめを自動生成
+4. スタイルガイドに準拠
+5. git commit
 
 ### `/add-slide` — スライド追加
 
 既存スライドに新しいセクションを追加します。
 
 ```
-/add-slide 放射線の種類と特性
+/add-slide 技術概要
 ```
 
 **出力:**
 - 新規スライドセクション
 - 既存スタイルとの整合性確保
+- 用途・聴衆に応じた内容調整
 
-### `/create-abstract` — 抄読会スライド
+### `/create-document-summary` — 文書要約スライド
 
-医学論文から抄読会用スライドを自動生成します。
+文書から要約スライドを自動生成します。
 
 ```
-/create-abstract 10.1016/j.ijrobp.2024.xxxxx
-/create-abstract --pdf /path/to/paper.pdf
-/create-abstract --url https://pubmed.ncbi.nlm.nih.gov/12345678/
+/create-document-summary 10.1016/j.example.2024.xxxxx
+/create-document-summary --pdf /path/to/document.pdf
+/create-document-summary --url https://example.com/document
 ```
 
 **ワークフロー:**
-1. 論文情報取得（DOI/PDF/URL）
-2. Geminiで論文分析（必要に応じて）
-3. 背景・方法・結果・考察を構造化
-4. 抄読会フォーマットで生成
+1. 文書情報取得（DOI/PDF/URL）
+2. Geminiで文書分析（必要に応じて）
+3. 要点を構造化
+4. 要約スライド生成
 
 ### `/slide-style-rector` — スタイル整形
 
@@ -303,8 +301,8 @@ PDF出力用に最適化し、自動的にPDFを生成します。
 **記録内容:**
 - レイアウトパターンの選択
 - 配色・ビジュアルデザイン
-- 教育設計アプローチ
-- 医学的正確性確認
+- プレゼンテーション設計アプローチ
+- 内容の正確性確認
 
 ### `/checkpointing` — ワークフロー保存
 
@@ -354,14 +352,14 @@ bash scripts/check-layout.sh    # レイアウトチェック
 
 | フック                         | トリガー           | 動作                             |
 | ------------------------------ | ------------------ | -------------------------------- |
-| `agent-router.py`              | ユーザー入力       | 医学用語・レイアウト質問でGemini提案 |
+| `agent-router.py`              | ユーザー入力       | 専門用語・レイアウト質問でGemini提案 |
 | `suggest-gemini-research.py`   | WebSearch前        | Gemini調査を提案                 |
 | `log-cli-tools.py`             | Gemini実行         | 入出力ログ記録                   |
 
 ## Language Rules
 
 - **コード・思考**: 英語
-- **医学用語**: 英語（国際標準）
+- **専門用語**: 適切な言語（分野による）
 - **Slidev markdown**: 英語
 - **ユーザーへの応答**: 日本語
 - **スライドコンテンツ**: 日本語
@@ -372,85 +370,61 @@ bash scripts/check-layout.sh    # レイアウトチェック
 
 ### いつGeminiを使うか
 
-- **医学的正確性確認** - 最新ガイドライン、治療標準
-- **教育設計相談** - 認知負荷、視覚階層、学習効果
+- **専門性の確認** - 最新情報、業界標準
+- **プレゼンテーション設計相談** - 認知負荷、視覚階層、効果
 - **レイアウト判断** - 40パターンから最適なものを推奨
-- **論文分析** - PDF医学論文の構造化抽出
+- **文書分析** - PDF文書の構造化抽出
 
 ### 使い方
 
 **自動提案:**
-「最新のガイドラインを確認して」と質問すると、agent-routerがGemini使用を提案します。
+「最新情報を確認して」と質問すると、agent-routerがGemini使用を提案します。
 
 **サブエージェント経由（推奨）:**
 ```
 Task(subagent_type="general-purpose",
-     prompt="Geminiで前立腺癌の標準分割照射について調査し、要約を返して")
+     prompt="Geminiで[トピック]について調査し、要約を返して")
 ```
 
 **直接呼び出し（ターミナル）:**
 ```bash
-gemini -p "放射線治療の分割照射について説明して" 2>/dev/null
+gemini -p "[質問内容]" 2>/dev/null
 ```
 
 ---
 
 ## このフレームワークを使う
 
-### 新規講義を作成
+### 新規プレゼンテーション作成
 
-1. **授業計画作成** - `lesson_plan/` に授業計画を作成
-2. **スライド生成** - `/create-lecture` で一括生成
+1. **プレゼンテーション計画作成** - `lesson_plan/` にプレゼンテーション計画を作成
+2. **スライド生成** - `/create-presentation` で一括生成
 3. **図解追加** - `/slidev-diagram` で必要な図解を追加
 4. **スタイル整形** - `/slide-style-rector` で統一
 5. **レイアウト確認** - `/layout-fix` で修正
 6. **PDF出力** - `/prepare-pdf` で発表用PDF作成
 
-### 抄読会準備
+### 文書要約スライド準備
 
-1. **論文情報準備** - DOI、PDF、URLのいずれか
-2. **スライド生成** - `/create-abstract` で自動生成
+1. **文書情報準備** - DOI、PDF、URLのいずれか
+2. **スライド生成** - `/create-document-summary` で自動生成
 3. **PDF出力** - `/prepare-pdf` で発表用PDF作成
 
-### 医学的正確性確認
+### 専門性の確認
 
-1. **質問** - 「最新のガイドラインを確認して」
+1. **質問** - 「最新情報を確認して」
 2. **自動ルーティング** - agent-routerがGemini提案
 3. **調査** - サブエージェント経由でGemini調査
-4. **保存** - `.claude/docs/research/medical-{topic}.md` に保存
+4. **保存** - `.claude/docs/research/{topic}.md` に保存
 5. **記録** - design-trackerが自動的に検証結果を記録
 
 ### カスタマイズ
 
 - **CLAUDE.md**: プロジェクト固有の情報を追加
-- **lesson_plan/**: 授業計画をカスタマイズ
+- **lesson_plan/**: プレゼンテーション計画をカスタマイズ
 - **format/**: レイアウトパターン・テンプレートを追加
 - **.claude/skills/**: カスタムスキルを追加
 - **.claude/rules/**: ルールをカスタマイズ
-
----
-
-## Medical Education Focus
-
-### Target Audience
-
-- 医学生
-- 放射線科レジデント
-- 放射線治療専門医
-
-### Learning Objectives
-
-- 放射線治療の基礎理論
-- 治療計画の実践
-- 最新治療技術の理解
-- 臨床判断能力の向上
-
-### Educational Strategies
-
-- 段階的開示（v-clicks）
-- ビジュアル重視（図解・ダイアグラム）
-- 理論と実践の統合
-- ケースベース学習
 
 ---
 
@@ -492,18 +466,16 @@ NODE_OPTIONS=--max-old-space-size=4096 npm run export
 - **Slidev Documentation**: https://sli.dev/
 - **Vue 3 Documentation**: https://vuejs.org/
 - **Material Design Icons**: https://pictogrammers.com/library/mdi/
-- **NCCN Guidelines**: https://www.nccn.org/
-- **ASTRO Guidelines**: https://www.astro.org/
 
 ---
 
 ## Integration Benefits
 
-### 医学教育の質向上
+### プレゼンテーションの質向上
 
-- ✅ 最新ガイドラインとの整合性確保
-- ✅ 医学用語の国際標準への準拠
-- ✅ 教育効果の科学的根拠に基づく最大化
+- ✅ 最新情報との整合性確保
+- ✅ 専門用語の適切な使用
+- ✅ プレゼンテーション効果の科学的根拠に基づく最大化
 
 ### 開発効率の向上
 
