@@ -26,6 +26,12 @@ Skillsは、ユーザーが直接呼び出す具体的なアクションです�
 │   └── SKILL.md
 ├── slidev-diagram/
 │   └── SKILL.md
+├── plan/                      # orchestra統合
+│   └── SKILL.md
+├── design-tracker/            # orchestra統合
+│   └── SKILL.md
+├── checkpointing/             # orchestra統合
+│   └── SKILL.md
 └── README.md
 ```
 

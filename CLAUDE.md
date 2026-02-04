@@ -595,3 +595,118 @@ Gemini CLI呼び出しを `.claude/logs/cli-tools.jsonl` に記録します。
 5. **計画的開発**: 複雑な講義前にplan skillで事前設計
 
 すべて既存のSlidev特化機能を維持したまま実現されています。
+
+### Gemini CLI設定
+
+Gemini CLIの動作は `.gemini/` ディレクトリで設定されています。
+
+#### ディレクトリ構造
+
+```
+.gemini/
+├── GEMINI.md                      # Geminiエージェントの役割と動作定義
+├── settings.json                  # Gemini CLI設定
+├── skills/
+│   └── context-loader/
+│       └── SKILL.md              # プロジェクトコンテキスト読み込み
+└── (future skills)
+```
+
+#### Geminiの役割
+
+Gemini CLIは以下の専門分野でClaude Codeをサポートします:
+
+1. **医学的正確性の確認**: 最新の臨床ガイドライン、治療標準の検証
+2. **教育設計コンサルテーション**: 認知負荷分析、視覚階層、学習効果の評価
+3. **Slidevレイアウト最適化**: 40種類のパターンから最適なレイアウトを推奨
+4. **PDF医学論文分析**: 抄読会用のコンテンツ抽出と構造化
+5. **マルチモーダル処理**: PDF、動画、音声の分析
+
+#### 設定ファイル
+
+**`.gemini/settings.json`**:
+- モデル: `gemini-2.0-flash-exp`
+- コンテキストファイル: `GEMINI.md`
+- スキル: 有効化
+- エージェント: 無効化（Claude Codeがオーケストレーション）
+
+**`.gemini/GEMINI.md`**:
+- Geminiの役割定義
+- 出力フォーマット
+- 医学教育特化の指示
+- リサーチパターン
+
+**`.geminiignore`**:
+Geminiが無視すべきファイルを指定（node_modules、build出力、ログなど）
+
+#### 使用例
+
+サブエージェント経由でGeminiを呼び出す場合:
+
+```
+Task(
+  subagent_type="general-purpose",
+  prompt="""
+    Geminiで最新の前立腺癌放射線治療ガイドラインを調査してください。
+
+    調査内容:
+    - NCCN Guidelines 2024の標準分割照射の推奨
+    - 照射線量と分割方法の最新エビデンス
+    - 寡分割照射の適応
+
+    結果を.claude/docs/research/medical-prostate-radiotherapy.mdに保存し、
+    要約を返してください。
+  """
+)
+```
+
+Geminiは:
+1. `.gemini/GEMINI.md`の指示に従って動作
+2. `context-loader`スキルでプロジェクトコンテキストを読み込み
+3. Google Search groundingで最新ガイドラインを検索
+4. 医学的に正確な情報を抽出
+5. 完全な調査結果を`.claude/docs/research/`に保存
+6. Claude Codeに要約を返却
+
+#### 直接呼び出し（ターミナルから）
+
+Gemini CLIを直接使用する場合（デバッグや探索的調査）:
+
+```bash
+# 基本的な質問
+gemini -p "放射線治療における分割照射の原理を説明して" 2>/dev/null
+
+# PDF分析
+gemini -p "この論文の主要な知見を抽出して" < paper.pdf 2>/dev/null
+
+# コードベース分析
+gemini -p "Slidevのレイアウトパターンを分析して" --include-directories . 2>/dev/null
+```
+
+#### ログと記録
+
+- Gemini実行履歴: `.claude/logs/cli-tools.jsonl`
+- 調査結果: `.claude/docs/research/`
+- セッション履歴: `/checkpointing`実行後に記録
+
+#### トラブルシューティング
+
+**Gemini CLIが見つからない**:
+```bash
+npm install -g @google/genai-cli
+# または
+brew install gemini-cli
+```
+
+**認証エラー**:
+```bash
+gemini auth login
+```
+
+**設定確認**:
+```bash
+gemini config list
+```
+
+**コンテキスト確認**:
+Geminiは`.gemini/GEMINI.md`を自動的に読み込みます。変更はすぐに反映されます。

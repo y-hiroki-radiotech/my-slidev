@@ -70,7 +70,17 @@
 - **suggest-gemini-research**: Web検索前にGemini調査を提案
 - **log-cli-tools**: Gemini実行履歴を記録
 
-詳細は `CLAUDE.md` の「マルチエージェント統合」セクションを参照してください。
+### Gemini CLI設定
+
+`.gemini/` ディレクトリでGemini CLIの動作を設定:
+
+- **GEMINI.md**: Geminiの役割と専門分野（医学的正確性、教育設計、レイアウト最適化）
+- **settings.json**: モデルとコンテキスト設定
+- **skills/context-loader**: プロジェクトコンテキストの自動読み込み
+
+Geminiは1MトークンのコンテキストとGoogle Search groundingを活用して、最新の医学ガイドライン確認や教育設計のコンサルテーションを提供します。
+
+詳細は `CLAUDE.md` の「マルチエージェント統合」セクションおよび「Gemini CLI設定」を参照してください。
 
 ---
 

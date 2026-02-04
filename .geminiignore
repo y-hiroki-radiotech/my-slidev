@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+.output/
+slides-export/
+*.pdf
+
+# Cache and temp
+.cache/
+.vite/
+.slidev/
+.temp/
+
+# Previous slides (archived)
+previous_slides/
+
+# Planning directories (internal use)
+.slide-planning/
+.lecture-planning/
+.abstract-planning/
+.pdf-planning/
+
+# Logs
+.claude/logs/
+*.log
+
+# Environment
+.env
+.env.*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+
+# Large image files (Gemini can see via specific requests)
+public/images/*.png
+public/images/*.jpg
+public/images/*.jpeg
+
+# Checkpoints (use when needed)
+.claude/checkpoints/
