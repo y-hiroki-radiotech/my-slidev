@@ -1,27 +1,88 @@
-node_modules
-.DS_Store
-dist
-*.local
-.vite-inspect
-.remote-assets
-components.d.ts
+# Claude Code local settings
+.claude/settings.local.json
+CLAUDE.local.md
 
-# Environment files
+# Environment
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
+
+# Secrets
+*.pem
+*.key
+credentials*
+*secret*
+
+# Node.js / npm
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Slidev
+.slidev/
+dist/
+.output/
+.vite-inspect/
+.remote-assets/
+components.d.ts
+slides-export/
+*.pdf
+!format/*.pdf
+!docs/*.pdf
+
+# Build outputs
+*.local
+
+# Cache and temp
+.cache/
+.temp/
+.tmp/
+.vite/
+coverage/
+.nyc_output/
 
 # Logs
 *.log
-npm-debug.log*"
-yarn-debug.log*
-yarn-error.log*
+logs/
+.claude/logs/*.jsonl
+.claude/logs/*.log
 
-# Cache and temp files
-.cache
-.temp
-.tmp
-coverage/
-.nyc_output
+# Checkpoints (session-specific)
+.claude/checkpoints/
+!.claude/checkpoints/.gitkeep
 
+# Planning directories (temporary)
+.slide-planning/
+.lecture-planning/
+.abstract-planning/
+.pdf-planning/
 
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+
+# OS
+.DS_Store
+Thumbs.db
+.AppleDouble
+.LSOverride
+._*
+
+# Scratchpad (temporary files)
+/private/tmp/claude-*/
+
+# Test / Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Keep important directories
+!.claude/docs/research/.gitkeep
+!.claude/logs/.gitkeep
+!.claude/checkpoints/.gitkeep
