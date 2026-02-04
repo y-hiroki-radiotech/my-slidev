@@ -2,7 +2,7 @@
 
 **AI駆動の医学教育プレゼンテーション自動生成システム**
 
-![clau(https://storage.googleapis.com/zenn-user-upload/c219b1c77e2d-20260204.png)
+![slide system](https://storage.googleapis.com/zenn-user-upload/c219b1c77e2d-20260204.png)
 
 ```
 Claude Code (Orchestrator) ─┬─ Gemini CLI (Medical Research)
