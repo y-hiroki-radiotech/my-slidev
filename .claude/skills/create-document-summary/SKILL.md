@@ -1,24 +1,24 @@
 ---
-name: create-abstract
-description: 医学論文情報から抄読会用スライドを自動生成する
+name: create-document-summary
+description: 文書情報から要約スライドを自動生成する
 tools: [Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch]
 ---
 
-# 抄読会スライドの自動生成
+# 文書要約スライドの自動生成
 
-**引数:** 論文のDOI、PubMed ID、タイトル、またはオプション付き
+**引数:** 文書のDOI、タイトル、またはオプション付き
 
 **オプション:**
-- `--pdf [PDFファイルパス]`: PDFから論文情報を抽出
-- `--url [論文URL]`: Web上の論文から情報を抽出
+- `--pdf [PDFファイルパス]`: PDFから文書情報を抽出
+- `--url [文書URL]`: Web上の文書から情報を抽出
 
 **例:**
-- `10.1016/j.ijrobp.2023.xxxxx`
-- `Radiotherapy outcomes in lung cancer`
-- `--pdf /path/to/paper.pdf`
-- `--url https://pubmed.ncbi.nlm.nih.gov/12345678/`
+- `10.1016/j.example.2023.xxxxx`
+- `Technology adoption in modern enterprises`
+- `--pdf /path/to/document.pdf`
+- `--url https://example.com/document`
 
-このスキルは、論文情報を自動取得し、`format/abstract_reading_slide.md`テンプレートに従った抄読会スライドを生成します。
+このスキルは、文書情報を自動取得し、要約スライドを生成します。
 
 ## 実行フロー
 

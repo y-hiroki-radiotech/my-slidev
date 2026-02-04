@@ -14,9 +14,9 @@ Skillsは、ユーザーが直接呼び出す具体的なアクションです�
 .claude/skills/
 ├── add-slide/
 │   └── SKILL.md
-├── create-lecture/
+├── create-presentation/
 │   └── SKILL.md
-├── create-abstract/
+├── create-document-summary/
 │   └── SKILL.md
 ├── prepare-pdf/
 │   └── SKILL.md
@@ -46,11 +46,12 @@ Skillsは、ユーザーが直接呼び出す具体的なアクションです�
 
 ### 1. `/add-slide` - 新規スライドセクション追加
 
-授業計画を参照しながら、新しいスライドセクションを自動生成します。
+プレゼンテーション計画を参照しながら、新しいスライドセクションを自動生成します。
 
 **使用方法:**
 ```
-/add-slide 放射線の種類と特性
+/add-slide 技術概要
+/add-slide 市場分析
 ```
 
 **引数:** スライドテーマ/トピック名
@@ -60,7 +61,7 @@ Skillsは、ユーザーが直接呼び出す具体的なアクションです�
 - プランニングファイル（`.slide-planning/`）
 
 **機能:**
-- 授業計画（`lesson_plan/`）との整合性チェック
+- プレゼンテーション計画（`lesson_plan/`）との整合性チェック
 - 既存スタイル・レイアウトパターンの自動踏襲
 - フォーマット検証（文字サイズ28pt以上など）
 - プレビュー確認の自動実行
@@ -69,35 +70,35 @@ Skillsは、ユーザーが直接呼び出す具体的なアクションです�
 
 ---
 
-### 2. `/create-lecture` - 講義全体の自動生成
+### 2. `/create-presentation` - プレゼンテーション全体の自動生成
 
-授業計画から講義全体のスライドを一括生成します。
+プレゼンテーション計画からスライド全体を一括生成します。
 
 **使用方法:**
 ```
-/create-lecture 第1回
-/create-lecture 放射線治療学入門
+/create-presentation プロジェクト概要
+/create-presentation 技術紹介
 ```
 
-**引数:** 講義回数または講義テーマ
+**引数:** プレゼンテーションテーマ
 
 **成果物:**
-- 完全な講義スライド（`slides.md`）
+- 完全なプレゼンテーションスライド（`slides.md`）
 - プランニングファイル（`.lecture-planning/`）
 - 自動git commit
 
 **機能:**
 - `lesson_plan/`の内容を完全反映
 - フロントマター、導入、本論、まとめまで自動化
-- 自己紹介ページ（`pages/who_am_i.md`）の自動インポート
+- 自己紹介ページ（`pages/who_am_i.md`）の自動インポート（必要時）
 - セクション別スライド枚数管理
-- 時間配分（10-70-10分）の考慮
+- 時間配分の考慮
 
-**詳細:** `create-lecture.md` を参照
+**詳細:** `create-presentation.md` を参照
 
 ---
 
-### 3. `/create-abstract` - 抄読会スライド生成
+### 3. `/create-document-summary` - 文書要約スライド生成
 
 医学論文情報から抄読会用のスライドを自動生成します。
 

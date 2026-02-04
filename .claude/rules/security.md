@@ -84,13 +84,13 @@ logger.error(f"Database connection failed: {connection_string}")
 - Never expose absolute paths in slides
 - Don't include sensitive file system information
 
-### Medical Content
-- No patient identifiable information (PII)
-- No actual patient data or case details
+### Sensitive Content
+- No personally identifiable information (PII)
+- No actual confidential data or case details
 - Use anonymized/synthetic examples only
-- Verify data privacy compliance before including any medical images
+- Verify data privacy compliance before including any sensitive images
 
 ### External Resources
 - Validate all external image URLs
 - Don't embed untrusted third-party content
-- Check license compliance for medical images/diagrams
+- Check license compliance for all images/diagrams

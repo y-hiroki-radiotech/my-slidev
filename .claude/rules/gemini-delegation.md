@@ -73,9 +73,9 @@ Consult Gemini when user says:
 | 「〜について情報を集めて」 | "Gather information about X" |
 | **Slidev-specific triggers** | |
 | 「レイアウトはどれがいい？」「配色は？」 | "Which layout?" "Color scheme?" |
-| 「教育効果を高めるには？」 | "How to improve educational effect?" |
-| 「医学的に正確か確認して」 | "Verify medical accuracy" |
-| 「最新のガイドラインは？」 | "Latest guidelines?" |
+| 「プレゼンテーション効果を高めるには？」 | "How to improve presentation effect?" |
+| 「内容は正確か確認して」 | "Verify content accuracy" |
+| 「最新情報は？」 | "Latest information?" |
 | 「図解が必要」「ダイアグラムを追加」 | "Need diagram" "Add illustration" |
 
 ## When NOT to Consult
@@ -182,35 +182,35 @@ prompt: |
   Return key extracted information.
 ```
 
-**Slidev Medical Content Pattern:**
+**Slidev Content Accuracy Pattern:**
 ```
 prompt: |
-  Verify medical accuracy for {topic}.
+  Verify content accuracy for {topic}.
 
-  gemini -p "Verify medical accuracy of {topic}. Check latest
-  clinical guidelines, treatment standards, and terminology.
+  gemini -p "Verify accuracy of {topic}. Check latest
+  information, industry standards, and terminology.
   Identify any inaccuracies or outdated information." 2>/dev/null
 
-  Save to .claude/docs/research/medical-{topic}.md
+  Save to .claude/docs/research/{topic}.md
   Return:
   - Accuracy assessment
-  - Latest guideline references
+  - Latest information references
   - Suggested corrections
 ```
 
-**Slidev Educational Design Pattern:**
+**Slidev Presentation Design Pattern:**
 ```
 prompt: |
   Design consultation for {slide topic}.
 
-  gemini -p "Educational design: How to present {topic} effectively
-  in medical education? Consider layout, visual hierarchy, cognitive
-  load, and engagement strategies." 2>/dev/null
+  gemini -p "Presentation design: How to present {topic} effectively?
+  Consider layout, visual hierarchy, cognitive load, and engagement
+  strategies for the target audience." 2>/dev/null
 
   Return:
   - Recommended layout pattern
   - Visual design suggestions
-  - Educational effectiveness tips
+  - Presentation effectiveness tips
 ```
 
 ### Step 2: Continue Your Work

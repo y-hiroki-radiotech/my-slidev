@@ -1,46 +1,103 @@
 ---
-name: create-lecture
-description: 授業計画から講義全体のスライドを一括自動生成する
-tools: [Read, Write, Edit, Glob, Grep, Bash]
+name: create-presentation
+description: プレゼンテーション計画から全体のスライドを一括自動生成する
+tools: [Read, Write, Edit, Glob, Grep, Bash, AskUserQuestion]
 ---
 
-# 講義全体の自動生成
+# プレゼンテーション全体の自動生成
 
-**引数:** 講義回数または講義テーマ (例: `第1回` または `放射線治療学入門`)
+**引数:** プレゼンテーションテーマまたはトピック (例: `プロジェクト概要` または `技術紹介`)
 
-このスキルは、lesson_plan/の内容から講義全体を完全自動で生成します。ユーザーの介入なしに、開始から完了まで実行します。
+このスキルは、lesson_plan/の内容からプレゼンテーション全体を完全自動で生成します。ユーザーの介入なしに、開始から完了まで実行します。
 
 ## 実行フロー
+
+### Phase 0.5: プレゼンテーション要件確認
+
+AskUserQuestion tool で以下を確認:
+
+**Question 1: プレゼンテーションの用途**
+- Header: "用途"
+- multiSelect: false
+- Options:
+  - label: "講義・授業資料"
+    description: "教育目的のスライド"
+  - label: "研究発表・学会"
+    description: "研究成果の発表"
+  - label: "ビジネスプレゼン"
+    description: "企業向けプレゼンテーション"
+  - label: "技術セミナー"
+    description: "技術的な内容の説明"
+
+**Question 2: 聴衆の属性**
+- Header: "聴衆"
+- multiSelect: false
+- Options:
+  - label: "学生・初学者"
+    description: "基礎から説明が必要"
+  - label: "専門家・研究者"
+    description: "高度な内容を期待"
+  - label: "一般向け"
+    description: "専門用語を避けた説明"
+  - label: "混合（専門家+一般）"
+    description: "バランスの取れた内容"
+
+**Question 3: 予備知識レベル**
+- Header: "予備知識"
+- multiSelect: false
+- Options:
+  - label: "ほぼなし"
+    description: "基本概念から説明"
+  - label: "基礎レベル"
+    description: "基本的な用語は理解している"
+  - label: "中級レベル"
+    description: "ある程度の専門知識あり"
+  - label: "専門家レベル"
+    description: "高度な知識を前提"
+
+**Question 4: 内容の充実度**
+- Header: "詳細度"
+- multiSelect: false
+- Options:
+  - label: "概要のみ"
+    description: "要点を簡潔に"
+  - label: "標準的な詳しさ"
+    description: "バランスの取れた内容"
+  - label: "詳細まで網羅"
+    description: "詳しい説明と例"
+  - label: "完全網羅"
+    description: "すべての側面をカバー"
+
+これらの回答を受けて、スライド生成の方針（詳細度、専門用語の使用、例の多さ等）を調整する。
 
 ### ステップ1: 準備とコンテキスト設定
 
 1. タスクコンテキストを確立:
-  - 講義名: ユーザー提供の講義名
+  - プレゼンテーション名: ユーザー提供のタイトル
   - 日付: YYYYMMDD形式
-  - プランニングディレクトリ: `.lecture-planning/[日付]-[講義名]/`
+  - プランニングディレクトリ: `.lecture-planning/[日付]-[タイトル]/`
 
 2. プランニングファイルを作成:
-  - `lecture-structure.md` (講義構造)
+  - `presentation-structure.md` (プレゼンテーション構造)
   - `content-outline.md` (内容アウトライン)
   - `tasklist.md` (タスクリスト)
   - `section-breakdown.md` (セクション分解)
 
-### ステップ2: 授業計画の詳細分析
+### ステップ2: プレゼンテーション計画の詳細分析
 
 1. プロジェクトルールを理解:
   - `CLAUDE.md`
-  - `lesson_plan/第1回授業の全体像.md`
-  - `lesson_plan/本論部分の詳細.md`
+  - `lesson_plan/` ディレクトリの計画ファイル
   - `slidev_write.md`
   - `format/template_sides.md`
 
-2. 授業計画から抽出:
-  - 授業の目的と到達目標
+2. プレゼンテーション計画から抽出:
+  - プレゼンテーションの目的と到達目標
   - 全体の時間配分
   - 各セクションのタイトルと内容
   - 重要な概念・キーワード
   - 必要な図表・画像
-  - 学生に考えさせたいポイント
+  - 聴衆に考えさせたいポイント
 
 3. 自己紹介が必要か判断（必要なら`pages/who_am_i.md`を確認）
 
@@ -56,11 +113,11 @@ tools: [Read, Write, Edit, Glob, Grep, Bash]
 
 プランニングファイルを作成:
 
-**lecture-structure.md:**
+**presentation-structure.md:**
 ```markdown
-# 講義全体構造
-- 講義名: [名前]
-- 対象: [対象学生]
+# プレゼンテーション全体構造
+- タイトル: [名前]
+- 対象: [対象聴衆]
 - 時間: [総時間]
 - 到達目標: [目標]
 
