@@ -1,667 +1,505 @@
-# Claude Code統合機能
+# Slidev Medical Education Framework
 
-このプロジェクトでは、Claude Codeの3つの機能を活用してスライド作成を支援します。
+**AI駆動の医学教育プレゼンテーション自動生成システム**
 
-## Skills / Commands / Agents の違い
+![clau(https://storage.googleapis.com/zenn-user-upload/c219b1c77e2d-20260204.png)
 
-### Skills（スキル）- `.claude/skills/`
-**実行可能なスラッシュコマンド**
-
-- スラッシュコマンドとして直接実行（例: `/add-slide`）
-- 明確な入出力と成果物がある
-- 完全自動実行（ユーザー介入なし）
-- 即座に実行可能なタスク
-
-**利用可能なスキル:**
-- `/add-slide` - 新規スライドセクション追加
-- `/create-lecture` - 講義全体の自動生成
-- `/create-abstract` - 抄読会スライド生成
-- `/slide-style-rector` - スタイル自動整形
-- `/layout-fix` - レイアウト崩れ自動修正
-- `/slidev-diagram` - 図解生成とスライド挿入
-- `/prepare-pdf` - PDF出力用最適化
-- `/plan` - 実装前の計画作成（orchestra統合）
-- `/design-tracker` - 設計決定の自動記録（orchestra統合）
-- `/checkpointing` - ワークフローの保存とパターン発見（orchestra統合）
-
-詳細は `.claude/skills/README.md` を参照してください。
-
-### Commands（コマンド）- `.claude/commands/`
-**詳細な実行手順書（参照用）**
-
-- Skillsの詳細版・参照用ドキュメント
-- 完全な実行フローの記述
-- トラブルシューティング情報
-- Claude Codeが内部的に参照
-
-### Agents（エージェント）- `.claude/agents/`
-**特定分野の専門家として振る舞う自律的システム**
-
-- Taskツールやプロンプトで起動
-- 専門知識と判断能力を持つ
-- 複雑な問題解決プロセス
-- 分析・設計・相談のサポート
-
-**利用可能なエージェント:**
-- `radiation-therapy-educator` - 放射線治療教育の専門家
-- `medical-slidev-architect` - Slidev設計アーキテクト
-- `adaptive-lecture-designer` - 講義設計の専門家
-- `adaptive-content-structurer` - コンテンツ構造化の専門家
-- `interactive-medical-presenter` - インタラクティブ実装の専門家
-- `general-purpose` - Gemini CLI連携用サブエージェント（orchestra統合）
-
-詳細は `.claude/agents/README.md` を参照してください。
-
-## claude-code-orchestra 統合
-
-このプロジェクトは、[claude-code-orchestra](https://github.com/yourusername/claude-code-orchestra)フレームワークを統合しています。
-
-### 追加された機能
-
-1. **Gemini CLI統合**: 医学コンテンツの調査・検証
-2. **スマートルーティング**: 設計/調査タスクの自動検出
-3. **設計記録**: スライドレイアウト決定の追跡（DESIGN.md）
-4. **アーカイブ機能**: 完成プレゼンテーションのテンプレート化
-5. **計画フェーズ**: 複雑な講義作成前の事前計画
-
-### 自動化フック
-
-- **agent-router**: 質問を分析してGeminiを提案
-- **suggest-gemini-research**: Web検索前にGemini調査を提案
-- **log-cli-tools**: Gemini実行履歴を記録
-
-### Gemini CLI設定
-
-`.gemini/` ディレクトリでGemini CLIの動作を設定:
-
-- **GEMINI.md**: Geminiの役割と専門分野（医学的正確性、教育設計、レイアウト最適化）
-- **settings.json**: モデルとコンテキスト設定
-- **skills/context-loader**: プロジェクトコンテキストの自動読み込み
-
-Geminiは1MトークンのコンテキストとGoogle Search groundingを活用して、最新の医学ガイドライン確認や教育設計のコンサルテーションを提供します。
-
-詳細は `CLAUDE.md` の「マルチエージェント統合」セクションおよび「Gemini CLI設定」を参照してください。
-
----
-
-# スラッシュコマンド（完全自動スライド作成）
-
-Claude Codeのスラッシュコマンド機能を使って、スライド作成を完全自動化できます。
-
-## 利用可能なコマンド
-
-### 1. `/add-slide` - 新規スライドセクション追加
-
-授業計画を参照しながら、新しいスライドセクションを自動生成します。
-
-**使用例:**
-```bash
-/add-slide 放射線の種類と特性
-/add-slide 治療計画の基礎
+```
+Claude Code (Orchestrator) ─┬─ Gemini CLI (Medical Research)
+                            └─ Slidev Skills (Presentation Generation)
 ```
 
-**機能:**
-- 授業計画（`lesson_plan/`）との整合性を自動チェック
-- 既存のスタイル・レイアウトパターンを自動踏襲
-- フォーマット検証（タイトルと内容の間のスペース、文字サイズ28pt以上など）
-- プレビュー確認の自動実行
-- 進捗管理（`.slide-planning/`ディレクトリにタスクリスト等を保存）
+高品質な放射線治療学スライドを自動生成。医学的正確性と教育効果を両立。
 
-**生成物:**
-- 新しいスライドセクション（`slides.md`または`pages/`内）
-- プランニングファイル（requirements.md, design.md, tasklist.md）
+## Quick Start
 
----
+### 新規講義を作成
 
-### 2. `/create-lecture` - 講義全体の自動生成
+```bash
+# 1. 授業計画を作成
+# lesson_plan/第2回授業の全体像.md を作成
+
+# 2. Claude Codeでスライド生成
+claude
+> /create-lecture 第2回
+
+# 3. プレビュー
+npm run dev
+
+# 4. PDF出力
+> /prepare-pdf
+```
+
+### 抄読会スライド作成
+
+```bash
+claude
+> /create-abstract 10.1016/j.ijrobp.2024.xxxxx
+
+# または PDFから
+> /create-abstract --pdf /path/to/paper.pdf
+```
+
+### 既存スライドに追加
+
+```bash
+claude
+> /add-slide 放射線の生物学的効果
+> /slide-style-rector slides.md
+```
+
+## Prerequisites
+
+### Claude Code
+
+```bash
+npm install -g @anthropic-ai/claude-code
+claude login
+```
+
+### Gemini CLI（推奨）
+
+```bash
+npm install -g @google/genai-cli
+gemini auth login
+```
+
+### Slidev環境
+
+```bash
+npm install
+```
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│           Claude Code (Orchestrator)                        │
+│           → スライド生成・レイアウト実装                     │
+│           → ユーザー対話・調整・PDF出力                      │
+│                      ↓                                      │
+│  ┌───────────────────────────────────────────────────────┐  │
+│  │              Subagent (general-purpose)               │  │
+│  │              → 独立したコンテキストを持つ               │  │
+│  │              → Gemini を呼び出し可能                   │  │
+│  │              → 結果を要約してメインに返す              │  │
+│  │                                                       │  │
+│  │              ┌──────────────┐                         │  │
+│  │              │  Gemini CLI  │                         │  │
+│  │              │  医学調査    │                         │  │
+│  │              │  論文分析    │                         │  │
+│  │              │  教育設計    │                         │  │
+│  │              └──────────────┘                         │  │
+│  └───────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### コンテキスト管理（重要）
+
+メインオーケストレーターのコンテキストを節約するため、医学調査・論文分析はサブエージェント経由で実行します。
+
+| 状況                   | 推奨方法                            |
+| ---------------------- | ----------------------------------- |
+| 医学的正確性確認       | サブエージェント経由                |
+| 論文分析               | サブエージェント経由 → ファイル保存 |
+| 教育設計相談           | サブエージェント経由                |
+| 簡単な質問             | 直接回答OK                          |
+
+## Directory Structure
+
+```
+my-slidev/
+├── CLAUDE.md                    # メインシステムドキュメント
+├── README.md
+├── slides.md                    # メインスライド
+├── package.json
+│
+├── .claude/
+│   ├── agents/
+│   │   ├── general-purpose.md   # Gemini連携サブエージェント
+│   │   ├── radiation-therapy-educator.md
+│   │   ├── medical-slidev-architect.md
+│   │   └── ...                  # 医学教育特化エージェント
+│   │
+│   ├── skills/                  # 10スキル
+│   │   ├── create-lecture/      # 講義全体生成
+│   │   ├── add-slide/           # スライド追加
+│   │   ├── create-abstract/     # 抄読会スライド
+│   │   ├── slide-style-rector/  # スタイル整形
+│   │   ├── layout-fix/          # レイアウト修正
+│   │   ├── slidev-diagram/      # 図解生成
+│   │   ├── prepare-pdf/         # PDF出力
+│   │   ├── plan/                # 実装計画
+│   │   ├── design-tracker/      # 設計記録
+│   │   └── checkpointing/       # ワークフロー保存
+│   │
+│   ├── hooks/                   # 自動化フック
+│   │   ├── agent-router.py      # Geminiルーティング
+│   │   ├── suggest-gemini-research.py
+│   │   └── log-cli-tools.py
+│   │
+│   ├── rules/                   # 開発ガイドライン
+│   │   ├── gemini-delegation.md
+│   │   ├── dev-environment-slidev.md
+│   │   ├── language.md
+│   │   └── security.md
+│   │
+│   ├── docs/
+│   │   ├── DESIGN.md            # プレゼンテーション設計記録
+│   │   ├── style-guide.md       # ビジュアルデザイン原則
+│   │   └── research/            # Gemini医学調査結果
+│   │
+│   └── logs/
+│       └── cli-tools.jsonl      # Gemini入出力ログ
+│
+├── .gemini/                     # Gemini CLI設定
+│   ├── GEMINI.md                # 医学教育特化の役割定義
+│   ├── settings.json
+│   └── skills/
+│       └── context-loader/      # コンテキスト自動読み込み
+│
+├── lesson_plan/                 # 授業計画
+│   ├── 第1回授業の全体像.md
+│   └── 本論部分の詳細.md
+│
+├── format/                      # テンプレート
+│   ├── layout-patterns.md       # 40種類のレイアウトパターン
+│   ├── template_sides.md
+│   └── abstract_reading_slide.md
+│
+└── pages/                       # 個別スライド
+    └── who_am_i.md
+```
+
+## Skills
+
+### `/create-lecture` — 講義全体生成
 
 授業計画から講義全体のスライドを一括生成します。
 
-**使用例:**
-```bash
+```
 /create-lecture 第1回
-/create-lecture 放射線治療学入門
 ```
 
-**機能:**
-- `lesson_plan/`の内容を完全に反映
-- フロントマター、導入、本論、まとめまで完全自動化
-- 自己紹介ページ（`pages/who_am_i.md`）の自動インポート
-- 既存スライドの自動バックアップ（git commit）
-- セクション別のスライド枚数管理
-- 時間配分の考慮
+**ワークフロー:**
+1. `lesson_plan/` から授業計画を読み込み
+2. フロントマター・導入・本論・まとめを自動生成
+3. スタイルガイドに準拠
+4. git commit
 
-**生成物:**
-- 完全な講義スライド（`slides.md`）
-- プランニングファイル（lecture-structure.md, content-outline.md, section-breakdown.md, tasklist.md）
-- git commitによるバージョン管理
+### `/add-slide` — スライド追加
 
----
+既存スライドに新しいセクションを追加します。
 
-### 3. `/create-abstract` - 抄読会スライド生成
+```
+/add-slide 放射線の種類と特性
+```
 
-医学論文情報から抄読会用のスライドを自動生成します。
+**出力:**
+- 新規スライドセクション
+- 既存スタイルとの整合性確保
 
-**使用例:**
-```bash
-# DOIから生成
-/create-abstract 10.1016/j.ijrobp.2023.xxxxx
+### `/create-abstract` — 抄読会スライド
 
-# タイトルから生成
-/create-abstract Radiotherapy outcomes in lung cancer
+医学論文から抄読会用スライドを自動生成します。
 
-# PDFファイルから生成
+```
+/create-abstract 10.1016/j.ijrobp.2024.xxxxx
 /create-abstract --pdf /path/to/paper.pdf
-
-# URLから生成
 /create-abstract --url https://pubmed.ncbi.nlm.nih.gov/12345678/
 ```
 
-**機能:**
-- 論文情報の自動取得（DOI、PubMed ID、タイトル、PDF、URL対応）
-- 論文内容の構造化抽出（背景、方法、結果、考察、結論）
-- `format/abstract_reading_slide.md`テンプレートへの厳密な準拠
-- v-clicksによる段階的表示の自動設定
-- レイアウト（two-cols、center）の自動適用
+**ワークフロー:**
+1. 論文情報取得（DOI/PDF/URL）
+2. Geminiで論文分析（必要に応じて）
+3. 背景・方法・結果・考察を構造化
+4. 抄読会フォーマットで生成
 
-**生成物:**
-- 抄読会用スライド（`pages/abstract-[FirstAuthor]-[Year].md`）
-- プランニングファイル（paper-info.md, content-extraction.md, slide-outline.md, tasklist.md）
+### `/slide-style-rector` — スタイル整形
 
----
+スタイルガイドとレイアウトパターンに基づいて自動整形します。
 
-### 4. `/prepare-pdf` - PDF出力用最適化
-
-スライドをPDF出力用に最適化し、自動的にPDFを生成します。
-
-**使用例:**
-```bash
-# 現在のslides.mdを最適化してPDF出力
-/prepare-pdf
-
-# 特定のファイルを最適化してPDF出力
-/prepare-pdf pages/abstract-Smith-2024.md
-
-# 最適化をスキップしてPDF出力のみ
-/prepare-pdf --export-only
-
-# バックアップをスキップ（非推奨）
-/prepare-pdf --skip-backup
 ```
-
-**機能:**
-- 背景色を白に自動変更
-- 文字色を黒系統に自動調整（コントラスト比4.5:1以上を確保）
-- アイコン色の最適化（700番台の色に統一）
-- レイアウト要素（ボーダー、背景）の調整
-- 自動バックアップ（git commit + バックアップファイル作成）
-- `slidev export`の自動実行
-- PDF品質の自動検証
-
-**生成物:**
-- 最適化されたスライドファイル
-- PDFファイル（`slides-export.pdf`または`[ファイル名]-export.pdf`）
-- プランニングファイル（optimization-checklist.md, changes-log.md, tasklist.md）
-- バックアップファイル
-
-**色変換例:**
-- `text-white` → `text-black`
-- `text-yellow-500` → `text-yellow-700`
-- `bg-gray-800` → `bg-gray-100`
-- `border-gray-700` → `border-gray-300`
-
----
-
-### 5. `/slide-style-rector` - スタイル自動整形
-
-スタイルガイドとレイアウトパターンに基づいてスライドを自動整形します。
-
-**使用例:**
-```bash
-# 全スライドを整形
 /slide-style-rector slides.md
-
-# 範囲指定で整形
-/slide-style-rector slides.md 10-20
-
-# 特定のページを整形
-/slide-style-rector pages/flowchart.md
 ```
 
-**機能:**
-- `docs/style-guide.md`のルールに従った自動整形
-- `format/layout-patterns.md`から最適なレイアウトパターンを選択
-- 文体ルールの自動適用（コロン、感嘆符、絵文字の削除）
-- 1スライド1メッセージの徹底
-- 本文28pt以上の維持
-- 適切な余白の確保（mt-5, mb-5）
-- タイトルと本文の間隔調整
+**適用ルール:**
+- 1スライド1メッセージ
+- 28pt以上の文字サイズ
+- 適切な余白（mt-5, mb-5）
+- コロン・感嘆符禁止
 
-**生成物:**
-- 整形されたスライドファイル
-- 自動git commit
+### `/layout-fix` — レイアウト修正
 
----
+レイアウト崩れを検出して自動修正します。
 
-### 6. `/layout-fix` - レイアウト崩れ自動修正
-
-スライドのレイアウト崩れを検出して自動修正します。
-
-**使用例:**
-```bash
-# レイアウトチェックと修正
+```
 /layout-fix slides.md
-
-# 特定のページをチェック
-/layout-fix pages/flowchart.md
 ```
 
-**機能:**
-- リスト項目過多の検出（5個以上で警告）
-- テキストオーバーフローの検出（300文字超で警告）
-- 画像サイズの確認と調整
-- タイトル間隔の検証
-- 不適切なレイアウトの検出と修正提案
-- 開発サーバーとの連携による表示確認
+**検出項目:**
+- リスト項目過多（5個以上）
+- テキストオーバーフロー（300文字超）
+- 不適切なレイアウト
 
-**生成物:**
-- 修正されたスライドファイル
-- レイアウト分析レポート
-- 自動git commit
+### `/slidev-diagram` — 図解生成
 
-**検出パターン:**
-- リスト項目過多 → 2スライドに分割
-- テキストオーバーフロー → 要約または分割
-- 画像とテキストのバランス不良 → レイアウト変更
-- タイトル間隔不足 → *** と <div class="mt-5"></div> を追加
+AI画像生成で図解を作成し、スライドに挿入します。
 
----
-
-### 7. `/slidev-diagram` - 図解生成とスライド挿入
-
-AI画像生成を使用して図解を作成し、スライドに挿入します。
-
-**使用例:**
-```bash
-# 図解を生成してページに挿入
+```
 /slidev-diagram リニアックの構造を図解して。ページ7に挿入、slides.md
-
-# 図解を生成（ページ指定なし）
-/slidev-diagram 放射線治療の流れを図解して
 ```
 
-**機能:**
-- AI画像生成（図解、イラスト、概念図）
-- ユーザー承認フロー（生成後にプレビュー表示）
-- レイアウト選択（center, two-cols, image-right等）
-- 既存コンテンツの維持
-- プレビュー確認
+**ワークフロー:**
+1. AI画像生成
+2. ユーザー承認
+3. images/ に保存
+4. スライドに自動挿入
 
-**生成物:**
-- 生成された図解画像（images/フォルダ）
-- 更新されたスライドファイル
+### `/prepare-pdf` — PDF出力
 
-**対応レイアウト:**
-- center: 画像中央配置
-- two-cols: 左右分割
-- default: 上下配置
-- image: 全画面画像
-- image-right/image-left: 画像+テキスト
+PDF出力用に最適化し、自動的にPDFを生成します。
+
+```
+/prepare-pdf
+/prepare-pdf pages/abstract-Smith-2024.md
+```
+
+**最適化:**
+- 背景色を白に変更
+- 文字色を黒系統に調整
+- レイアウト確認
+- slidev export 実行
+
+### `/plan` — 実装計画
+
+複雑な講義作成前に実装計画を立てます。
+
+```
+/plan
+```
+
+### `/design-tracker` — 設計記録（自動）
+
+プレゼンテーション設計決定を自動記録します。
+
+**記録内容:**
+- レイアウトパターンの選択
+- 配色・ビジュアルデザイン
+- 教育設計アプローチ
+- 医学的正確性確認
+
+### `/checkpointing` — ワークフロー保存
+
+セッションの状態を保存し、再利用可能なパターンを発見します。
+
+```bash
+/checkpointing              # 基本: 履歴ログ
+/checkpointing --full       # 完全: git履歴・ファイル変更含む
+/checkpointing --analyze    # 分析: スキルパターン発見
+```
+
+## Development
+
+### Tech Stack
+
+| ツール        | 用途                    |
+| ------------- | ----------------------- |
+| **Slidev**    | プレゼンテーションフレームワーク |
+| **Vue 3**     | コンポーネント          |
+| **npm**       | パッケージ管理          |
+| **Prettier**  | コードフォーマット      |
+
+### Commands
+
+```bash
+# 開発
+npm run dev              # 開発サーバー起動
+npm run build            # プロダクションビルド
+npm run export           # PDF出力
+
+# スクリプト
+bash scripts/start-server.sh    # 開発サーバー
+bash scripts/export-pdf.sh      # PDF出力
+bash scripts/check-layout.sh    # レイアウトチェック
+```
+
+### Design System
+
+- **Minimum Text**: 28pt
+- **Layout Patterns**: 40 patterns
+- **Color Palette**: Primary #1e3a8a (deep blue)
+- **Icons**: @iconify-json/mdi
+
+## Hooks
+
+自動化フックにより、適切なタイミングでエージェント連携を提案します。
+
+| フック                         | トリガー           | 動作                             |
+| ------------------------------ | ------------------ | -------------------------------- |
+| `agent-router.py`              | ユーザー入力       | 医学用語・レイアウト質問でGemini提案 |
+| `suggest-gemini-research.py`   | WebSearch前        | Gemini調査を提案                 |
+| `log-cli-tools.py`             | Gemini実行         | 入出力ログ記録                   |
+
+## Language Rules
+
+- **コード・思考**: 英語
+- **医学用語**: 英語（国際標準）
+- **Slidev markdown**: 英語
+- **ユーザーへの応答**: 日本語
+- **スライドコンテンツ**: 日本語
 
 ---
 
-## コマンドの共通仕様
+## Gemini CLI Integration
 
-### 完全自動実行
-すべてのコマンドは、ユーザーの介入なしで開始から完了まで実行されるように設計されています。
+### いつGeminiを使うか
 
-### プランニングディレクトリ
-各コマンドは専用のディレクトリを作成し、進捗を管理します:
-- `.slide-planning/` - `/add-slide`
-- `.lecture-planning/` - `/create-lecture`
-- `.abstract-planning/` - `/create-abstract`
-- `.pdf-planning/` - `/prepare-pdf`
+- **医学的正確性確認** - 最新ガイドライン、治療標準
+- **教育設計相談** - 認知負荷、視覚階層、学習効果
+- **レイアウト判断** - 40パターンから最適なものを推奨
+- **論文分析** - PDF医学論文の構造化抽出
 
-### タスク管理
-各コマンドは`tasklist.md`でタスクの進捗を管理し、すべてのタスクが完了するまで自律的に実行を継続します。
+### 使い方
 
-### バージョン管理
-重要な変更の前後で自動的にgit commitを実行し、変更履歴を保持します。
+**自動提案:**
+「最新のガイドラインを確認して」と質問すると、agent-routerがGemini使用を提案します。
 
-### 品質保証
-- プレビュー確認（`npm run dev`）
-- フォーマット検証
-- 既存パターンとの整合性チェック
+**サブエージェント経由（推奨）:**
+```
+Task(subagent_type="general-purpose",
+     prompt="Geminiで前立腺癌の標準分割照射について調査し、要約を返して")
+```
+
+**直接呼び出し（ターミナル）:**
+```bash
+gemini -p "放射線治療の分割照射について説明して" 2>/dev/null
+```
 
 ---
 
-# 実行方法
-- `npm run dev`
-- `npm run dev -- ファイル名`
-- `npm run dev -- ファイル名 --remote`
+## このフレームワークを使う
 
-# codeプロック内の遷移
-```python {all|1|3-9}
-<Code></Code>
-```
+### 新規講義を作成
 
-# Mermaid図のリンク
-[Mermaid](https://mermaid.js.org/intro/)
+1. **授業計画作成** - `lesson_plan/` に授業計画を作成
+2. **スライド生成** - `/create-lecture` で一括生成
+3. **図解追加** - `/slidev-diagram` で必要な図解を追加
+4. **スタイル整形** - `/slide-style-rector` で統一
+5. **レイアウト確認** - `/layout-fix` で修正
+6. **PDF出力** - `/prepare-pdf` で発表用PDF作成
 
-# UnoCSSのリンク
-[UnoCSS Interactive](https://unocss.dev/interactive/)
+### 抄読会準備
 
-# デフォルトテーマのレイアウト
-[デフォルトテーマのレイアウト](https://zenn.dev/rinc5/articles/b7dc7a3b0bbd30)
+1. **論文情報準備** - DOI、PDF、URLのいずれか
+2. **スライド生成** - `/create-abstract` で自動生成
+3. **PDF出力** - `/prepare-pdf` で発表用PDF作成
 
-# ページ下部にページ数を埋め込む
-```bash
-<div class="absolute bottom-5 right-5">
-  <span class="font-size-2">
-    {{ $page }}<!-- 1 -->
-  </span>
-</div>
-```
+### 医学的正確性確認
 
-# おすすめフォント
-```bash
----
-fonts:
-  # 標準テキスト用
-  sans: Noto Sans JP
-  # UnoCSS で `font-serif` クラスを指定したとき用
-  serif: Noto Serif JP
-  # コードブロック用
-  mono: Fira Code
----
-```
+1. **質問** - 「最新のガイドラインを確認して」
+2. **自動ルーティング** - agent-routerがGemini提案
+3. **調査** - サブエージェント経由でGemini調査
+4. **保存** - `.claude/docs/research/medical-{topic}.md` に保存
+5. **記録** - design-trackerが自動的に検証結果を記録
 
-# Export
-- PDF
-```bash
-slidev export
-```
-- PPTX
-```bash
-slidev export --format pptx
-```
-PPTXファイル内のすべてのスライドは画像としてexportされるので注意。
+### カスタマイズ
 
-- PNGs and Markdown
-```bash
-slidev export --format md
-```
-- 出力ファイル名をつけたい場合
-```bash
-slidev export --output <file-name>
-```
-- ダークモード
-```bash
-slidev export --dark
-```
-
-# Frontmatter
-- title: Welcome to slidev
-
-urlのタイトルとリンクを作成したときや、デフォルトでexportしたときのタイトルとして扱われる。
-
--
-background: これは1枚目のFrontmatterに入れるべきものかな
-
-# アニメーション
-**Click**
-  クリックはスライド内のアニメーションステップの単位。スライドには1回以上のクリックがあり、クリックごとに1つ以上のアニメーションがトリガーされる。
-
-- `v-click`
-<v-click>Hello world!</v-click>
-クリック時に表示される。
-<div v-click class="text-x1"> Hey! </div>
-
-- `v-after`
-`v-click`に連動して表示
-<div v-click> Hello </div>
-<div v-after> World </div>  <!-- or <v-after> World </v-after> -->
-
-- クリック後に非表示にする
-`.hide`クリック後に表示を消す
-```bash
-<div v-click> Visible after 1 click </div>
-<div v-click.hide> Hidden after 2 clicks </div>
-<div v-after.hide> Hidden after 2 clicks </div>
-```
-
-- `v-clicks`
-まとめて適応させる
-```bash
-<v-clicks>
-
-- 1
-- 2
-- 3
-- 4
-</v-clicks>
-```
-- ネストされたリストの場合
-```bash
-<v-clicks depth="2">
-- Item 1
-  - Item 1.1
-  - Item 1.2
-- Item 2
-  - Item 2.1
-  - Item 2.2
-</v-clicks>
-```
-
-# スライドトランジション
-Slidevは標準でスライドtransitionをサポートしています。transition frontmatterオプションを設定することで有効にできます。
-
-```bash
----
-transition: slide-left
----
-```
-- `fade` - Crossfade in/out
-- `fade-out` - Fade out and then fade in
-- `slide-left` - Slides to the left (slide to right when going backward)
-- `slide-right` - Slides to the right (slide to left when going backward)
-- `slide-up` - Slides to the top (slide to bottom when going backward)
-- `slide-down` - Slides to the bottom (slide to top when going backward)
-- `view-transition` - Via the view transitions API
-
-# Theme
-[テーマギャラリー](https://sli.dev/resources/theme-gallery)
-
-# Layout
-[レイアウトの設定](https://sli.dev/builtin/layouts)
-
-# 横線
-`***`
-
-# hideInToc: true
-Frontmatterに`hideInToc: true`を追加することで、目次に表示されなくなります。
-
-# Material Icons
-[Material Icons](https://icones.js.org/)
-
-**`mdi:account-circle`** をSlidevで使うコンポーネント形式に変換するルールは以下の通りです。
-
-1.  コロン（`:`）をハイフン（`-`）に変える。
-2.  全体をコンポーネントのタグ（`<` と `/>`）で囲む。
+- **CLAUDE.md**: プロジェクト固有の情報を追加
+- **lesson_plan/**: 授業計画をカスタマイズ
+- **format/**: レイアウトパターン・テンプレートを追加
+- **.claude/skills/**: カスタムスキルを追加
+- **.claude/rules/**: ルールをカスタマイズ
 
 ---
 
-### 具体的な変換手順
+## Medical Education Focus
 
-あなたの見つけたアイコン `mdi:account-circle` を例にすると、
+### Target Audience
 
-1.  まず、コロン `:` をハイフン `-` に置き換えます。
-    > `mdi:account-circle` → `mdi-account-circle`
+- 医学生
+- 放射線科レジデント
+- 放射線治療専門医
 
-2.  次に、その文字列をタグで囲みます。
-    > `mdi-account-circle` → `<mdi-account-circle />`
+### Learning Objectives
 
-これで完了です。
-この `<mdi-account-circle />` をそのままSlidevのMarkdownファイルに貼り付ければ、画像と同じアイコンが表示されます。
+- 放射線治療の基礎理論
+- 治療計画の実践
+- 最新治療技術の理解
+- 臨床判断能力の向上
 
-### まとめ（ルール）
+### Educational Strategies
 
-| 見つけた形式 | Slidevでの形式 |
-| :--- | :--- |
-| `[コレクション名]:[アイコン名]` | `<[コレクション名]-[アイコン名] />` |
+- 段階的開示（v-clicks）
+- ビジュアル重視（図解・ダイアグラム）
+- 理論と実践の統合
+- ケースベース学習
 
-**別の例:**
-もし `carbon:settings` というアイコンを見つけたとします。
-ルールに従うと、コロンをハイフンに変えてタグで囲むので `<carbon-settings />` となります。
+---
 
-このルールさえ覚えておけば、どのサイトで見つけたアイコンでも迷わず使えるようになります。
+## Troubleshooting
 
+### Gemini CLIエラー
 
-# 目次の表示
-目次を表示するには、以下のように`<Toc />`コンポーネントを使用します。
 ```bash
-<Toc maxDepth="2"/>
+# インストール確認
+which gemini
+
+# 認証
+gemini auth login
+
+# 設定確認
+gemini config list
 ```
-`maxDepth`は目次の深さを指定します。デフォルトは1です。
-maxDepth属性の役割
-maxDepth="2" 属性は、目次に表示する見出しレベルの最大深度を制御します。この設定により：
 
-# 見出し1（レベル1）は目次に含まれます
-## 見出し2（レベル2）は目次に含まれます
-### 見出し3（レベル3以下）は目次に含まれません
+### PDF出力失敗
 
----
-
-# スラッシュコマンド使用時のベストプラクティス
-
-## 推奨ワークフロー
-
-### 新しい講義を作成する場合
-1. `lesson_plan/`ディレクトリに授業計画を作成・更新
-2. `/create-lecture [講義名]`で講義全体を生成
-3. プレビューで確認（`npm run dev`）
-4. 必要に応じて`/add-slide`で追加セクションを作成
-5. `/prepare-pdf`でPDF出力
-
-### 既存の講義に追加する場合
-1. `lesson_plan/`で授業計画を確認
-2. `/add-slide [セクション名]`で新しいセクションを追加
-3. プレビューで確認
-4. 必要に応じて`/prepare-pdf`でPDF更新
-
-### 抄読会の準備をする場合
-1. 論文情報（DOI、タイトル、PDF等）を用意
-2. `/create-abstract [論文情報]`でスライド生成
-3. プレビューで内容確認
-4. `/prepare-pdf pages/abstract-xxx.md`でPDF出力
-
-## 注意事項
-
-### git commitについて
-- スラッシュコマンドは自動的にgit commitを実行します
-- 重要な変更の前には必ずバックアップが作成されます
-- 手動でcommitする必要はありません
-
-### バックアップとロールバック
-- 各コマンドは実行前に自動バックアップを作成
-- 問題が発生した場合は`git log`で履歴を確認し、`git revert`または`git reset`で戻せます
-- バックアップファイル（`.backup-[日付]`）も保存されます
-
-### プランニングディレクトリ
-- `.slide-planning/`等のディレクトリには実行履歴が保存されます
-- タスクリスト、変更ログ、設計文書などが含まれます
-- トラブルシューティングや振り返りに活用できます
-
-### PDF出力時の注意
-- `/prepare-pdf`は元のファイルを変更します（バックアップあり）
-- プレゼンテーション用（ダークテーマ）と印刷用（ライトテーマ）で別ファイルにすることを推奨
-- 必要に応じて`--export-only`オプションで最適化をスキップ
-
----
-
-# トラブルシューティング
-
-## スラッシュコマンド関連
-
-### コマンドが途中で停止した場合
-1. `.xxx-planning/`ディレクトリの`tasklist.md`を確認
-2. 未完了のタスクを確認
-3. エラーメッセージがあればそれに従って修正
-4. 必要に応じて手動で作業を完了
-
-### 生成されたスライドが期待と異なる場合
-1. `lesson_plan/`の内容を確認・更新
-2. `.xxx-planning/`の設計ファイルを確認
-3. git revertで元に戻す
-4. 必要に応じてコマンドを再実行
-
-### PDF出力が失敗する場合
-
-**"Chromium not found"エラー**
 ```bash
+# Chromiumインストール
 npx playwright install chromium
-```
 
-**"Out of memory"エラー**
-```bash
+# メモリ不足の場合
 NODE_OPTIONS=--max-old-space-size=4096 npm run export
 ```
 
-**レイアウト崩れ**
-- フロントマターの設定を確認
-- カスタムCSSが適切か確認
-- ブラウザのプレビューと比較
+### レイアウト崩れ
 
-**文字化け**
-- フォント設定を確認
-- 日本語フォントが正しく読み込まれているか確認
-
-### 論文情報が取得できない場合（`/create-abstract`）
-- DOIやPubMed IDの形式が正しいか確認
-- URLが正しくアクセスできるか確認
-- PDFファイルのパスが正しいか確認
-- 論文が公開されているか確認（ペイウォール等）
-- 手動で論文情報を`.abstract-planning/paper-info.md`に入力し、コマンドを再実行
-
-## Slidev一般
-
-### 開発サーバーが起動しない
-```bash
-# 依存関係の再インストール
-npm install
-
-# キャッシュのクリア
-rm -rf node_modules/.vite
-npm run dev
 ```
-
-### スライドが表示されない
-- `slides.md`のフロントマターを確認
-- マークダウンの構文エラーを確認
-- ブラウザのコンソールでエラーを確認
-
-### アイコンが表示されない
-```bash
-# @iconify-json/mdiがインストールされているか確認
-npm list @iconify-json/mdi
-
-# インストールされていない場合
-npm install -D @iconify-json/mdi
+/layout-fix slides.md
 ```
 
 ---
 
-# 参考情報
+## Resources
 
-## プロジェクト構成
-詳細なプロジェクト構成は`CLAUDE.md`を参照してください。
+- **Slidev Documentation**: https://sli.dev/
+- **Vue 3 Documentation**: https://vuejs.org/
+- **Material Design Icons**: https://pictogrammers.com/library/mdi/
+- **NCCN Guidelines**: https://www.nccn.org/
+- **ASTRO Guidelines**: https://www.astro.org/
 
-## スライド作成のルール
-- 各スライドのタイトルと内容の間は`***`と`<div class="mt-5"></div>`で区切る
-- 本文の文字サイズは28pt以上を基本とする
-- 画像は`public/`ディレクトリに保存
-- テンプレートは`format/template_sides.md`を参照
+---
 
-## 改善点
-改善してほしい点は`issue.md`に記載されています。
+## Integration Benefits
 
+### 医学教育の質向上
+
+- ✅ 最新ガイドラインとの整合性確保
+- ✅ 医学用語の国際標準への準拠
+- ✅ 教育効果の科学的根拠に基づく最大化
+
+### 開発効率の向上
+
+- ✅ 設計決定の自動記録と追跡
+- ✅ 成功パターンの発見と再利用
+- ✅ 知識の組織的蓄積
+
+### 品質保証
+
+- ✅ 自動スタイル整形
+- ✅ レイアウト崩れ検出
+- ✅ git履歴による変更追跡
+
+---
+
+**すべての機能は既存のSlidev特化機能を維持したまま動作します。**
