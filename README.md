@@ -2,7 +2,10 @@
 
 **AI駆動の汎用プレゼンテーション自動生成システム**
 
-![slide system](https://storage.googleapis.com/zenn-user-upload/c219b1c77e2d-20260204.png)
+![slide system](https://storage.googleapis.com/zenn-user-upload/8b968c169693-20260204.png)
+
+**使用方法のまとめ**
+![how-to-use](https://storage.googleapis.com/zenn-user-upload/1c8081222a19-20260204.png)
 
 ```
 Claude Code (Orchestrator) ─┬─ Gemini CLI (Content Research)
