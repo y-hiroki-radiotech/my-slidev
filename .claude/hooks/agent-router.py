@@ -1,0 +1,102 @@
+#!/usr/bin/env python3
+"""
+UserPromptSubmit hook: Route to appropriate agent based on user intent.
+
+Analyzes user prompts and suggests Gemini for design/debug/research/multimodal tasks.
+"""
+
+import json
+import sys
+
+# Triggers for Gemini (design, debugging, research, multimodal, large context)
+GEMINI_TRIGGERS = {
+    "ja": [
+        # Design & Debug
+        "設計", "どう設計", "アーキテクチャ",
+        "なぜ動かない", "エラー", "バグ", "デバッグ",
+        "どちらがいい", "比較して", "トレードオフ",
+        "実装方法", "どう実装",
+        "リファクタリング", "リファクタ",
+        "レビュー", "見て",
+        "考えて", "分析して", "深く",
+        # Research & Multimodal
+        "調べて", "リサーチ", "調査",
+        "PDF", "動画", "音声", "画像",
+        "コードベース全体", "リポジトリ全体",
+        "最新", "ドキュメント",
+        "ライブラリ", "パッケージ",
+        # Slidev-specific
+        "レイアウト", "配色", "教育効果", "授業設計",
+        "医学的正確性", "医療用語", "最新ガイドライン",
+        "図解", "ダイアグラム",
+    ],
+    "en": [
+        # Design & Debug
+        "design", "architecture", "architect",
+        "debug", "error", "bug", "not working", "fails",
+        "compare", "trade-off", "tradeoff", "which is better",
+        "how to implement", "implementation",
+        "refactor", "simplify",
+        "review", "check this",
+        "think", "analyze", "deeply",
+        # Research & Multimodal
+        "research", "investigate", "look up", "find out",
+        "pdf", "video", "audio", "image",
+        "entire codebase", "whole repository",
+        "latest", "documentation", "docs",
+        "library", "package", "framework",
+        # Slidev-specific
+        "layout", "color scheme", "educational effect", "lesson design",
+        "medical accuracy", "medical terminology", "latest guidelines",
+        "diagram", "illustration",
+    ],
+}
+
+
+def detect_agent(prompt: str) -> tuple[str | None, str]:
+    """Detect which agent should handle this prompt."""
+    prompt_lower = prompt.lower()
+
+    # Check Gemini triggers
+    for triggers in GEMINI_TRIGGERS.values():
+        for trigger in triggers:
+            if trigger in prompt_lower:
+                return "gemini", trigger
+
+    return None, ""
+
+
+def main():
+    try:
+        data = json.load(sys.stdin)
+        prompt = data.get("prompt", "")
+
+        # Skip short prompts
+        if len(prompt) < 10:
+            sys.exit(0)
+
+        agent, trigger = detect_agent(prompt)
+
+        if agent == "gemini":
+            output = {
+                "hookSpecificOutput": {
+                    "hookEventName": "UserPromptSubmit",
+                    "additionalContext": (
+                        f"[Agent Routing] Detected '{trigger}' - this task may benefit from "
+                        "Gemini CLI's deep reasoning and research capabilities. Consider: "
+                        '`gemini -p "{question}" 2>/dev/null` '
+                        "for design decisions, debugging, research, or multimodal analysis."
+                    )
+                }
+            }
+            print(json.dumps(output))
+
+        sys.exit(0)
+
+    except Exception as e:
+        print(f"Hook error: {e}", file=sys.stderr)
+        sys.exit(0)
+
+
+if __name__ == "__main__":
+    main()

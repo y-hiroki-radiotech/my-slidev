@@ -20,6 +20,9 @@
 - `/layout-fix` - レイアウト崩れ自動修正
 - `/slidev-diagram` - 図解生成とスライド挿入
 - `/prepare-pdf` - PDF出力用最適化
+- `/plan` - 実装前の計画作成（orchestra統合）
+- `/design-tracker` - 設計決定の自動記録（orchestra統合）
+- `/checkpointing` - ワークフローの保存とパターン発見（orchestra統合）
 
 詳細は `.claude/skills/README.md` を参照してください。
 
@@ -45,8 +48,29 @@
 - `adaptive-lecture-designer` - 講義設計の専門家
 - `adaptive-content-structurer` - コンテンツ構造化の専門家
 - `interactive-medical-presenter` - インタラクティブ実装の専門家
+- `general-purpose` - Gemini CLI連携用サブエージェント（orchestra統合）
 
 詳細は `.claude/agents/README.md` を参照してください。
+
+## claude-code-orchestra 統合
+
+このプロジェクトは、[claude-code-orchestra](https://github.com/yourusername/claude-code-orchestra)フレームワークを統合しています。
+
+### 追加された機能
+
+1. **Gemini CLI統合**: 医学コンテンツの調査・検証
+2. **スマートルーティング**: 設計/調査タスクの自動検出
+3. **設計記録**: スライドレイアウト決定の追跡（DESIGN.md）
+4. **アーカイブ機能**: 完成プレゼンテーションのテンプレート化
+5. **計画フェーズ**: 複雑な講義作成前の事前計画
+
+### 自動化フック
+
+- **agent-router**: 質問を分析してGeminiを提案
+- **suggest-gemini-research**: Web検索前にGemini調査を提案
+- **log-cli-tools**: Gemini実行履歴を記録
+
+詳細は `CLAUDE.md` の「マルチエージェント統合」セクションを参照してください。
 
 ---
 

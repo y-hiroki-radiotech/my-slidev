@@ -446,3 +446,152 @@ bash scripts/export-pdf.sh slides.md
 - /prepare-pdf を使用
 - 背景色と文字色を確認
 - レイアウトを再確認
+
+---
+
+## マルチエージェント統合（claude-code-orchestra）
+
+### Gemini CLI統合
+
+このプロジェクトは、claude-code-orchestraフレームワークを統合しています。
+
+#### いつGeminiを使うか
+
+以下のような場合に、Gemini CLIを使用した調査・検証が推奨されます:
+
+- **医学用語の正確性確認**: 最新の医学用語、治療法の確認
+- **最新治療ガイドライン調査**: 臨床ガイドライン、標準治療の調査
+- **教育効果分析**: 教育設計、学習効果の分析
+- **レイアウト・配色の設計判断**: プレゼンテーションデザインの検討
+- **複雑な技術的判断**: アーキテクチャ、実装方法の比較検討
+
+#### 使い方（サブエージェント経由）
+
+大きな出力が予想される調査は、サブエージェントを経由して実行します:
+
+```
+Task(
+  subagent_type="general-purpose",
+  prompt="Geminiで{トピック}を調査し、要約を返して"
+)
+```
+
+サブエージェントは:
+1. Gemini CLIを呼び出して完全な調査を実行
+2. 完全な出力を `.claude/docs/research/` に保存
+3. メインに対しては要約のみを返却
+
+これにより、メインのコンテキストを節約しながら、詳細な調査結果を記録できます。
+
+### 新しいスキル
+
+orchestra統合により、以下の新しいスキルが利用可能になりました:
+
+#### /plan
+
+実装前に計画を立てるスキル。複雑な講義作成や大規模な変更の前に使用します。
+
+#### /design-tracker
+
+スライド設計決定を自動的に記録するスキル。以下のような決定を `.claude/docs/DESIGN.md` に記録します:
+
+- レイアウトパターンの選択
+- 配色やビジュアルデザインの決定
+- 教育設計のアプローチ
+- 医学的正確性の確認結果
+
+**プロアクティブ**: 明示的に呼び出さなくても、設計決定を検知すると自動的に記録します。
+
+#### /checkpointing
+
+プレゼンテーション作成のワークフローを保存し、再利用可能なパターンを発見します。
+
+**モード**:
+- デフォルト: セッション履歴の保存
+- `--full`: 完全なチェックポイント作成
+- `--full --analyze`: スキル化可能なパターンを分析
+
+### 自動化フック
+
+以下のフックが自動的に動作します:
+
+#### agent-router（UserPromptSubmit）
+
+ユーザーの質問を分析し、Geminiが適切な場合に提案します。
+
+**トリガー例**:
+- 「最新のガイドラインは?」
+- 「レイアウトはどれがいい?」
+- 「医学的に正確か確認して」
+- 「教育効果を高めるには?」
+
+#### suggest-gemini-research（PreToolUse: WebSearch|WebFetch）
+
+WebSearchやWebFetchの前に、Geminiでの調査を提案します。
+
+#### log-cli-tools（PostToolUse: Bash）
+
+Gemini CLI呼び出しを `.claude/logs/cli-tools.jsonl` に記録します。
+
+### 開発ルール
+
+新しいルールファイルが追加されました:
+
+- `.claude/rules/gemini-delegation.md` - Geminiの使い方とパターン
+- `.claude/rules/language.md` - 日英使い分けルール
+- `.claude/rules/security.md` - セキュリティチェックリスト
+- `.claude/rules/dev-environment-slidev.md` - Slidev開発環境ガイド
+
+### ディレクトリ構造の追加
+
+```
+.claude/
+├── agents/
+│   └── general-purpose.md      # Gemini連携用サブエージェント
+├── hooks/                       # 自動化フック
+│   ├── agent-router.py
+│   ├── suggest-gemini-research.py
+│   └── log-cli-tools.py
+├── rules/                       # 開発ルール
+│   ├── gemini-delegation.md
+│   ├── language.md
+│   ├── security.md
+│   └── dev-environment-slidev.md
+├── docs/
+│   ├── DESIGN.md                # 設計決定記録
+│   └── research/                # Gemini調査結果保存先
+├── logs/
+│   └── cli-tools.jsonl          # Gemini実行履歴
+└── checkpoints/                 # プレゼンアーカイブ
+```
+
+### 統合ワークフロー例
+
+#### 医学コンテンツの正確性確認
+
+1. ユーザー: 「最新のガイドラインを確認して」
+2. agent-router: Gemini使用を提案
+3. サブエージェント経由でGemini調査
+4. 結果を `.claude/docs/research/medical-{topic}.md` に保存
+5. 要約をメインに返却
+6. design-tracker: 検証結果を自動記録
+
+#### 講義全体の作成
+
+1. `/plan` で実装計画を立てる
+2. サブエージェント経由でGemini調査（教育設計、医学的正確性）
+3. `/create-lecture` でスライド生成
+4. `/design-tracker` が設計決定を自動記録
+5. `/layout-fix` でレイアウト確認
+6. `/prepare-pdf` でPDF出力
+7. `/checkpointing --full --analyze` でワークフローをパターン化
+
+### 統合の利点
+
+1. **医学コンテンツの正確性**: Geminiによる最新ガイドライン確認
+2. **教育設計の強化**: 設計判断をGeminiと協議
+3. **知識の蓄積**: DESIGN.mdとresearch/で設計決定を記録
+4. **再利用性向上**: checkpointingでテンプレート化
+5. **計画的開発**: 複雑な講義前にplan skillで事前設計
+
+すべて既存のSlidev特化機能を維持したまま実現されています。
