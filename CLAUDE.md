@@ -135,24 +135,50 @@ npm run export        # PDF出力
 
 ---
 
-## Skills Overview
+## Skills Overview (18 Skills)
 
-### Slidev特化スキル (8)
+### Slidev特化スキル (9)
 
-1. **add-slide** - 新規スライドセクション追加
-2. **create-presentation** - プレゼンテーション全体の自動生成
-3. **create-document-summary** - 文書要約スライド生成
-4. **slide-style-rector** - スタイル自動整形
-5. **layout-fix** - レイアウト崩れ自動修正
-6. **slidev-diagram** - 図解生成とスライド挿入
-7. **prepare-pdf** - PDF出力用最適化
-8. **archive-lecture** - プレゼンテーションアーカイブ
+| # | スキル | 説明 | 使用例 |
+|---|--------|------|--------|
+| 1 | `/add-slide` | 新規スライドセクション追加 | `/add-slide 技術概要` |
+| 2 | `/create-presentation` | プレゼンテーション全体の自動生成 | `/create-presentation` |
+| 3 | `/create-document-summary` | 文書要約スライド生成 | `/create-document-summary 10.1016/xxx` |
+| 4 | `/slide-style-rector` | スタイル自動整形 | `/slide-style-rector slides.md` |
+| 5 | `/layout-fix` | レイアウト崩れ自動修正 | `/layout-fix slides.md` |
+| 6 | `/slidev-diagram` | 図解生成とスライド挿入 | `/slidev-diagram 構造を図解して` |
+| 7 | `/prepare-pdf` | PDF出力用最適化 | `/prepare-pdf` |
+| 8 | `/archive-lecture` | プレゼンテーションアーカイブ | `/archive-lecture` |
+| 9 | `/add-notes` | スピーカーノート追加 | `/add-notes 3-10` |
+
+### Git/PR スキル (2)
+
+| # | スキル | 説明 | 使用例 |
+|---|--------|------|--------|
+| 10 | `/commit-push` | Conventional Commitでコミット・プッシュ | `/commit-push` |
+| 11 | `/pr-generator` | PR自動生成 | `/pr-generator` |
+
+### NotebookLM スキル (3)
+
+| # | スキル | 説明 | 使用例 |
+|---|--------|------|--------|
+| 12 | `/notebook-ask` | NotebookLMに質問 | `/notebook-ask 質問内容` |
+| 13 | `/notebook-manage` | NotebookLM管理 | `/notebook-manage list` |
+| 14 | `/notebook-add` | NotebookLM追加 | `/notebook-add URL` |
+
+### レビュー・分析スキル (1)
+
+| # | スキル | 説明 | 使用例 |
+|---|--------|------|--------|
+| 15 | `/student-review` | 初学者視点レビュー | `/student-review docs/lecture.md` |
 
 ### Orchestra統合スキル (3)
 
-8. **plan** - 実装前の計画作成
-9. **design-tracker** - 設計決定の自動記録（プロアクティブ）
-10. **checkpointing** - ワークフローの保存とパターン発見
+| # | スキル | 説明 | 使用例 |
+|---|--------|------|--------|
+| 16 | `/plan` | 実装前の計画作成 | `/plan` |
+| 17 | `/design-tracker` | 設計決定の自動記録（プロアクティブ） | 自動トリガー |
+| 18 | `/checkpointing` | ワークフローの保存 | `/checkpointing --full` |
 
 → 詳細: `.claude/skills/README.md`
 
@@ -160,19 +186,27 @@ npm run export        # PDF出力
 
 ## Agents
 
-### Slidevプレゼンテーションエージェント (5)
+### 利用可能なエージェント
 
-- **presentation-content-expert** - プレゼンテーション内容の専門家
-- **slidev-architect** - Slidev設計アーキテクト
-- **presentation-designer** - プレゼンテーション設計の専門家
-- **content-structurer** - コンテンツ構造化の専門家
-- **interactive-presenter** - インタラクティブ実装の専門家
+| エージェント | 説明 | 使用場面 |
+|-------------|------|----------|
+| **general-purpose** | Gemini CLI連携用サブエージェント | 専門調査、文書分析、設計相談 |
+| **Explore** | コードベース探索 | ファイル検索、構造把握 |
+| **Plan** | 実装計画作成 | 複雑なタスクの設計 |
 
-### Orchestra統合エージェント (1)
+### 使用方法
 
-- **general-purpose** - Gemini CLI連携用サブエージェント
+```
+Task(subagent_type="general-purpose", prompt="Geminiで{トピック}を調査して")
+Task(subagent_type="Explore", prompt="関連ファイルを探して")
+```
 
-→ 使用方法: `Task(subagent_type="agent-name", prompt="...")`
+### general-purpose エージェントの役割
+
+- **Gemini CLI 直接呼び出し**: 設計相談、デバッグ、リサーチ
+- **コンテキスト保護**: メイン Claude Code のコンテキストを消費しない
+- **結果の永続化**: `.claude/docs/research/` に調査結果を保存
+- **簡潔な要約**: メインに5-7ポイントの要約のみ返却
 
 ---
 
@@ -195,16 +229,75 @@ npm run export        # PDF出力
 
 実行中に自動的にトリガーされるフック:
 
-1. **agent-router** (UserPromptSubmit)
-   - 専門用語・レイアウト質問を検知 → Gemini提案
-
-2. **suggest-gemini-research** (PreToolUse: WebSearch|WebFetch)
-   - Web検索前 → Gemini調査を提案
-
-3. **log-cli-tools** (PostToolUse: Bash)
-   - Gemini実行 → `.claude/logs/cli-tools.jsonl` に記録
+| フック | トリガー | 動作 |
+|--------|----------|------|
+| **agent-router** | UserPromptSubmit | 専門用語・レイアウト質問を検知 → Gemini提案 |
+| **suggest-gemini-research** | PreToolUse (WebSearch\|WebFetch) | Web検索前 → Gemini調査を提案 |
+| **log-cli-tools** | PostToolUse (Bash) | Gemini実行 → `.claude/logs/cli-tools.jsonl` に記録 |
 
 → 設定: `.claude/settings.json`
+
+---
+
+## Orchestration Configuration
+
+### settings.json 構造
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [...],  // ユーザー入力時
+    "PreToolUse": [...],        // ツール実行前
+    "PostToolUse": [...]        // ツール実行後
+  },
+  "permissions": {
+    "allow": [...],             // 許可されたツール
+    "deny": [...]               // 禁止されたツール
+  },
+  "env": {
+    "EDITOR": "code --wait"
+  }
+}
+```
+
+### Permissions (許可されたツール)
+
+**ファイル操作:**
+- `Read(*)`, `Edit(*)`, `Write(*)`, `MultiEdit(*)`
+- `Glob(*)`, `Grep(*)`, `LS(*)`
+
+**Web:**
+- `WebFetch(*)`, `WebSearch(*)`
+
+**タスク管理:**
+- `Task(*)`, `Skill(*)`, `TodoRead(*)`, `TodoWrite(*)`
+
+**Bash コマンド:**
+- ファイル: `cat`, `ls`, `find`, `grep`, `head`, `tail`, `wc`, `sort`, `uniq`, `diff`
+- Git: `git`
+- Node.js: `npm`, `npx`, `node`
+- 外部: `curl`, `wget`, `jq`, `gemini`
+- シェル: `bash`, `sh`, `mkdir`, `touch`, `cp`, `mv`, `chmod`
+
+### Permissions (禁止されたツール)
+
+**機密ファイル:**
+- `.env`, `.env.*`, `*.pem`, `*.key`
+- `credentials*`, `*secret*`
+- `~/.ssh/**`, `~/.aws/**`, `~/.config/gcloud/**`
+
+**危険なコマンド:**
+- `pip`, `pip3`（パッケージ管理は手動で）
+- `rm -rf /`, `rm -rf ~`
+
+### フック実装ファイル
+
+```
+.claude/hooks/
+├── agent-router.py           # ユーザー入力分析
+├── suggest-gemini-research.py # Gemini提案
+└── log-cli-tools.py          # ログ記録
+```
 
 ---
 
@@ -240,20 +333,57 @@ Geminiは以下の専門分野でClaude Codeをサポート:
 ```
 my-slidev/
 ├── .gemini/                    # Gemini CLI設定
+│   ├── GEMINI.md               # Geminiの役割定義
+│   ├── settings.json           # モデル・コンテキスト設定
+│   └── skills/                 # Geminiスキル
 ├── .claude/                    # Claude Code設定
-│   ├── agents/                 # 6エージェント
+│   ├── agents/                 # サブエージェント定義
+│   │   └── general-purpose.md  # Gemini連携エージェント
 │   ├── hooks/                  # 3自動化フック
-│   ├── rules/                  # 4開発ルール
-│   ├── skills/                 # 11スキル
+│   │   ├── agent-router.py
+│   │   ├── suggest-gemini-research.py
+│   │   └── log-cli-tools.py
+│   ├── rules/                  # 開発ルール
+│   │   ├── gemini-delegation.md
+│   │   ├── dev-environment-slidev.md
+│   │   ├── language.md
+│   │   └── security.md
+│   ├── skills/                 # 18スキル
+│   │   ├── add-slide/
+│   │   ├── create-presentation/
+│   │   ├── create-document-summary/
+│   │   ├── slide-style-rector/
+│   │   ├── layout-fix/
+│   │   ├── slidev-diagram/
+│   │   ├── prepare-pdf/
+│   │   ├── archive-lecture/
+│   │   ├── add-notes/
+│   │   ├── commit-push/
+│   │   ├── pr-generator/
+│   │   ├── student-review/
+│   │   ├── notebook-ask/
+│   │   ├── notebook-manage/
+│   │   ├── notebook-add/
+│   │   ├── plan/
+│   │   ├── design-tracker/
+│   │   └── checkpointing/
 │   ├── commands/               # 詳細手順書
 │   ├── docs/                   # 設計・調査ドキュメント
+│   │   ├── DESIGN.md           # 設計決定の記録
+│   │   ├── style-guide.md      # スタイルガイド
+│   │   └── research/           # Gemini調査結果
+│   ├── format/                 # テンプレート・パターン
+│   │   ├── layout-patterns.md
+│   │   └── template_slides.md
 │   ├── logs/                   # ログ
+│   │   └── cli-tools.jsonl     # Gemini入出力ログ
 │   ├── checkpoints/            # アーカイブ
-│   └── settings.json           # フック設定
-├── lesson_plan/                # 授業計画
-├── format/                     # テンプレート・パターン
+│   └── settings.json           # フック・パーミッション設定
+├── lesson_plan/                # プレゼンテーション計画
 ├── slides.md                   # メインスライド
-└── pages/                      # 個別スライドページ
+├── pages/                      # 個別スライドページ
+├── public/                     # 静的アセット（画像等）
+└── previous_lecture/           # アーカイブ済み講義
 ```
 
 ---

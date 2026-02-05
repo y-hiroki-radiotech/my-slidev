@@ -20,5 +20,11 @@
   },
   "skills": {
     "disabled": []
+  },
+  "mcpServers": {
+    "deepwiki": {
+      "url": "https://mcp.deepwiki.com/mcp",
+      "type": "sse"
+    }
   }
 }

@@ -116,12 +116,13 @@ my-slidev/
 ├── README.md
 ├── slides.md                    # メインスライド
 ├── package.json
+├── *.skill                      # スキルパッケージファイル
 │
 ├── .claude/
 │   ├── agents/
 │   │   └── general-purpose.md   # Gemini連携サブエージェント
 │   │
-│   ├── skills/                  # 11スキル
+│   ├── skills/                  # 18スキル
 │   │   ├── create-presentation/ # プレゼンテーション全体生成
 │   │   ├── add-slide/           # スライド追加
 │   │   ├── create-document-summary/ # 文書要約スライド
@@ -132,7 +133,13 @@ my-slidev/
 │   │   ├── archive-lecture/     # プレゼンテーションアーカイブ
 │   │   ├── plan/                # 実装計画
 │   │   ├── design-tracker/      # 設計記録
-│   │   └── checkpointing/       # ワークフロー保存
+│   │   ├── checkpointing/       # ワークフロー保存
+│   │   ├── commit-push/         # Gitコミット・プッシュ
+│   │   ├── pr-generator/        # PR自動生成
+│   │   ├── student-review/      # 教材レビュー
+│   │   ├── notebook-ask/        # NotebookLM質問
+│   │   ├── notebook-manage/     # NotebookLM管理
+│   │   └── notebook-add/        # NotebookLM追加
 │   │
 │   ├── hooks/                   # 自動化フック
 │   │   ├── agent-router.py      # Geminiルーティング
@@ -155,9 +162,18 @@ my-slidev/
 │
 ├── .gemini/                     # Gemini CLI設定
 │   ├── GEMINI.md                # 役割定義
-│   ├── settings.json
+│   ├── settings.json            # mcpServers含む
 │   └── skills/
-│       └── context-loader/      # コンテキスト自動読み込み
+│       ├── context-loader/      # コンテキスト自動読み込み
+│       └── pdf-to-markdown/     # PDF→Markdown変換
+│
+├── .github/                     # GitHub統合
+│   ├── copilot-instructions.md  # Copilot設定
+│   ├── pull_request_template.md # PRテンプレート
+│   └── workflows/
+│       ├── claude-code-review.yml  # PR自動レビュー
+│       ├── claude.yml           # @claudeメンション対応
+│       └── deploy.yaml          # デプロイ
 │
 ├── lesson_plan/                 # プレゼンテーション計画
 │   └── (プレゼンテーション計画ファイル)
@@ -166,6 +182,9 @@ my-slidev/
 │   ├── layout-patterns.md       # 40種類のレイアウトパターン
 │   ├── template_sides.md
 │   └── abstract_reading_slide.md
+│
+├── reviews/                     # レビューレポート保存先
+│   └── (student-reviewスキルの出力)
 │
 └── pages/                       # 個別スライド
     └── who_am_i.md
@@ -317,6 +336,114 @@ PDF出力用に最適化し、自動的にPDFを生成します。
 /checkpointing --analyze    # 分析: スキルパターン発見
 ```
 
+### `/commit-push` — Gitコミット・プッシュ
+
+ステージされた変更からConventional Commitメッセージ候補を3つ生成し、選択後にコミット・プッシュします。
+
+```bash
+/commit-push
+```
+
+**ワークフロー:**
+1. `git diff --cached` で変更内容を分析
+2. `type(scope): 説明` 形式で候補3つ生成
+3. ユーザーが選択または編集
+4. コミット実行
+5. プッシュ確認（オプション）
+
+### `/pr-generator` — PR自動生成
+
+PRテンプレートと変更差分を元にPRの下書きを自動生成し、ghコマンドでPRを作成します。
+
+```bash
+/pr-generator
+```
+
+**ワークフロー:**
+1. `.github/pull_request_template.md` を読み込み
+2. コミット範囲を選択（ブランチ全体、最新1件、カスタム）
+3. 下書きを生成
+4. ユーザー確認
+5. `gh pr create` でPR作成
+
+### `/student-review` — 初学者視点レビュー
+
+学習教材（Markdownファイル）を初学者の視点で分析し、改善提案を行います。
+
+```bash
+/student-review docs/lecture-01.md
+```
+
+**出力:**
+- `reviews/` ディレクトリにレビューレポートを保存
+- 例: `docs/lecture-01.md` → `reviews/lecture-01.md`
+- 「なぜ疑問が生じるか」「改善提案」「現場での活用」を含む
+
+### `/notebook-ask` — NotebookLMに質問
+
+NotebookLMに質問し、自動的にフォローアップ質問を実行します。
+
+```bash
+/notebook-ask 水吸収線量について教えて
+/notebook-ask --id notebook-id 質問内容
+/notebook-ask --url https://notebooklm.google.com/notebook/ID 質問内容
+```
+
+### `/notebook-manage` — NotebookLM管理
+
+NotebookLMノートブックの一覧、検索、アクティブ化、削除を行います。
+
+```bash
+/notebook-manage list
+/notebook-manage search 放射線
+/notebook-manage activate notebook-id
+/notebook-manage remove notebook-id
+```
+
+### `/notebook-add` — NotebookLM追加
+
+NotebookLMのノートブックをライブラリに自動追加します。
+
+```bash
+/notebook-add https://notebooklm.google.com/notebook/abc-123
+```
+
+## GitHub Actions
+
+### Claude Code PR Review
+
+PR作成時に自動でコードレビューを実行します。
+
+```yaml
+# .github/workflows/claude-code-review.yml
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review, reopened]
+```
+
+**セットアップ:**
+1. リポジトリの Settings > Secrets に `CLAUDE_CODE_OAUTH_TOKEN` を設定
+2. PR作成時に自動でレビューが実行される
+
+### Claude @メンション
+
+IssueやPRコメントで `@claude` メンション時に対話形式で対応します。
+
+```yaml
+# .github/workflows/claude.yml
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+```
+
+**使い方:**
+```
+@claude このPRの変更内容を説明して
+@claude このバグの原因を調査して
+```
+
 ## Development
 
 ### Tech Stack
@@ -377,6 +504,16 @@ bash scripts/check-layout.sh    # レイアウトチェック
 - **プレゼンテーション設計相談** - 認知負荷、視覚階層、効果
 - **レイアウト判断** - 40パターンから最適なものを推奨
 - **文書分析** - PDF文書の構造化抽出
+- **PDF→Markdown変換** - PDFをMarkdown形式に変換
+
+### Gemini Skill: pdf-to-markdown
+
+pdfフォルダ内のPDFをMarkdown形式に変換します。
+
+```bash
+# Gemini CLIで直接実行
+gemini -p "以下のPDFファイルの内容を読み取り、Markdown形式で出力してください" -f "pdf/document.pdf"
+```
 
 ### 使い方
 

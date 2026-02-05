@@ -36,6 +36,18 @@ Skillsは、ユーザーが直接呼び出す具体的なアクションです�
 │   └── SKILL.md
 ├── checkpointing/             # orchestra統合
 │   └── SKILL.md
+├── commit-push/               # Git操作
+│   └── SKILL.md
+├── pr-generator/              # PR自動生成
+│   └── SKILL.md
+├── student-review/            # 教材レビュー
+│   └── SKILL.md
+├── notebook-ask/              # NotebookLM質問
+│   └── SKILL.md
+├── notebook-manage/           # NotebookLM管理
+│   └── SKILL.md
+├── notebook-add/              # NotebookLM追加
+│   └── SKILL.md
 └── README.md
 ```
 
@@ -436,6 +448,169 @@ AI画像生成を使用して図解を作成し、スライドに挿入します
 - 再利用可能なスキルの抽出
 
 **詳細:** orchestra統合により追加
+
+---
+
+### 13. `/commit-push` - Conventional Commitでコミット・プッシュ
+
+ステージされた変更から日本語のConventional Commitメッセージ候補を3つ生成し、選択後にコミット・プッシュを実行します。
+
+**使用方法:**
+```
+/commit-push
+```
+
+**引数:** なし
+
+**成果物:**
+- gitコミット
+- リモートへのプッシュ（オプション）
+
+**機能:**
+- ステージされた変更の自動分析
+- Conventional Commit形式（`type(scope): 説明`）の候補3つ生成
+- ユーザーによる選択または編集
+- プッシュ前の確認
+
+**詳細:** `commit-push/SKILL.md` を参照
+
+---
+
+### 14. `/pr-generator` - PR自動生成
+
+PRテンプレートと変更差分を元にPRの下書きを自動生成し、確認後ghコマンドでPRを作成します。
+
+**使用方法:**
+```
+/pr-generator
+```
+
+**引数:** なし
+
+**成果物:**
+- PR下書きファイル（`tmp/pr/`）
+- GitHub PR
+
+**機能:**
+- PRテンプレートの自動読み込み
+- コミット範囲の選択（ブランチ全体、最新1件、カスタム）
+- 差分に基づく下書き生成
+- ユーザー確認後のPR作成
+
+**詳細:** `pr-generator/SKILL.md` を参照
+
+---
+
+### 15. `/student-review` - 初学者視点レビュー
+
+学習教材（Markdownファイル）を初学者の視点で分析し、改善提案を行います。
+
+**使用方法:**
+```
+/student-review docs/lecture-01.md
+/student-review slides.md
+```
+
+**引数:** レビュー対象のMarkdownファイルパス
+
+**成果物:**
+- `reviews/` ディレクトリにレビューレポートを保存
+- 例: `docs/lecture-01.md` → `reviews/lecture-01.md`
+
+**機能:**
+- 専門用語、前提知識の確認
+- 説明の論理的な流れのチェック
+- 具体例の充足度の評価
+- 「なぜ疑問が生じるか」「改善提案」「現場での活用」を含む詳細レポート
+
+**詳細:** `student-review/SKILL.md` を参照
+
+---
+
+### 16. `/notebook-ask` - NotebookLMに質問
+
+NotebookLMに質問し、自動的にフォローアップ質問を実行して完全な回答を得ます。
+
+**使用方法:**
+```
+# アクティブなノートブックに質問
+/notebook-ask 水吸収線量について教えて
+
+# 特定のノートブックに質問
+/notebook-ask --id notebook-id 質問内容
+
+# URLを直接指定
+/notebook-ask --url https://notebooklm.google.com/notebook/ID 質問内容
+```
+
+**引数:** 質問内容、オプションで `--id` または `--url`
+
+**成果物:**
+- NotebookLMからの回答
+
+**機能:**
+- アクティブノートブック、ID指定、URL指定の3つの方法
+- 自動フォローアップ質問
+- 回答の統合
+
+**詳細:** `notebook-ask/SKILL.md` を参照
+
+---
+
+### 17. `/notebook-manage` - NotebookLM管理
+
+NotebookLMノートブックライブラリの管理操作を提供します。
+
+**使用方法:**
+```
+# 一覧表示
+/notebook-manage list
+
+# 検索
+/notebook-manage search 放射線
+
+# アクティブ化
+/notebook-manage activate notebook-id
+
+# 削除
+/notebook-manage remove notebook-id
+```
+
+**引数:** 操作コマンド（list, search, activate, remove）
+
+**成果物:**
+- ノートブック一覧、検索結果、操作結果
+
+**機能:**
+- ノートブック一覧表示
+- トピック・キーワード検索
+- アクティブ化
+- 削除
+
+**詳細:** `notebook-manage/SKILL.md` を参照
+
+---
+
+### 18. `/notebook-add` - NotebookLM追加
+
+NotebookLMのノートブックをライブラリに自動追加します。
+
+**使用方法:**
+```
+/notebook-add https://notebooklm.google.com/notebook/abc-123
+```
+
+**引数:** NotebookLMのURL
+
+**成果物:**
+- ライブラリに登録されたノートブック
+
+**機能:**
+- URLからの自動内容分析
+- 名前、説明、トピックの自動生成
+- ライブラリへの登録
+
+**詳細:** `notebook-add/SKILL.md` を参照
 
 ---
 
