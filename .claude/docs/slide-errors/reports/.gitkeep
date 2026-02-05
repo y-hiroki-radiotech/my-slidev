@@ -1,0 +1,5 @@
+# This directory stores slide test reports
+# Each test run creates a timestamped subdirectory with:
+# - test-results.json: Raw test data
+# - report.md: Human-readable report
+# - screenshots/: Error screenshots

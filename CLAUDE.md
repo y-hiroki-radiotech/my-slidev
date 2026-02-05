@@ -60,6 +60,7 @@ Task(subagent_type="general-purpose", prompt="Geminiで最新情報を調査し�
 | `/create-document-summary` | 文書要約準備 | 文書要約スライド |
 | `/slide-style-rector` | スタイル統一 | 整形されたスライド |
 | `/layout-fix` | レイアウト崩れ修正 | 修正されたスライド |
+| `/slide-test` | Playwright自動テスト＋オーバーフロー自動修正 | テストレポート + 自動修正 |
 | `/slidev-diagram` | 図解追加 | 図解画像 + スライド更新 |
 | `/prepare-pdf` | 発表前 | PDF出力 |
 | `/plan` | 複雑なプレゼンの計画 | 実装計画 |
@@ -79,7 +80,9 @@ Task(subagent_type="general-purpose", prompt="Geminiで最新情報を調査し�
 2. /create-presentation でスライド一括生成
 3. /slide-style-rector でスタイル整形
 4. /slidev-diagram で図解追加（必要に応じて）
-5. /layout-fix でレイアウト確認
+5. /slide-test でブラウザテスト＆オーバーフロー自動修正
+   → Step 1: スペーシング縮小 → Step 2: フォントサイズ縮小
+   → 解消しない場合はユーザーに「さらに縮小」or「スライド分割」を確認
 6. /prepare-pdf でPDF出力
 ```
 
@@ -129,15 +132,20 @@ Task(subagent_type="general-purpose", prompt="Geminiで最新情報を調査し�
 npm run dev           # 開発サーバー起動
 npm run build         # プロダクションビルド
 npm run export        # PDF出力
+
+# オーバーフロー自動修正スクリプト
+node scripts/fix-overflow.mjs slides.md 6,10,11        # Step 1: スペーシング縮小
+node scripts/fix-overflow.mjs slides.md 6,10 --step=2  # Step 2: フォントサイズ縮小
+node scripts/fix-overflow.mjs slides.md 6 --dry-run    # ドライラン（変更確認のみ）
 ```
 
 → 詳細: `.claude/rules/dev-environment-slidev.md`
 
 ---
 
-## Skills Overview (18 Skills)
+## Skills Overview (19 Skills)
 
-### Slidev特化スキル (9)
+### Slidev特化スキル (10)
 
 | # | スキル | 説明 | 使用例 |
 |---|--------|------|--------|
@@ -146,10 +154,11 @@ npm run export        # PDF出力
 | 3 | `/create-document-summary` | 文書要約スライド生成 | `/create-document-summary 10.1016/xxx` |
 | 4 | `/slide-style-rector` | スタイル自動整形 | `/slide-style-rector slides.md` |
 | 5 | `/layout-fix` | レイアウト崩れ自動修正 | `/layout-fix slides.md` |
-| 6 | `/slidev-diagram` | 図解生成とスライド挿入 | `/slidev-diagram 構造を図解して` |
-| 7 | `/prepare-pdf` | PDF出力用最適化 | `/prepare-pdf` |
-| 8 | `/archive-lecture` | プレゼンテーションアーカイブ | `/archive-lecture` |
-| 9 | `/add-notes` | スピーカーノート追加 | `/add-notes 3-10` |
+| 6 | `/slide-test` | Playwright自動テスト＋オーバーフロー自動修正 | `/slide-test` |
+| 7 | `/slidev-diagram` | 図解生成とスライド挿入 | `/slidev-diagram 構造を図解して` |
+| 8 | `/prepare-pdf` | PDF出力用最適化 | `/prepare-pdf` |
+| 9 | `/archive-lecture` | プレゼンテーションアーカイブ | `/archive-lecture` |
+| 10 | `/add-notes` | スピーカーノート追加 | `/add-notes 3-10` |
 
 ### Git/PR スキル (2)
 
@@ -217,6 +226,7 @@ Task(subagent_type="Explore", prompt="関連ファイルを探して")
 | `.claude/rules/` | 開発ルール（Gemini使用、セキュリティ、言語） |
 | `.claude/docs/DESIGN.md` | プレゼンテーション設計決定の記録 |
 | `.claude/docs/research/` | Gemini調査結果 |
+| `.claude/docs/slide-errors/` | スライドテストエラーカタログ＆レポート（CSSクリッピング検出対応） |
 | `.claude/docs/style-guide.md` | ビジュアルデザイン原則 |
 | `.claude/format/layout-patterns.md` | 40種類のレイアウトパターン |
 | `.claude/format/template_sides.md` | スライドテンプレート |
@@ -348,12 +358,13 @@ my-slidev/
 │   │   ├── dev-environment-slidev.md
 │   │   ├── language.md
 │   │   └── security.md
-│   ├── skills/                 # 18スキル
+│   ├── skills/                 # 19スキル
 │   │   ├── add-slide/
 │   │   ├── create-presentation/
 │   │   ├── create-document-summary/
 │   │   ├── slide-style-rector/
 │   │   ├── layout-fix/
+│   │   ├── slide-test/
 │   │   ├── slidev-diagram/
 │   │   ├── prepare-pdf/
 │   │   ├── archive-lecture/
@@ -371,7 +382,10 @@ my-slidev/
 │   ├── docs/                   # 設計・調査ドキュメント
 │   │   ├── DESIGN.md           # 設計決定の記録
 │   │   ├── style-guide.md      # スタイルガイド
-│   │   └── research/           # Gemini調査結果
+│   │   ├── research/           # Gemini調査結果
+│   │   └── slide-errors/       # スライドテストエラーカタログ
+│   │       ├── error-catalog.md # 永続的エラーパターン集
+│   │       └── reports/        # テスト結果レポート
 │   ├── format/                 # テンプレート・パターン
 │   │   ├── layout-patterns.md
 │   │   └── template_slides.md

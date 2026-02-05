@@ -1,0 +1,24 @@
+{
+  "timestamp": "20260205-131116",
+  "targetFile": "slides.md",
+  "totalSlides": 33,
+  "testedSlides": 33,
+  "errors": [
+    {
+      "slideNumber": 17,
+      "type": "vite_error",
+      "details": "Icon `mdi/cancer` not found - caused slides 16-18 to show Vite error overlay",
+      "screenshot": "screenshots/slide-17-vite-error.png",
+      "fixed": true,
+      "fixDetails": "Replaced <mdi-cancer> with <mdi-biohazard> at line 982 of slides.md"
+    }
+  ],
+  "warnings": [],
+  "passed": 33,
+  "failed": 0,
+  "retest": {
+    "performed": true,
+    "result": "all_passed",
+    "passedSlides": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33]
+  }
+}

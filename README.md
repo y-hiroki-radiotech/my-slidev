@@ -122,12 +122,13 @@ my-slidev/
 │   ├── agents/
 │   │   └── general-purpose.md   # Gemini連携サブエージェント
 │   │
-│   ├── skills/                  # 18スキル
+│   ├── skills/                  # 19スキル
 │   │   ├── create-presentation/ # プレゼンテーション全体生成
 │   │   ├── add-slide/           # スライド追加
 │   │   ├── create-document-summary/ # 文書要約スライド
 │   │   ├── slide-style-rector/  # スタイル整形
 │   │   ├── layout-fix/          # レイアウト修正
+│   │   ├── slide-test/          # Playwrightテスト＋オーバーフロー自動修正
 │   │   ├── slidev-diagram/      # 図解生成
 │   │   ├── prepare-pdf/         # PDF出力
 │   │   ├── archive-lecture/     # プレゼンテーションアーカイブ
@@ -155,7 +156,10 @@ my-slidev/
 │   ├── docs/
 │   │   ├── DESIGN.md            # プレゼンテーション設計記録
 │   │   ├── style-guide.md       # ビジュアルデザイン原則
-│   │   └── research/            # Gemini調査結果
+│   │   ├── research/            # Gemini調査結果
+│   │   └── slide-errors/        # エラーカタログ＆テストレポート
+│   │       ├── error-catalog.md # エラーパターン集（CSSクリッピング検出対応）
+│   │       └── reports/         # テスト結果レポート
 │   │
 │   └── logs/
 │       └── cli-tools.jsonl      # Gemini入出力ログ
@@ -262,6 +266,32 @@ my-slidev/
 - リスト項目過多（5個以上）
 - テキストオーバーフロー（300文字超）
 - 不適切なレイアウト
+
+### `/slide-test` — Playwrightテスト＋オーバーフロー自動修正
+
+Playwright MCPでスライドを自動テストし、CSSクリッピングによるオーバーフローを検出・段階的に自動修正します。
+
+```
+/slide-test
+/slide-test --no-fix
+```
+
+**検出項目:**
+- CSSクリッピングオーバーフロー（`.slidev-page`の`scrollHeight` vs `clientHeight`比較）
+- Viteエラーオーバーレイ
+- コンソールエラー
+
+**自動修正フロー:**
+1. **Step 1: スペーシング縮小** — `mt-6`→`mt-3`, `p-5`→`p-3`, `space-y-4`→`space-y-2` 等
+2. **Step 2: フォントサイズ縮小** — `text-lg`→`text-base`, `text-xl`→`text-lg`
+3. **Step 3: ユーザーに確認** — 「さらに縮小」or「スライド分割」を選択
+
+**自動修正スクリプト（直接実行も可能）:**
+```bash
+node scripts/fix-overflow.mjs slides.md 6,10,11        # Step 1
+node scripts/fix-overflow.mjs slides.md 6,10 --step=2  # Step 2
+node scripts/fix-overflow.mjs slides.md 6 --dry-run    # ドライラン
+```
 
 ### `/slidev-diagram` — 図解生成
 

@@ -232,43 +232,43 @@ src: ./pages/resources.md
 
 ***
 
-<div class="mt-8"></div>
+<div class="mt-4"></div>
 
-<div class="space-y-4 text-lg">
-<div class="bg-blue-50 p-4 rounded-lg flex items-center">
-<div class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold mr-4">1</div>
+<div class="space-y-2 text-lg">
+<div class="bg-blue-50 p-3 rounded-lg flex items-center">
+<div class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold mr-4">1</div>
 <div class="flex-1">
 <strong>DNA損傷のメカニズム</strong>
 <span class="ml-4 text-blue-600">20分</span>
 </div>
 </div>
 
-<div class="bg-green-50 p-4 rounded-lg flex items-center">
-<div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mr-4">2</div>
+<div class="bg-green-50 p-3 rounded-lg flex items-center">
+<div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mr-4">2</div>
 <div class="flex-1">
 <strong>放射線感受性</strong>
 <span class="ml-4 text-green-600">15分</span>
 </div>
 </div>
 
-<div class="bg-purple-50 p-4 rounded-lg flex items-center">
-<div class="w-12 h-12 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold mr-4">3</div>
+<div class="bg-purple-50 p-3 rounded-lg flex items-center">
+<div class="w-10 h-10 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold mr-4">3</div>
 <div class="flex-1">
 <strong>分割照射の4つのR</strong>
 <span class="ml-4 text-purple-600">25分</span>
 </div>
 </div>
 
-<div class="bg-orange-50 p-4 rounded-lg flex items-center">
-<div class="w-12 h-12 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold mr-4">4</div>
+<div class="bg-orange-50 p-3 rounded-lg flex items-center">
+<div class="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold mr-4">4</div>
 <div class="flex-1">
 <strong>臨床への応用</strong>
 <span class="ml-4 text-orange-600">10分</span>
 </div>
 </div>
 
-<div class="bg-gray-50 p-4 rounded-lg flex items-center">
-<div class="w-12 h-12 bg-gray-500 text-white rounded-full flex items-center justify-center font-bold mr-4">5</div>
+<div class="bg-gray-50 p-3 rounded-lg flex items-center">
+<div class="w-10 h-10 bg-gray-500 text-white rounded-full flex items-center justify-center font-bold mr-4">5</div>
 <div class="flex-1">
 <strong>まとめと次回予告</strong>
 <span class="ml-4 text-gray-600">10分</span>
@@ -461,17 +461,17 @@ DNA鎖の切断
 
 ***
 
-<div class="mt-6"></div>
+<div class="mt-3"></div>
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-4">
 <div>
-<h3 class="text-xl font-semibold mb-4 text-green-600">
+<h3 class="text-xl font-semibold mb-2 text-green-600">
 <mdi-water class="inline mr-2" />
 メカニズム
 </h3>
 
-<div class="bg-green-50 p-5 rounded-lg">
-<div class="font-semibold mb-3">化学反応の流れ</div>
+<div class="bg-green-50 p-3 rounded-lg">
+<div class="font-semibold mb-2">化学反応の流れ</div>
 <div class="text-base space-y-3">
 <div class="bg-white p-3 rounded">
 <strong>1. 水の電離</strong><br>
@@ -491,13 +491,13 @@ OH• + DNA → DNA損傷
 </div>
 
 <div>
-<h3 class="text-xl font-semibold mb-4 text-purple-600">
+<h3 class="text-xl font-semibold mb-2 text-purple-600">
 <mdi-chart-box class="inline mr-2" />
 重要性
 </h3>
 
-<div class="space-y-4">
-<div class="bg-purple-50 p-4 rounded-lg">
+<div class="space-y-2">
+<div class="bg-purple-50 p-3 rounded-lg">
 <div class="font-semibold mb-2">寄与率</div>
 <div class="text-3xl font-bold text-purple-600">
 約70%
@@ -507,7 +507,7 @@ X線・γ線治療の主要メカニズム
 </div>
 </div>
 
-<div class="bg-blue-50 p-4 rounded-lg">
+<div class="bg-blue-50 p-3 rounded-lg">
 <div class="font-semibold mb-2">なぜ主要なのか？</div>
 <div class="text-base">
 • 人体の<strong>70%は水</strong><br>
@@ -519,7 +519,7 @@ X線・γ線治療の主要メカニズム
 </div>
 </div>
 
-<div class="mt-6 text-center bg-yellow-50 p-4 rounded-lg">
+<div class="mt-3 text-center bg-yellow-50 p-3 rounded-lg">
 <mdi-lightbulb class="inline mr-2 text-yellow-600" />
 <strong>Key Point:</strong> 間接作用が放射線治療の主要メカニズム
 </div>
@@ -545,11 +545,11 @@ X線・γ線治療の主要メカニズム
 
 ***
 
-<div class="mt-6"></div>
+<div class="mt-3"></div>
 
-<div class="grid grid-cols-2 gap-6">
-<div class="bg-blue-50 p-5 rounded-lg">
-<h3 class="text-lg font-semibold mb-3 text-blue-700">
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-blue-50 p-3 rounded-lg">
+<h3 class="text-lg font-semibold mb-2 text-blue-700">
 <mdi-link-variant class="inline mr-2" />
 一本鎖切断 (SSB)
 </h3>
@@ -561,8 +561,8 @@ X線・γ線治療の主要メカニズム
 </div>
 </div>
 
-<div class="bg-red-50 p-5 rounded-lg border-2 border-red-300">
-<h3 class="text-lg font-semibold mb-3 text-red-700">
+<div class="bg-red-50 p-3 rounded-lg border-2 border-red-300">
+<h3 class="text-lg font-semibold mb-2 text-red-700">
 <mdi-link-variant-off class="inline mr-2" />
 二本鎖切断 (DSB)
 </h3>
@@ -574,8 +574,8 @@ X線・γ線治療の主要メカニズム
 </div>
 </div>
 
-<div class="bg-green-50 p-5 rounded-lg">
-<h3 class="text-lg font-semibold mb-3 text-green-700">
+<div class="bg-green-50 p-3 rounded-lg">
+<h3 class="text-lg font-semibold mb-2 text-green-700">
 <mdi-alpha-b-circle class="inline mr-2" />
 塩基損傷
 </h3>
@@ -586,8 +586,8 @@ X線・γ線治療の主要メカニズム
 </div>
 </div>
 
-<div class="bg-purple-50 p-5 rounded-lg">
-<h3 class="text-lg font-semibold mb-3 text-purple-700">
+<div class="bg-purple-50 p-3 rounded-lg">
+<h3 class="text-lg font-semibold mb-2 text-purple-700">
 <mdi-link class="inline mr-2" />
 DNA-DNA架橋
 </h3>
@@ -599,7 +599,7 @@ DNA-DNA架橋
 </div>
 </div>
 
-<div class="mt-6 text-center bg-red-50 p-4 rounded-lg border-2 border-red-300">
+<div class="mt-3 text-center bg-red-50 p-3 rounded-lg border-2 border-red-300">
 <mdi-alert class="inline mr-2 text-red-600" />
 <strong class="text-red-600">最も重要:</strong> 二本鎖切断（DSB）が最も致死的な損傷
 </div>
@@ -803,33 +803,33 @@ layout: section
 
 ***
 
-<div class="mt-6"></div>
+<div class="mt-3"></div>
 
-<div class="bg-blue-50 p-6 rounded-lg mb-6">
-<h3 class="text-xl font-semibold mb-4 text-blue-700">
+<div class="bg-blue-50 p-3 rounded-lg mb-2">
+<h3 class="text-xl font-semibold mb-2 text-blue-700">
 <mdi-book-open-variant class="inline mr-2" />
 放射線感受性が高い細胞の3つの特徴
 </h3>
 
 <div class="grid grid-cols-3 gap-4 text-lg">
-<div class="bg-white p-4 rounded text-center">
+<div class="bg-white p-3 rounded text-center">
 <div class="text-3xl mb-2">📈</div>
 <div class="font-semibold">1. 分裂が活発</div>
 </div>
-<div class="bg-white p-4 rounded text-center">
+<div class="bg-white p-3 rounded text-center">
 <div class="text-3xl mb-2">🔬</div>
 <div class="font-semibold">2. 分化度が低い</div>
 </div>
-<div class="bg-white p-4 rounded text-center">
+<div class="bg-white p-3 rounded text-center">
 <div class="text-3xl mb-2">🔄</div>
 <div class="font-semibold">3. 将来の分裂回数が多い</div>
 </div>
 </div>
 </div>
 
-<div class="grid grid-cols-2 gap-6">
-<div class="bg-red-50 p-5 rounded-lg">
-<h4 class="font-semibold mb-3 text-red-700">
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-red-50 p-3 rounded-lg">
+<h4 class="font-semibold mb-2 text-red-700">
 <mdi-arrow-up class="inline mr-2" />
 高感受性細胞の例
 </h4>
@@ -841,8 +841,8 @@ layout: section
 </div>
 </div>
 
-<div class="bg-green-50 p-5 rounded-lg">
-<h4 class="font-semibold mb-3 text-green-700">
+<div class="bg-green-50 p-3 rounded-lg">
+<h4 class="font-semibold mb-2 text-green-700">
 <mdi-arrow-down class="inline mr-2" />
 低感受性細胞の例
 </h4>
@@ -877,21 +877,19 @@ layout: section
 
 ---
 
-# 細胞周期と放射線感受性
+# 細胞周期と放射線感受性 (1/2)
 
 ***
 
-<div class="mt-6"></div>
+<div class="mt-3"></div>
 
-<div class="grid grid-cols-2 gap-8">
-<div>
-<h3 class="text-xl font-semibold mb-4 text-blue-600">
+<h3 class="text-lg font-semibold mb-2 text-blue-600">
 <mdi-refresh-circle class="inline mr-2" />
 細胞周期の各期
 </h3>
 
-<div class="space-y-3">
-<div class="bg-red-50 p-4 rounded-lg border-2 border-red-300">
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-red-50 p-3 rounded-lg border-2 border-red-300">
 <div class="font-semibold text-red-700">M期（分裂期）</div>
 <div class="text-base mt-2">
 <strong class="text-red-600">最も感受性が高い</strong><br>
@@ -899,7 +897,7 @@ layout: section
 </div>
 </div>
 
-<div class="bg-orange-50 p-4 rounded-lg">
+<div class="bg-orange-50 p-3 rounded-lg">
 <div class="font-semibold text-orange-700">G2/M境界</div>
 <div class="text-base mt-2">
 感受性が高い<br>
@@ -907,7 +905,7 @@ layout: section
 </div>
 </div>
 
-<div class="bg-green-50 p-4 rounded-lg">
+<div class="bg-green-50 p-3 rounded-lg">
 <div class="font-semibold text-green-700">S期（DNA合成期）</div>
 <div class="text-base mt-2">
 <strong class="text-green-600">最も抵抗性が高い</strong><br>
@@ -915,75 +913,85 @@ layout: section
 </div>
 </div>
 
-<div class="bg-blue-50 p-4 rounded-lg">
+<div class="bg-blue-50 p-3 rounded-lg">
 <div class="font-semibold text-blue-700">G1期（準備期）</div>
 <div class="text-base mt-2">
 中程度の感受性
 </div>
 </div>
 </div>
-</div>
-
-<div>
-<h3 class="text-xl font-semibold mb-4 text-purple-600">
-<mdi-chart-line class="inline mr-2" />
-感受性の変化
-</h3>
-
-<div class="bg-purple-50 p-6 rounded-lg mb-4">
-<div class="text-center text-lg font-semibold mb-3">
-感受性の順序
-</div>
-<div class="text-2xl text-center font-bold text-purple-700">
-M期 > G2/M > G1 > S期
-</div>
-</div>
-
-<div class="bg-yellow-50 p-5 rounded-lg">
-<div class="font-semibold mb-2 text-yellow-700">
-<mdi-lightbulb class="inline mr-2" />
-臨床的意義
-</div>
-<div class="text-base">
-• M期の細胞が最も放射線に弱い<br>
-• がん細胞は分裂が速い → M期が多い<br>
-• この特性を利用した治療戦略
-</div>
-</div>
-</div>
-</div>
 
 <!--
-[時間: 3分]
+[時間: 1.5分]
 
 ### スクリプト
 「細胞周期のどの段階にいるかで、放射線感受性は大きく変わります。最も感受性が高いのはM期、つまり分裂期です。逆にS期、DNA合成期は最も抵抗性が高い。なぜでしょうか？M期では染色体が凝縮していてDNA修復が困難だからです。S期では修復機構が活発に働いています。」
 
 ### トーキングポイント
 - 細胞周期の各期を簡潔に説明（G1→S→G2→M）
-- 感受性の順序：M期 > G2/M > G1 > S期
-- がん細胞はM期の細胞が多いことと関連付け
+- 各期の感受性の違いを色分けで視覚的に理解
 
 ### 強調ポイント
-「M期が最も感受性が高く、S期が最も抵抗性が高い。この順序は必ず覚えてください」
+「M期が最も感受性が高く、S期が最も抵抗性が高い」
 -->
 
 ---
 
-# がん細胞 vs 正常細胞
+# 細胞周期と放射線感受性 (2/2)
 
 ***
 
-<div class="mt-6"></div>
+<div class="mt-3"></div>
 
-<div class="grid grid-cols-2 gap-8">
-<div class="bg-red-50 p-6 rounded-lg border-2 border-red-300">
-<h3 class="text-xl font-semibold mb-4 text-red-700">
-<mdi-cancer class="inline mr-2" />
+<h3 class="text-lg font-semibold mb-3 text-purple-600">
+<mdi-chart-line class="inline mr-2" />
+感受性の順序
+</h3>
+
+<div class="bg-purple-50 p-5 rounded-lg mb-4">
+<div class="text-3xl text-center font-bold text-purple-700">
+M期 > G2/M > G1 > S期
+</div>
+</div>
+
+<div class="bg-yellow-50 p-5 rounded-lg">
+<div class="font-semibold mb-3 text-yellow-700">
+<mdi-lightbulb class="inline mr-2" />
+臨床的意義
+</div>
+<div class="text-lg space-y-2">
+<div>• M期の細胞が最も放射線に弱い</div>
+<div>• がん細胞は分裂が速い → M期が多い</div>
+<div>• この特性を利用した治療戦略</div>
+</div>
+</div>
+
+<!--
+[時間: 1.5分]
+
+### トーキングポイント
+- 感受性の順序：M期 > G2/M > G1 > S期
+- がん細胞はM期の細胞が多いことと関連付け
+
+### 強調ポイント
+「この順序は必ず覚えてください。がん細胞はM期が多いから放射線に弱い」
+-->
+
+---
+
+# がん細胞 vs 正常細胞 (1/2)
+
+***
+
+<div class="mt-3"></div>
+
+<div class="bg-red-50 p-4 rounded-lg border-2 border-red-300">
+<h3 class="text-xl font-semibold mb-3 text-red-700">
+<mdi-biohazard class="inline mr-2" />
 がん細胞の特徴
 </h3>
 
-<div class="space-y-3 text-base">
+<div class="grid grid-cols-2 gap-3 text-base">
 <div class="bg-white p-3 rounded">
 <strong>分裂速度</strong><br>
 <mdi-arrow-up class="inline text-red-600" /> 速い → 感受性が高い
@@ -1006,13 +1014,35 @@ M期 > G2/M > G1 > S期
 </div>
 </div>
 
-<div class="bg-green-50 p-6 rounded-lg border-2 border-green-300">
-<h3 class="text-xl font-semibold mb-4 text-green-700">
+<!--
+[時間: 1.5分]
+
+### スクリプト
+「ここでがん細胞と正常細胞を比較してみましょう。がん細胞は分裂が速く、DNA修復能力が低下していることが多い。そのため放射線に弱い。」
+
+### トーキングポイント
+- がん細胞の4つの特徴を順に説明
+- 「低酸素領域」については後のReoxygenationで詳しく説明と予告
+
+### 強調ポイント
+「がん細胞は放射線に弱い」
+-->
+
+---
+
+# がん細胞 vs 正常細胞 (2/2)
+
+***
+
+<div class="mt-3"></div>
+
+<div class="bg-green-50 p-4 rounded-lg border-2 border-green-300">
+<h3 class="text-xl font-semibold mb-3 text-green-700">
 <mdi-human class="inline mr-2" />
 正常細胞の特徴
 </h3>
 
-<div class="space-y-3 text-base">
+<div class="grid grid-cols-2 gap-3 text-base">
 <div class="bg-white p-3 rounded">
 <strong>分裂速度</strong><br>
 <mdi-arrow-down class="inline text-green-600" /> 遅い（または分裂しない）
@@ -1034,9 +1064,8 @@ M期 > G2/M > G1 > S期
 </div>
 </div>
 </div>
-</div>
 
-<div class="mt-6 bg-blue-50 p-5 rounded-lg">
+<div class="mt-4 bg-blue-50 p-4 rounded-lg">
 <h4 class="font-semibold mb-2 text-blue-700">
 <mdi-hospital class="inline mr-2" />
 臨床例
@@ -1047,15 +1076,14 @@ M期 > G2/M > G1 > S期
 </div>
 
 <!--
-[時間: 3分]
+[時間: 1.5分]
 
 ### スクリプト
-「ここでがん細胞と正常細胞を比較してみましょう。がん細胞は分裂が速く、DNA修復能力が低下していることが多い。そのため放射線に弱い。一方、正常細胞は分裂が遅く、修復能力が正常なため、放射線に強い。この違いが放射線治療を可能にしているのです。」
+「一方、正常細胞は分裂が遅く、修復能力が正常なため、放射線に強い。この違いが放射線治療を可能にしているのです。悪性リンパ腫の例では、非常に感受性が高いため30-40 Gyで効果があります。」
 
 ### トーキングポイント
-- がん細胞と正常細胞の特徴を対比
-- 悪性リンパ腫の例：非常に感受性が高いため30-40 Gyで効果あり
-- 「低酸素領域」については後のReoxygenationで詳しく説明と予告
+- 正常細胞の特徴を対比して説明
+- 悪性リンパ腫の臨床例
 
 ### 強調ポイント
 「がん細胞は放射線に弱く、正常細胞は放射線に強い。この違いを最大化することが治療の目標です」
@@ -1090,10 +1118,10 @@ layout: section
 
 ***
 
-<div class="mt-8"></div>
+<div class="mt-4"></div>
 
-<div class="bg-blue-50 p-6 rounded-lg mb-8">
-<h3 class="text-xl font-semibold mb-4 text-blue-700">
+<div class="bg-blue-50 p-3 rounded-lg mb-8">
+<h3 class="text-xl font-semibold mb-2 text-blue-700">
 <mdi-calendar-month class="inline mr-2" />
 定義
 </h3>
@@ -1102,16 +1130,16 @@ layout: section
 </div>
 </div>
 
-<div class="grid grid-cols-2 gap-8 mb-8">
-<div class="bg-green-50 p-6 rounded-lg">
-<h4 class="font-semibold mb-3 text-green-700">標準的なスケジュール</h4>
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-green-50 p-3 rounded-lg">
+<h4 class="font-semibold mb-2 text-green-700">標準的なスケジュール</h4>
 <div class="text-3xl font-bold text-green-600 mb-2">2 Gy × 30回</div>
 <div class="text-xl">= 60 Gy</div>
 <div class="text-base mt-3">期間: 6週間（週5回）</div>
 </div>
 
-<div class="bg-red-50 p-6 rounded-lg">
-<h4 class="font-semibold mb-3 text-red-700">なぜ一度に照射しないのか？</h4>
+<div class="bg-red-50 p-3 rounded-lg">
+<h4 class="font-semibold mb-2 text-red-700">なぜ一度に照射しないのか？</h4>
 <div class="text-lg">
 一度に60 Gyを照射すると<br>
 <strong class="text-red-600">正常組織が重篤な障害を受ける</strong>
@@ -1120,7 +1148,7 @@ layout: section
 </div>
 
 <div class="text-center">
-<div class="text-2xl font-bold text-purple-600 mb-4">
+<div class="text-2xl font-bold text-purple-600 mb-2">
 この疑問の答えが
 </div>
 <div class="text-3xl font-bold text-blue-600">
@@ -1149,12 +1177,12 @@ layout: section
 
 ***
 
-<div class="mt-8"></div>
+<div class="mt-4"></div>
 
-<div class="grid grid-cols-2 gap-6">
-<div class="bg-blue-50 p-6 rounded-lg">
-<div class="text-4xl mb-3 text-center">🔧</div>
-<h3 class="text-xl font-semibold mb-3 text-blue-700 text-center">
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-blue-50 p-3 rounded-lg">
+<div class="text-4xl mb-2 text-center">🔧</div>
+<h3 class="text-xl font-semibold mb-2 text-blue-700 text-center">
 Repair（修復）
 </h3>
 <div class="text-base text-center">
@@ -1162,9 +1190,9 @@ Repair（修復）
 </div>
 </div>
 
-<div class="bg-green-50 p-6 rounded-lg">
-<div class="text-4xl mb-3 text-center">🔄</div>
-<h3 class="text-xl font-semibold mb-3 text-green-700 text-center">
+<div class="bg-green-50 p-3 rounded-lg">
+<div class="text-4xl mb-2 text-center">🔄</div>
+<h3 class="text-xl font-semibold mb-2 text-green-700 text-center">
 Redistribution（再分布）
 </h3>
 <div class="text-base text-center">
@@ -1172,9 +1200,9 @@ Redistribution（再分布）
 </div>
 </div>
 
-<div class="bg-purple-50 p-6 rounded-lg">
-<div class="text-4xl mb-3 text-center">📈</div>
-<h3 class="text-xl font-semibold mb-3 text-purple-700 text-center">
+<div class="bg-purple-50 p-3 rounded-lg">
+<div class="text-4xl mb-2 text-center">📈</div>
+<h3 class="text-xl font-semibold mb-2 text-purple-700 text-center">
 Repopulation（再増殖）
 </h3>
 <div class="text-base text-center">
@@ -1182,9 +1210,9 @@ Repopulation（再増殖）
 </div>
 </div>
 
-<div class="bg-orange-50 p-6 rounded-lg">
-<div class="text-4xl mb-3 text-center">💨</div>
-<h3 class="text-xl font-semibold mb-3 text-orange-700 text-center">
+<div class="bg-orange-50 p-3 rounded-lg">
+<div class="text-4xl mb-2 text-center">💨</div>
+<h3 class="text-xl font-semibold mb-2 text-orange-700 text-center">
 Reoxygenation（再酸素化）
 </h3>
 <div class="text-base text-center">
@@ -1193,7 +1221,7 @@ Reoxygenation（再酸素化）
 </div>
 </div>
 
-<div class="mt-8 text-center bg-yellow-50 p-5 rounded-lg">
+<div class="mt-4 text-center bg-yellow-50 p-3 rounded-lg">
 <mdi-lightbulb class="inline mr-2 text-yellow-600" />
 <strong class="text-xl">これら4つのRが相乗的に作用し、治療効果を最大化する</strong>
 </div>
@@ -1219,17 +1247,17 @@ Reoxygenation（再酸素化）
 
 ***
 
-<div class="mt-6"></div>
+<div class="mt-3"></div>
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-4">
 <div>
-<h3 class="text-xl font-semibold mb-4 text-blue-600">
+<h3 class="text-xl font-semibold mb-2 text-blue-600">
 <mdi-wrench class="inline mr-2" />
 メカニズム
 </h3>
 
-<div class="space-y-4">
-<div class="bg-blue-50 p-4 rounded-lg">
+<div class="space-y-2">
+<div class="bg-blue-50 p-3 rounded-lg">
 <div class="font-semibold mb-2">正常組織</div>
 <div class="text-base">
 <mdi-check-circle class="inline text-green-600" /> 修復能力が高い<br>
@@ -1237,7 +1265,7 @@ Reoxygenation（再酸素化）
 </div>
 </div>
 
-<div class="bg-red-50 p-4 rounded-lg">
+<div class="bg-red-50 p-3 rounded-lg">
 <div class="font-semibold mb-2">がん細胞</div>
 <div class="text-base">
 <mdi-close-circle class="inline text-red-600" /> 修復能力が低い<br>
@@ -1248,13 +1276,13 @@ Reoxygenation（再酸素化）
 </div>
 
 <div>
-<h3 class="text-xl font-semibold mb-4 text-green-600">
+<h3 class="text-xl font-semibold mb-2 text-green-600">
 <mdi-chart-timeline-variant class="inline mr-2" />
 分割照射の利点
 </h3>
 
-<div class="bg-green-50 p-5 rounded-lg mb-4">
-<div class="font-semibold mb-3">正常組織への恩恵</div>
+<div class="bg-green-50 p-3 rounded-lg mb-2">
+<div class="font-semibold mb-2">正常組織への恩恵</div>
 <div class="text-base space-y-2">
 <div>• 照射後に修復時間を与える</div>
 <div>• 次回照射までに回復</div>
@@ -1262,8 +1290,8 @@ Reoxygenation（再酸素化）
 </div>
 </div>
 
-<div class="bg-orange-50 p-5 rounded-lg">
-<div class="font-semibold mb-3">臨床例</div>
+<div class="bg-orange-50 p-3 rounded-lg">
+<div class="font-semibold mb-2">臨床例</div>
 <div class="text-base">
 <strong>晩期反応組織</strong>（脊髄、肺）<br>
 → 修復が遅い<br>
@@ -1273,7 +1301,7 @@ Reoxygenation（再酸素化）
 </div>
 </div>
 
-<div class="mt-6 text-center bg-red-50 p-4 rounded-lg border-2 border-red-300">
+<div class="mt-3 text-center bg-red-50 p-3 rounded-lg border-2 border-red-300">
 <mdi-star class="inline mr-2 text-red-600" />
 <strong class="text-red-600">これが分割照射の最も重要な理由</strong>
 </div>
@@ -1299,48 +1327,48 @@ Reoxygenation（再酸素化）
 
 ***
 
-<div class="mt-6"></div>
+<div class="mt-3"></div>
 
-<div class="mb-6">
-<h3 class="text-xl font-semibold mb-4 text-center text-purple-600">
+<div class="mb-3">
+<h3 class="text-xl font-semibold mb-2 text-center text-purple-600">
 細胞周期の再分布による感受性の変化
 </h3>
 </div>
 
-<div class="space-y-4">
-<div class="bg-blue-50 p-5 rounded-lg">
-<div class="flex items-center mb-3">
-<div class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold mr-4">1</div>
+<div class="space-y-2">
+<div class="bg-blue-50 p-3 rounded-lg">
+<div class="flex items-center mb-2">
+<div class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold mr-3">1</div>
 <div class="font-semibold text-lg">照射直後</div>
 </div>
-<div class="text-base ml-16">
+<div class="text-base ml-13">
 M期の細胞が死ぬ → S期の細胞（抵抗性）が生き残る
 </div>
 </div>
 
-<div class="bg-green-50 p-5 rounded-lg">
-<div class="flex items-center mb-3">
-<div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mr-4">2</div>
+<div class="bg-green-50 p-3 rounded-lg">
+<div class="flex items-center mb-2">
+<div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center font-bold mr-3">2</div>
 <div class="font-semibold text-lg">照射後6-12時間</div>
 </div>
-<div class="text-base ml-16">
+<div class="text-base ml-13">
 S期の細胞がG2/M期に移行 → より感受性の高い時期へ
 </div>
 </div>
 
-<div class="bg-purple-50 p-5 rounded-lg">
-<div class="flex items-center mb-3">
-<div class="w-12 h-12 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold mr-4">3</div>
+<div class="bg-purple-50 p-3 rounded-lg">
+<div class="flex items-center mb-2">
+<div class="w-10 h-10 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold mr-3">3</div>
 <div class="font-semibold text-lg">次回照射時</div>
 </div>
-<div class="text-base ml-16">
+<div class="text-base ml-13">
 より感受性の高い時期に照射できる → 効果的に殺せる
 </div>
 </div>
 </div>
 
-<div class="mt-6 bg-yellow-50 p-5 rounded-lg">
-<h4 class="font-semibold mb-2 text-yellow-700">
+<div class="mt-3 bg-yellow-50 p-3 rounded-lg">
+<h4 class="font-semibold mb-1 text-yellow-700">
 <mdi-lightbulb class="inline mr-2" />
 臨床的意義
 </h4>
@@ -1370,17 +1398,17 @@ S期の細胞がG2/M期に移行 → より感受性の高い時期へ
 
 ***
 
-<div class="mt-6"></div>
+<div class="mt-3"></div>
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-4">
 <div>
-<h3 class="text-xl font-semibold mb-4 text-green-600">
+<h3 class="text-xl font-semibold mb-2 text-green-600">
 <mdi-sprout class="inline mr-2" />
 正常組織の再生
 </h3>
 
-<div class="space-y-4">
-<div class="bg-green-50 p-4 rounded-lg">
+<div class="space-y-2">
+<div class="bg-green-50 p-3 rounded-lg">
 <div class="font-semibold mb-2">メカニズム</div>
 <div class="text-base">
 照射で損傷を受けた正常組織が<br>
@@ -1388,7 +1416,7 @@ S期の細胞がG2/M期に移行 → より感受性の高い時期へ
 </div>
 </div>
 
-<div class="bg-blue-50 p-4 rounded-lg">
+<div class="bg-blue-50 p-3 rounded-lg">
 <div class="font-semibold mb-2">再生が速い組織</div>
 <div class="text-base space-y-1">
 <div>• 皮膚</div>
@@ -1400,13 +1428,13 @@ S期の細胞がG2/M期に移行 → より感受性の高い時期へ
 </div>
 
 <div>
-<h3 class="text-xl font-semibold mb-4 text-orange-600">
+<h3 class="text-xl font-semibold mb-2 text-orange-600">
 <mdi-calendar-alert class="inline mr-2" />
 治療期間の重要性
 </h3>
 
-<div class="space-y-4">
-<div class="bg-orange-50 p-4 rounded-lg">
+<div class="space-y-2">
+<div class="bg-orange-50 p-3 rounded-lg">
 <div class="font-semibold mb-2">重要なポイント</div>
 <div class="text-base">
 がん細胞も再増殖するが、<br>
@@ -1414,7 +1442,7 @@ S期の細胞がG2/M期に移行 → より感受性の高い時期へ
 </div>
 </div>
 
-<div class="bg-red-50 p-4 rounded-lg border-2 border-red-300">
+<div class="bg-red-50 p-3 rounded-lg border-2 border-red-300">
 <div class="font-semibold mb-2 text-red-700">
 <mdi-alert class="inline mr-1" />
 治療中断のリスク
@@ -1429,7 +1457,7 @@ S期の細胞がG2/M期に移行 → より感受性の高い時期へ
 </div>
 </div>
 
-<div class="mt-6 bg-blue-50 p-5 rounded-lg">
+<div class="mt-3 bg-blue-50 p-3 rounded-lg">
 <h4 class="font-semibold mb-2 text-blue-700">
 <mdi-hospital class="inline mr-2" />
 臨床例
@@ -1460,30 +1488,30 @@ S期の細胞がG2/M期に移行 → より感受性の高い時期へ
 
 ***
 
-<div class="mt-6"></div>
+<div class="mt-3"></div>
 
-<div class="mb-6 bg-blue-50 p-5 rounded-lg">
-<h3 class="text-xl font-semibold mb-3 text-blue-700">
+<div class="mb-1 bg-blue-50 p-2 rounded-lg">
+<h3 class="text-lg font-semibold mb-1 text-blue-700">
 <mdi-air-filter class="inline mr-2" />
 酸素効果 (Oxygen Effect)
 </h3>
-<div class="text-lg space-y-2">
+<div class="text-base space-y-1">
 <div>• 酸素がある → 放射線感受性が<strong class="text-red-600">2-3倍高い</strong></div>
 <div>• 低酸素 → 放射線抵抗性</div>
 <div>• 理由: 酸素がDNA損傷を固定化（Oxygen Fixation）</div>
 </div>
 </div>
 
-<div class="grid grid-cols-2 gap-8">
+<div class="grid grid-cols-2 gap-3">
 <div>
-<h3 class="text-xl font-semibold mb-4 text-orange-600">
+<h3 class="text-lg font-semibold mb-1 text-orange-600">
 <mdi-help-circle class="inline mr-2" />
 腫瘍内の低酸素領域
 </h3>
 
-<div class="bg-orange-50 p-5 rounded-lg">
-<div class="font-semibold mb-3">問題点</div>
-<div class="text-base space-y-2">
+<div class="bg-orange-50 p-2 rounded-lg">
+<div class="font-semibold mb-1">問題点</div>
+<div class="text-base space-y-1">
 <div>• 腫瘍は血管新生が不十分</div>
 <div>• 低酸素領域が存在</div>
 <div>• 低酸素細胞は<strong class="text-red-600">放射線抵抗性</strong></div>
@@ -1492,31 +1520,31 @@ S期の細胞がG2/M期に移行 → より感受性の高い時期へ
 </div>
 
 <div>
-<h3 class="text-xl font-semibold mb-4 text-green-600">
+<h3 class="text-lg font-semibold mb-1 text-green-600">
 <mdi-refresh class="inline mr-2" />
 再酸素化のメカニズム
 </h3>
 
-<div class="space-y-3 text-base">
-<div class="bg-green-50 p-3 rounded">
+<div class="space-y-1 text-base">
+<div class="bg-green-50 p-2 rounded">
 <strong>1.</strong> 照射で酸素化された腫瘍細胞が死ぬ
 </div>
-<div class="bg-green-50 p-3 rounded">
+<div class="bg-green-50 p-2 rounded">
 <strong>2.</strong> 腫瘍縮小 → 血流改善
 </div>
-<div class="bg-green-50 p-3 rounded">
+<div class="bg-green-50 p-2 rounded">
 <strong>3.</strong> 低酸素領域が減少 → 次回照射時により効果的
 </div>
 </div>
 </div>
 </div>
 
-<div class="mt-6 bg-purple-50 p-5 rounded-lg">
-<h4 class="font-semibold mb-2 text-purple-700">
+<div class="mt-2 bg-purple-50 p-2 rounded-lg">
+<h4 class="font-semibold mb-1 text-purple-700">
 <mdi-hospital class="inline mr-2" />
 臨床例
 </h4>
-<div class="text-lg">
+<div class="text-base">
 頭頸部がん（低酸素領域が多い）→ 分割照射が特に有効
 </div>
 </div>
@@ -1542,52 +1570,52 @@ S期の細胞がG2/M期に移行 → より感受性の高い時期へ
 
 ***
 
-<div class="mt-6"></div>
+<div class="mt-3"></div>
 
 <div class="mb-8">
-<h3 class="text-2xl font-semibold mb-6 text-center text-blue-600">
+<h3 class="text-2xl font-semibold mb-2 text-center text-blue-600">
 4つのRは相乗的に作用する
 </h3>
 
 <div class="grid grid-cols-4 gap-4 text-center">
-<div class="bg-blue-50 p-4 rounded-lg">
+<div class="bg-blue-50 p-3 rounded-lg">
 <div class="text-3xl mb-2">🔧</div>
 <div class="font-semibold">Repair</div>
 </div>
-<div class="bg-green-50 p-4 rounded-lg">
+<div class="bg-green-50 p-3 rounded-lg">
 <div class="text-3xl mb-2">🔄</div>
 <div class="font-semibold">Redistribution</div>
 </div>
-<div class="bg-purple-50 p-4 rounded-lg">
+<div class="bg-purple-50 p-3 rounded-lg">
 <div class="text-3xl mb-2">📈</div>
 <div class="font-semibold">Repopulation</div>
 </div>
-<div class="bg-orange-50 p-4 rounded-lg">
+<div class="bg-orange-50 p-3 rounded-lg">
 <div class="text-3xl mb-2">💨</div>
 <div class="font-semibold">Reoxygenation</div>
 </div>
 </div>
 </div>
 
-<div class="bg-yellow-50 p-6 rounded-lg border-2 border-yellow-300">
-<h3 class="text-xl font-semibold mb-4 text-yellow-700 text-center">
+<div class="bg-yellow-50 p-3 rounded-lg border-2 border-yellow-300">
+<h3 class="text-xl font-semibold mb-2 text-yellow-700 text-center">
 <mdi-scale-balance class="inline mr-2" />
 治療比の向上 (Therapeutic Ratio)
 </h3>
 
-<div class="grid grid-cols-2 gap-6 text-lg">
-<div class="bg-white p-4 rounded text-center">
+<div class="grid grid-cols-2 gap-3 text-lg">
+<div class="bg-white p-3 rounded text-center">
 <div class="text-green-600 font-bold text-2xl mb-2">↑</div>
 <div class="font-semibold">腫瘍制御</div>
 </div>
-<div class="bg-white p-4 rounded text-center">
+<div class="bg-white p-3 rounded text-center">
 <div class="text-red-600 font-bold text-2xl mb-2">↓</div>
 <div class="font-semibold">正常組織障害</div>
 </div>
 </div>
 </div>
 
-<div class="mt-8 text-center text-xl font-bold text-blue-600">
+<div class="mt-4 text-center text-xl font-bold text-blue-600">
 分割照射は生物学的に合理的な戦略
 </div>
 
@@ -1634,11 +1662,11 @@ layout: section
 
 ***
 
-<div class="mt-6"></div>
+<div class="mt-3"></div>
 
-<div class="grid grid-cols-2 gap-6">
-<div class="bg-blue-50 p-5 rounded-lg">
-<h3 class="text-lg font-semibold mb-3 text-blue-700">
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-blue-50 p-3 rounded-lg">
+<h3 class="text-lg font-semibold mb-2 text-blue-700">
 <mdi-numeric-1-circle class="inline mr-2" />
 分割照射（4つのR）
 </h3>
@@ -1648,8 +1676,8 @@ layout: section
 </div>
 </div>
 
-<div class="bg-green-50 p-5 rounded-lg">
-<h3 class="text-lg font-semibold mb-3 text-green-700">
+<div class="bg-green-50 p-3 rounded-lg">
+<h3 class="text-lg font-semibold mb-2 text-green-700">
 <mdi-numeric-2-circle class="inline mr-2" />
 照射野の最適化
 </h3>
@@ -1660,8 +1688,8 @@ layout: section
 </div>
 </div>
 
-<div class="bg-purple-50 p-5 rounded-lg">
-<h3 class="text-lg font-semibold mb-3 text-purple-700">
+<div class="bg-purple-50 p-3 rounded-lg">
+<h3 class="text-lg font-semibold mb-2 text-purple-700">
 <mdi-numeric-3-circle class="inline mr-2" />
 臓器の耐容線量
 </h3>
@@ -1672,8 +1700,8 @@ layout: section
 </div>
 </div>
 
-<div class="bg-orange-50 p-5 rounded-lg">
-<h3 class="text-lg font-semibold mb-3 text-orange-700">
+<div class="bg-orange-50 p-3 rounded-lg">
+<h3 class="text-lg font-semibold mb-2 text-orange-700">
 <mdi-numeric-4-circle class="inline mr-2" />
 時間的保護
 </h3>
@@ -1685,8 +1713,8 @@ layout: section
 </div>
 </div>
 
-<div class="mt-6 bg-red-50 p-5 rounded-lg">
-<h3 class="font-semibold mb-3 text-red-700">
+<div class="mt-3 bg-red-50 p-3 rounded-lg">
+<h3 class="font-semibold mb-2 text-red-700">
 <mdi-hospital class="inline mr-2" />
 臨床例
 </h3>
@@ -1717,14 +1745,14 @@ layout: section
 
 ***
 
-<div class="mt-6"></div>
+<div class="mt-3"></div>
 
-<div class="mb-6 bg-blue-50 p-6 rounded-lg">
-<h3 class="text-xl font-semibold mb-4 text-blue-700">
+<div class="mb-2 bg-blue-50 p-3 rounded-lg">
+<h3 class="text-xl font-semibold mb-2 text-blue-700">
 <mdi-calendar-check class="inline mr-2" />
 標準的分割照射
 </h3>
-<div class="text-2xl font-bold mb-3">2 Gy/回、週5回、6週間</div>
+<div class="text-2xl font-bold mb-2">2 Gy/回、週5回、6週間</div>
 
 <div class="grid grid-cols-4 gap-3 text-base">
 <div class="bg-white p-3 rounded">
@@ -1746,9 +1774,9 @@ layout: section
 </div>
 </div>
 
-<div class="grid grid-cols-2 gap-6">
-<div class="bg-green-50 p-5 rounded-lg">
-<h3 class="font-semibold mb-3 text-green-700">
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-green-50 p-3 rounded-lg">
+<h3 class="font-semibold mb-2 text-green-700">
 寡分割照射 (Hypofractionation)
 </h3>
 <div class="text-base space-y-2">
@@ -1758,8 +1786,8 @@ layout: section
 </div>
 </div>
 
-<div class="bg-purple-50 p-5 rounded-lg">
-<h3 class="font-semibold mb-3 text-purple-700">
+<div class="bg-purple-50 p-3 rounded-lg">
+<h3 class="font-semibold mb-2 text-purple-700">
 過分割照射 (Hyperfractionation)
 </h3>
 <div class="text-base space-y-2">
@@ -1770,7 +1798,7 @@ layout: section
 </div>
 </div>
 
-<div class="mt-6 text-center bg-yellow-50 p-4 rounded-lg">
+<div class="mt-3 text-center bg-yellow-50 p-3 rounded-lg">
 <mdi-lightbulb class="inline mr-2 text-yellow-600" />
 <strong>すべてのプロトコルに生物学的根拠がある</strong>
 </div>
@@ -1813,14 +1841,13 @@ layout: section
 
 ---
 
-# 核心的問いへの回答
+# 核心的問いへの回答 (1/2)
 
 ***
 
-<div class="mt-6"></div>
+<div class="mt-5"></div>
 
-<div class="space-y-8">
-<div class="bg-red-50 p-6 rounded-lg border-2 border-red-300">
+<div class="bg-red-50 p-5 rounded-lg border-2 border-red-300">
 <h3 class="text-2xl font-semibold mb-4 text-red-700 text-center">
 「なぜ放射線はがん細胞を殺せるのか？」
 </h3>
@@ -1838,7 +1865,29 @@ layout: section
 </div>
 </div>
 
-<div class="bg-green-50 p-6 rounded-lg border-2 border-green-300">
+<!--
+[時間: 1.5分]
+
+### スクリプト
+「最初の問い『なぜ放射線はがん細胞を殺せるのか？』への答えです。放射線がDNAを損傷し、がん細胞は分裂が速く修復能力が低いため、感受性が高く、DNA損傷から分裂死に至ります。」
+
+### トーキングポイント
+- 第1の問いへの回答を明確に
+- DNA損傷→感受性→細胞死という流れ
+
+### 強調ポイント
+「放射線はDNAを壊し、がん細胞はそれを修復できない」
+-->
+
+---
+
+# 核心的問いへの回答 (2/2)
+
+***
+
+<div class="mt-5"></div>
+
+<div class="bg-green-50 p-5 rounded-lg border-2 border-green-300">
 <h3 class="text-2xl font-semibold mb-4 text-green-700 text-center">
 「なぜ正常細胞は守られるのか？」
 </h3>
@@ -1855,18 +1904,17 @@ layout: section
 </div>
 </div>
 </div>
-</div>
 
 <!--
-[時間: 3分]
+[時間: 1.5分]
 
 ### スクリプト
-「最初の問い『なぜ放射線はがん細胞を殺せるのか？』への答えです。放射線がDNAを損傷し、がん細胞は分裂が速く修復能力が低いため、感受性が高く、DNA損傷から分裂死に至ります。2つ目の問い『なぜ正常細胞は守られるのか？』への答えは、4つのRです。分割照射により正常組織に修復・再生の時間を与え、がん細胞との生物学的差を最大化することで、治療比が向上するのです。」
+「2つ目の問い『なぜ正常細胞は守られるのか？』への答えは、4つのRです。分割照射により正常組織に修復・再生の時間を与え、がん細胞との生物学的差を最大化することで、治療比が向上するのです。」
 
 ### トーキングポイント
-- 2つの問いに対する回答を明確に
-- 今日学んだ内容の総括
-- DNA損傷→感受性→4R→臨床応用という流れの再確認
+- 第2の問いへの回答
+- 4つのRの総括
+- 治療比の向上
 
 ### 強調ポイント
 「この2つの問いに答えられるようになったことが、今日の最大の成果です」
