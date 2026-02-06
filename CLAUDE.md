@@ -55,6 +55,7 @@ Task(subagent_type="general-purpose", prompt="Geminiで最新情報を調査し�
 
 | スキル | 使用タイミング | 成果物 |
 |--------|---------------|--------|
+| `/choose-template` | テンプレート選択 | selected-template.md |
 | `/create-presentation` | 新規プレゼン作成 | 完全なプレゼンスライド |
 | `/add-slide` | セクション追加 | 新規スライドセクション |
 | `/create-document-summary` | 文書要約準備 | 文書要約スライド |
@@ -77,13 +78,16 @@ Task(subagent_type="general-purpose", prompt="Geminiで最新情報を調査し�
 
 ```
 1. lesson_plan/ にプレゼンテーション計画を作成
-2. /create-presentation でスライド一括生成
-3. /slide-style-rector でスタイル整形
-4. /slidev-diagram で図解追加（必要に応じて）
-5. /slide-test でブラウザテスト＆オーバーフロー自動修正
+2. /choose-template でテンプレートを選択（任意）
+   → Playwrightでプレビュー生成 → 5種から選択 → selected-template.md に保存
+3. /create-presentation でスライド一括生成
+   → テンプレート選択済みの場合、そのスタイルを自動適用
+4. /slide-style-rector でスタイル整形
+5. /slidev-diagram で図解追加（必要に応じて）
+6. /slide-test でブラウザテスト＆オーバーフロー自動修正
    → Step 1: スペーシング縮小 → Step 2: フォントサイズ縮小
    → 解消しない場合はユーザーに「さらに縮小」or「スライド分割」を確認
-6. /prepare-pdf でPDF出力
+7. /prepare-pdf でPDF出力
 ```
 
 ### 専門性の確認が必要な場合
@@ -143,51 +147,52 @@ node scripts/fix-overflow.mjs slides.md 6 --dry-run    # ドライラン（変�
 
 ---
 
-## Skills Overview (19 Skills)
+## Skills Overview (20 Skills)
 
-### Slidev特化スキル (10)
+### Slidev特化スキル (11)
 
 | # | スキル | 説明 | 使用例 |
 |---|--------|------|--------|
-| 1 | `/add-slide` | 新規スライドセクション追加 | `/add-slide 技術概要` |
-| 2 | `/create-presentation` | プレゼンテーション全体の自動生成 | `/create-presentation` |
-| 3 | `/create-document-summary` | 文書要約スライド生成 | `/create-document-summary 10.1016/xxx` |
-| 4 | `/slide-style-rector` | スタイル自動整形 | `/slide-style-rector slides.md` |
-| 5 | `/layout-fix` | レイアウト崩れ自動修正 | `/layout-fix slides.md` |
-| 6 | `/slide-test` | Playwright自動テスト＋オーバーフロー自動修正 | `/slide-test` |
-| 7 | `/slidev-diagram` | 図解生成とスライド挿入 | `/slidev-diagram 構造を図解して` |
-| 8 | `/prepare-pdf` | PDF出力用最適化 | `/prepare-pdf` |
-| 9 | `/archive-lecture` | プレゼンテーションアーカイブ | `/archive-lecture` |
-| 10 | `/add-notes` | スピーカーノート追加 | `/add-notes 3-10` |
+| 1 | `/choose-template` | テンプレート選択（Playwrightプレビュー） | `/choose-template` |
+| 2 | `/add-slide` | 新規スライドセクション追加 | `/add-slide 技術概要` |
+| 3 | `/create-presentation` | プレゼンテーション全体の自動生成 | `/create-presentation` |
+| 4 | `/create-document-summary` | 文書要約スライド生成 | `/create-document-summary 10.1016/xxx` |
+| 5 | `/slide-style-rector` | スタイル自動整形 | `/slide-style-rector slides.md` |
+| 6 | `/layout-fix` | レイアウト崩れ自動修正 | `/layout-fix slides.md` |
+| 7 | `/slide-test` | Playwright自動テスト＋オーバーフロー自動修正 | `/slide-test` |
+| 8 | `/slidev-diagram` | 図解生成とスライド挿入 | `/slidev-diagram 構造を図解して` |
+| 9 | `/prepare-pdf` | PDF出力用最適化 | `/prepare-pdf` |
+| 10 | `/archive-lecture` | プレゼンテーションアーカイブ | `/archive-lecture` |
+| 11 | `/add-notes` | スピーカーノート追加 | `/add-notes 3-10` |
 
 ### Git/PR スキル (2)
 
 | # | スキル | 説明 | 使用例 |
 |---|--------|------|--------|
-| 10 | `/commit-push` | Conventional Commitでコミット・プッシュ | `/commit-push` |
-| 11 | `/pr-generator` | PR自動生成 | `/pr-generator` |
+| 12 | `/commit-push` | Conventional Commitでコミット・プッシュ | `/commit-push` |
+| 13 | `/pr-generator` | PR自動生成 | `/pr-generator` |
 
 ### NotebookLM スキル (3)
 
 | # | スキル | 説明 | 使用例 |
 |---|--------|------|--------|
-| 12 | `/notebook-ask` | NotebookLMに質問 | `/notebook-ask 質問内容` |
-| 13 | `/notebook-manage` | NotebookLM管理 | `/notebook-manage list` |
-| 14 | `/notebook-add` | NotebookLM追加 | `/notebook-add URL` |
+| 14 | `/notebook-ask` | NotebookLMに質問 | `/notebook-ask 質問内容` |
+| 15 | `/notebook-manage` | NotebookLM管理 | `/notebook-manage list` |
+| 16 | `/notebook-add` | NotebookLM追加 | `/notebook-add URL` |
 
 ### レビュー・分析スキル (1)
 
 | # | スキル | 説明 | 使用例 |
 |---|--------|------|--------|
-| 15 | `/student-review` | 初学者視点レビュー | `/student-review docs/lecture.md` |
+| 17 | `/student-review` | 初学者視点レビュー | `/student-review docs/lecture.md` |
 
 ### Orchestra統合スキル (3)
 
 | # | スキル | 説明 | 使用例 |
 |---|--------|------|--------|
-| 16 | `/plan` | 実装前の計画作成 | `/plan` |
-| 17 | `/design-tracker` | 設計決定の自動記録（プロアクティブ） | 自動トリガー |
-| 18 | `/checkpointing` | ワークフローの保存 | `/checkpointing --full` |
+| 18 | `/plan` | 実装前の計画作成 | `/plan` |
+| 19 | `/design-tracker` | 設計決定の自動記録（プロアクティブ） | 自動トリガー |
+| 20 | `/checkpointing` | ワークフローの保存 | `/checkpointing --full` |
 
 → 詳細: `.claude/skills/README.md`
 
@@ -241,6 +246,7 @@ Task(subagent_type="Explore", prompt="関連ファイルを探して")
 
 | フック | トリガー | 動作 |
 |--------|----------|------|
+| **auto-branch** | UserPromptSubmit | mainで作業開始時 → ブランチ自動作成 / 「完了」「マージ」等 → マージ可否チェック |
 | **agent-router** | UserPromptSubmit | 専門用語・レイアウト質問を検知 → Gemini提案 |
 | **suggest-gemini-research** | PreToolUse (WebSearch\|WebFetch) | Web検索前 → Gemini調査を提案 |
 | **log-cli-tools** | PostToolUse (Bash) | Gemini実行 → `.claude/logs/cli-tools.jsonl` に記録 |

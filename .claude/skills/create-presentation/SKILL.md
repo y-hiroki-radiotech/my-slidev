@@ -68,6 +68,44 @@ AskUserQuestion tool で以下を確認:
   - label: "完全網羅"
     description: "すべての側面をカバー"
 
+**Question 5: テンプレート選択**
+
+まず `.claude/docs/selected-template.md` の存在を確認する。
+
+**Case A: selected-template.md が存在する場合**
+- ファイルを読み込み、選択済みテンプレート名を取得
+- AskUserQuestion で確認:
+  - Header: "テンプレート"
+  - multiSelect: false
+  - Options:
+    - label: "前回のテンプレートを使用"
+      description: "{テンプレート名}を継続使用"
+    - label: "新しいテンプレートを選択"
+      description: "/choose-template でプレビューから選択"
+    - label: "デフォルトを使用"
+      description: "Classic White（白ベース・ブルーアクセント）"
+- 「新しいテンプレートを選択」の場合 → `/choose-template` スキルを実行
+
+**Case B: selected-template.md が存在しない場合**
+- AskUserQuestion で確認:
+  - Header: "テンプレート"
+  - multiSelect: false
+  - Options:
+    - label: "テンプレートを選択する (Recommended)"
+      description: "/choose-template でプレビューから選択"
+    - label: "デフォルトを使用"
+      description: "Classic White（白ベース・ブルーアクセント）"
+- 「テンプレートを選択する」の場合 → `/choose-template` スキルを実行
+
+**テンプレート設定の適用**
+- selected-template.md が存在する場合、その設定を使用:
+  - フロントマター（theme, colorSchema, background）
+  - タイトルスライドテンプレート
+  - セクション区切りテンプレート
+  - コンテンツスライドのベーススタイル
+  - カラーパレット
+- 存在しない場合はデフォルト（Classic White）を使用
+
 これらの回答を受けて、スライド生成の方針（詳細度、専門用語の使用、例の多さ等）を調整する。
 
 ### ステップ1: 準備とコンテキスト設定
@@ -248,20 +286,28 @@ Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
 
 ## フロントマター例
 
+**selected-template.md が存在する場合:**
+- `selected-template.md` の `Global Frontmatter` セクションを参照
+- `Title Slide Template` をタイトルスライドに適用
+- `Section Slide Template` をセクション区切りに適用
+- `Content Slide Base Styles` をコンテンツスライドに適用
+
+**デフォルト（Classic White）の場合:**
 ```yaml
 ---
 theme: seriph
-background: https://source.unsplash.com/collection/94734566/1920x1080
+colorSchema: light
+background: white
 class: text-center
 highlighter: shiki
 lineNumbers: false
 info: |
-  ## 放射線治療学入門
-  第1回講義資料
+  ## プレゼンテーションタイトル
+  概要説明
 drawings:
   persist: false
 transition: slide-left
-title: 放射線治療学入門
+title: プレゼンテーションタイトル
 mdc: true
 ---
 ```

@@ -54,6 +54,9 @@ logs/
 .claude/checkpoints/
 !.claude/checkpoints/.gitkeep
 
+# Session markers (auto-branch hook)
+.claude/.session-branch-created/
+
 # Planning directories (temporary)
 .slide-planning/
 .lecture-planning/

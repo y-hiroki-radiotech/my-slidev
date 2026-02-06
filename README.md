@@ -122,8 +122,9 @@ my-slidev/
 │   ├── agents/
 │   │   └── general-purpose.md   # Gemini連携サブエージェント
 │   │
-│   ├── skills/                  # 19スキル
+│   ├── skills/                  # 20スキル
 │   │   ├── create-presentation/ # プレゼンテーション全体生成
+│   │   ├── choose-template/     # テンプレート選択（Playwrightプレビュー）
 │   │   ├── add-slide/           # スライド追加
 │   │   ├── create-document-summary/ # 文書要約スライド
 │   │   ├── slide-style-rector/  # スタイル整形
@@ -132,6 +133,7 @@ my-slidev/
 │   │   ├── slidev-diagram/      # 図解生成
 │   │   ├── prepare-pdf/         # PDF出力
 │   │   ├── archive-lecture/     # プレゼンテーションアーカイブ
+│   │   ├── add-notes/           # スピーカーノート追加
 │   │   ├── plan/                # 実装計画
 │   │   ├── design-tracker/      # 設計記録
 │   │   ├── checkpointing/       # ワークフロー保存
@@ -144,6 +146,7 @@ my-slidev/
 │   │
 │   ├── hooks/                   # 自動化フック
 │   │   ├── agent-router.py      # Geminiルーティング
+│   │   ├── auto-branch.py       # ブランチ自動作成・マージチェック
 │   │   ├── suggest-gemini-research.py
 │   │   └── log-cli-tools.py
 │   │
@@ -179,93 +182,109 @@ my-slidev/
 │       ├── claude.yml           # @claudeメンション対応
 │       └── deploy.yaml          # デプロイ
 │
+├── agents/                      # エージェント定義
+│   ├── adaptive-content-structure.md
+│   ├── adaptive-lecture-designer.md
+│   ├── interactive-medical-presenter.md
+│   ├── medical-slidev-architect.md
+│   ├── radiation-therapy-educator.md
+│   └── README.md
+│
 ├── lesson_plan/                 # プレゼンテーション計画
-│   └── (プレゼンテーション計画ファイル)
+│   ├── lecture-02-radiation-biology.md
+│   ├── 第1回授業の全体像.md
+│   └── 本論部分の詳細.md
 │
 ├── format/                      # テンプレート
 │   ├── layout-patterns.md       # 40種類のレイアウトパターン
 │   ├── template_sides.md
 │   └── abstract_reading_slide.md
 │
-├── reviews/                     # レビューレポート保存先
-│   └── (student-reviewスキルの出力)
+├── pages/                       # 個別スライドページ
+│   ├── flowchart.md
+│   ├── imported-slides.md
+│   ├── resources.md
+│   └── who_am_i.md
 │
-└── pages/                       # 個別スライド
-    └── who_am_i.md
+├── scripts/                     # 自動化スクリプト
+│   ├── check-layout.sh
+│   ├── cleanup.sh
+│   ├── export-pdf.sh
+│   ├── fix-overflow.mjs         # オーバーフロー自動修正
+│   └── start-server.sh
+│
+├── how-to-use/                  # 使い方ドキュメント
+│   ├── how_to_use.md
+│   └── slidev_write.md
+│
+├── reviews/                     # レビューレポート保存先
+├── previous_lecture/            # アーカイブ済みプレゼンテーション
+├── pdf/                         # PDF出力先
+├── images/                      # 画像アセット
+├── public/                      # 静的アセット
+├── components/                  # Vueコンポーネント
+├── layouts/                     # カスタムレイアウト
+└── snippets/                    # コードスニペット
 ```
 
-## Skills
+## Skills（20スキル）
 
-### `/create-presentation` — プレゼンテーション全体生成
+### プレゼンテーション作成
 
-プレゼンテーション計画から全体のスライドを一括生成します。
+| スキル | 説明 | 使用例 |
+|--------|------|--------|
+| `/choose-template` | テンプレート選択（Playwrightプレビュー） | `/choose-template` |
+| `/create-presentation` | プレゼンテーション全体生成 | `/create-presentation プロジェクト概要` |
+| `/add-slide` | 新規スライドセクション追加 | `/add-slide 技術概要` |
+| `/create-document-summary` | 文書要約スライド生成 | `/create-document-summary 10.1016/xxx` |
+| `/slidev-diagram` | 図解生成とスライド挿入 | `/slidev-diagram 構造を図解して` |
+| `/add-notes` | スピーカーノート追加 | `/add-notes 3-10` |
 
-```
-/create-presentation プロジェクト概要
-```
+### スタイル・品質管理
 
-**ワークフロー:**
-1. `lesson_plan/` からプレゼンテーション計画を読み込み
-2. 用途・聴衆・レベルを確認（AskUserQuestion）
-3. フロントマター・導入・本論・まとめを自動生成
-4. スタイルガイドに準拠
-5. git commit
+| スキル | 説明 | 使用例 |
+|--------|------|--------|
+| `/slide-style-rector` | スタイル自動整形 | `/slide-style-rector slides.md` |
+| `/layout-fix` | レイアウト崩れ自動修正 | `/layout-fix slides.md` |
+| `/slide-test` | Playwrightテスト＋オーバーフロー自動修正 | `/slide-test` |
 
-### `/add-slide` — スライド追加
+### 出力・管理
 
-既存スライドに新しいセクションを追加します。
+| スキル | 説明 | 使用例 |
+|--------|------|--------|
+| `/prepare-pdf` | PDF出力用最適化 | `/prepare-pdf` |
+| `/archive-lecture` | プレゼンテーションアーカイブ | `/archive-lecture` |
 
-```
-/add-slide 技術概要
-```
+### 計画・記録
 
-**出力:**
-- 新規スライドセクション
-- 既存スタイルとの整合性確保
-- 用途・聴衆に応じた内容調整
+| スキル | 説明 | 使用例 |
+|--------|------|--------|
+| `/plan` | 実装計画作成 | `/plan` |
+| `/design-tracker` | 設計決定の自動記録（プロアクティブ） | 自動トリガー |
+| `/checkpointing` | ワークフロー保存 | `/checkpointing --full` |
 
-### `/create-document-summary` — 文書要約スライド
+### Git/PR
 
-文書から要約スライドを自動生成します。
+| スキル | 説明 | 使用例 |
+|--------|------|--------|
+| `/commit-push` | Conventional Commitでコミット・プッシュ | `/commit-push` |
+| `/pr-generator` | PR自動生成 | `/pr-generator` |
 
-```
-/create-document-summary 10.1016/j.example.2024.xxxxx
-/create-document-summary --pdf /path/to/document.pdf
-/create-document-summary --url https://example.com/document
-```
+### レビュー
 
-**ワークフロー:**
-1. 文書情報取得（DOI/PDF/URL）
-2. Geminiで文書分析（必要に応じて）
-3. 要点を構造化
-4. 要約スライド生成
+| スキル | 説明 | 使用例 |
+|--------|------|--------|
+| `/student-review` | 初学者視点レビュー | `/student-review docs/lecture.md` |
 
-### `/slide-style-rector` — スタイル整形
+### NotebookLM
 
-スタイルガイドとレイアウトパターンに基づいて自動整形します。
+| スキル | 説明 | 使用例 |
+|--------|------|--------|
+| `/notebook-ask` | NotebookLMに質問 | `/notebook-ask 質問内容` |
+| `/notebook-manage` | NotebookLM管理 | `/notebook-manage list` |
+| `/notebook-add` | NotebookLM追加 | `/notebook-add URL` |
 
-```
-/slide-style-rector slides.md
-```
-
-**適用ルール:**
-- 1スライド1メッセージ
-- 28pt以上の文字サイズ
-- 適切な余白（mt-5, mb-5）
-- コロン・感嘆符禁止
-
-### `/layout-fix` — レイアウト修正
-
-レイアウト崩れを検出して自動修正します。
-
-```
-/layout-fix slides.md
-```
-
-**検出項目:**
-- リスト項目過多（5個以上）
-- テキストオーバーフロー（300文字超）
-- 不適切なレイアウト
+## スキル詳細
 
 ### `/slide-test` — Playwrightテスト＋オーバーフロー自動修正
 
@@ -275,11 +294,6 @@ Playwright MCPでスライドを自動テストし、CSSクリッピングによ
 /slide-test
 /slide-test --no-fix
 ```
-
-**検出項目:**
-- CSSクリッピングオーバーフロー（`.slidev-page`の`scrollHeight` vs `clientHeight`比較）
-- Viteエラーオーバーレイ
-- コンソールエラー
 
 **自動修正フロー:**
 1. **Step 1: スペーシング縮小** — `mt-6`→`mt-3`, `p-5`→`p-3`, `space-y-4`→`space-y-2` 等
@@ -293,38 +307,15 @@ node scripts/fix-overflow.mjs slides.md 6,10 --step=2  # Step 2
 node scripts/fix-overflow.mjs slides.md 6 --dry-run    # ドライラン
 ```
 
-### `/slidev-diagram` — 図解生成
-
-AI画像生成で図解を作成し、スライドに挿入します。
+### `/create-document-summary` — 文書要約スライド
 
 ```
-/slidev-diagram リニアックの構造を図解して。ページ7に挿入、slides.md
+/create-document-summary 10.1016/j.example.2024.xxxxx
+/create-document-summary --pdf /path/to/document.pdf
+/create-document-summary --url https://example.com/document
 ```
 
-**ワークフロー:**
-1. AI画像生成
-2. ユーザー承認
-3. images/ に保存
-4. スライドに自動挿入
-
-### `/prepare-pdf` — PDF出力
-
-PDF出力用に最適化し、自動的にPDFを生成します。
-
-```
-/prepare-pdf
-/prepare-pdf pages/abstract-Smith-2024.md
-```
-
-**最適化:**
-- 背景色を白に変更
-- 文字色を黒系統に調整
-- レイアウト確認
-- slidev export 実行
-
-### `/archive-lecture` — 講義アーカイブ
-
-現在のslides.mdを適切な名前でprevious_lecture/にアーカイブします。
+### `/archive-lecture` — プレゼンテーションアーカイブ
 
 ```
 /archive-lecture
@@ -332,111 +323,7 @@ PDF出力用に最適化し、自動的にPDFを生成します。
 /archive-lecture --no-commit
 ```
 
-**ワークフロー:**
-1. slides.mdからタイトル・メタデータを抽出
-2. `lecture-{番号}-{スラッグ化したタイトル}-{日付}.md` として保存
-3. previous_lecture/にコピー
-4. git commit（オプション）
-
-### `/plan` — 実装計画
-
-複雑な講義作成前に実装計画を立てます。
-
-```
-/plan
-```
-
-### `/design-tracker` — 設計記録（自動）
-
-プレゼンテーション設計決定を自動記録します。
-
-**記録内容:**
-- レイアウトパターンの選択
-- 配色・ビジュアルデザイン
-- プレゼンテーション設計アプローチ
-- 内容の正確性確認
-
-### `/checkpointing` — ワークフロー保存
-
-セッションの状態を保存し、再利用可能なパターンを発見します。
-
-```bash
-/checkpointing              # 基本: 履歴ログ
-/checkpointing --full       # 完全: git履歴・ファイル変更含む
-/checkpointing --analyze    # 分析: スキルパターン発見
-```
-
-### `/commit-push` — Gitコミット・プッシュ
-
-ステージされた変更からConventional Commitメッセージ候補を3つ生成し、選択後にコミット・プッシュします。
-
-```bash
-/commit-push
-```
-
-**ワークフロー:**
-1. `git diff --cached` で変更内容を分析
-2. `type(scope): 説明` 形式で候補3つ生成
-3. ユーザーが選択または編集
-4. コミット実行
-5. プッシュ確認（オプション）
-
-### `/pr-generator` — PR自動生成
-
-PRテンプレートと変更差分を元にPRの下書きを自動生成し、ghコマンドでPRを作成します。
-
-```bash
-/pr-generator
-```
-
-**ワークフロー:**
-1. `.github/pull_request_template.md` を読み込み
-2. コミット範囲を選択（ブランチ全体、最新1件、カスタム）
-3. 下書きを生成
-4. ユーザー確認
-5. `gh pr create` でPR作成
-
-### `/student-review` — 初学者視点レビュー
-
-学習教材（Markdownファイル）を初学者の視点で分析し、改善提案を行います。
-
-```bash
-/student-review docs/lecture-01.md
-```
-
-**出力:**
-- `reviews/` ディレクトリにレビューレポートを保存
-- 例: `docs/lecture-01.md` → `reviews/lecture-01.md`
-- 「なぜ疑問が生じるか」「改善提案」「現場での活用」を含む
-
-### `/notebook-ask` — NotebookLMに質問
-
-NotebookLMに質問し、自動的にフォローアップ質問を実行します。
-
-```bash
-/notebook-ask 水吸収線量について教えて
-/notebook-ask --id notebook-id 質問内容
-/notebook-ask --url https://notebooklm.google.com/notebook/ID 質問内容
-```
-
-### `/notebook-manage` — NotebookLM管理
-
-NotebookLMノートブックの一覧、検索、アクティブ化、削除を行います。
-
-```bash
-/notebook-manage list
-/notebook-manage search 放射線
-/notebook-manage activate notebook-id
-/notebook-manage remove notebook-id
-```
-
-### `/notebook-add` — NotebookLM追加
-
-NotebookLMのノートブックをライブラリに自動追加します。
-
-```bash
-/notebook-add https://notebooklm.google.com/notebook/abc-123
-```
+ファイル名形式: `lecture-{番号}-{スラッグ化したタイトル}-{日付}.md`
 
 ## GitHub Actions
 
@@ -459,16 +346,6 @@ on:
 
 IssueやPRコメントで `@claude` メンション時に対話形式で対応します。
 
-```yaml
-# .github/workflows/claude.yml
-on:
-  issue_comment:
-    types: [created]
-  pull_request_review_comment:
-    types: [created]
-```
-
-**使い方:**
 ```
 @claude このPRの変更内容を説明して
 @claude このバグの原因を調査して
@@ -497,6 +374,7 @@ npm run export           # PDF出力
 bash scripts/start-server.sh    # 開発サーバー
 bash scripts/export-pdf.sh      # PDF出力
 bash scripts/check-layout.sh    # レイアウトチェック
+bash scripts/cleanup.sh         # 一時ファイル削除
 ```
 
 ### Design System
@@ -510,21 +388,12 @@ bash scripts/check-layout.sh    # レイアウトチェック
 
 自動化フックにより、適切なタイミングでエージェント連携を提案します。
 
-| フック                         | トリガー           | 動作                             |
-| ------------------------------ | ------------------ | -------------------------------- |
+| フック                         | トリガー           | 動作                              |
+| ------------------------------ | ------------------ | --------------------------------- |
+| `auto-branch.py`               | ユーザー入力       | mainで作業開始時にブランチ自動作成 |
 | `agent-router.py`              | ユーザー入力       | 専門用語・レイアウト質問でGemini提案 |
-| `suggest-gemini-research.py`   | WebSearch前        | Gemini調査を提案                 |
-| `log-cli-tools.py`             | Gemini実行         | 入出力ログ記録                   |
-
-## Language Rules
-
-- **コード・思考**: 英語
-- **専門用語**: 適切な言語（分野による）
-- **Slidev markdown**: 英語
-- **ユーザーへの応答**: 日本語
-- **スライドコンテンツ**: 日本語
-
----
+| `suggest-gemini-research.py`   | WebSearch前        | Gemini調査を提案                  |
+| `log-cli-tools.py`             | Gemini実行         | 入出力ログ記録                    |
 
 ## Gemini CLI Integration
 
@@ -535,15 +404,6 @@ bash scripts/check-layout.sh    # レイアウトチェック
 - **レイアウト判断** - 40パターンから最適なものを推奨
 - **文書分析** - PDF文書の構造化抽出
 - **PDF→Markdown変換** - PDFをMarkdown形式に変換
-
-### Gemini Skill: pdf-to-markdown
-
-pdfフォルダ内のPDFをMarkdown形式に変換します。
-
-```bash
-# Gemini CLIで直接実行
-gemini -p "以下のPDFファイルの内容を読み取り、Markdown形式で出力してください" -f "pdf/document.pdf"
-```
 
 ### 使い方
 
@@ -561,18 +421,17 @@ Task(subagent_type="general-purpose",
 gemini -p "[質問内容]" 2>/dev/null
 ```
 
----
-
-## このフレームワークを使う
+## ワークフロー
 
 ### 新規プレゼンテーション作成
 
 1. **プレゼンテーション計画作成** - `lesson_plan/` にプレゼンテーション計画を作成
-2. **スライド生成** - `/create-presentation` で一括生成
-3. **図解追加** - `/slidev-diagram` で必要な図解を追加
-4. **スタイル整形** - `/slide-style-rector` で統一
-5. **レイアウト確認** - `/layout-fix` で修正
-6. **PDF出力** - `/prepare-pdf` で発表用PDF作成
+2. **テンプレート選択（任意）** - `/choose-template` でプレビュー付き選択
+3. **スライド生成** - `/create-presentation` で一括生成
+4. **図解追加** - `/slidev-diagram` で必要な図解を追加
+5. **スタイル整形** - `/slide-style-rector` で統一
+6. **テスト・修正** - `/slide-test` でオーバーフロー検出＆自動修正
+7. **PDF出力** - `/prepare-pdf` で発表用PDF作成
 
 ### 文書要約スライド準備
 
@@ -596,7 +455,13 @@ gemini -p "[質問内容]" 2>/dev/null
 - **.claude/skills/**: カスタムスキルを追加
 - **.claude/rules/**: ルールをカスタマイズ
 
----
+## Language Rules
+
+- **コード・思考**: 英語
+- **専門用語**: 適切な言語（分野による）
+- **Slidev markdown**: 英語
+- **ユーザーへの応答**: 日本語
+- **スライドコンテンツ**: 日本語
 
 ## Troubleshooting
 
@@ -629,36 +494,8 @@ NODE_OPTIONS=--max-old-space-size=4096 npm run export
 /layout-fix slides.md
 ```
 
----
-
 ## Resources
 
 - **Slidev Documentation**: https://sli.dev/
 - **Vue 3 Documentation**: https://vuejs.org/
 - **Material Design Icons**: https://pictogrammers.com/library/mdi/
-
----
-
-## Integration Benefits
-
-### プレゼンテーションの質向上
-
-- ✅ 最新情報との整合性確保
-- ✅ 専門用語の適切な使用
-- ✅ プレゼンテーション効果の科学的根拠に基づく最大化
-
-### 開発効率の向上
-
-- ✅ 設計決定の自動記録と追跡
-- ✅ 成功パターンの発見と再利用
-- ✅ 知識の組織的蓄積
-
-### 品質保証
-
-- ✅ 自動スタイル整形
-- ✅ レイアウト崩れ検出
-- ✅ git履歴による変更追跡
-
----
-
-**すべての機能は既存のSlidev特化機能を維持したまま動作します。**
