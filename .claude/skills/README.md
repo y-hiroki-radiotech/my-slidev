@@ -30,6 +30,8 @@ Skillsは、ユーザーが直接呼び出す具体的なアクションです�
 │   └── SKILL.md
 ├── add-notes/                 # スピーカーノート追加
 │   └── SKILL.md
+├── create-quiz/               # 確認テスト自動生成
+│   └── SKILL.md
 ├── plan/                      # orchestra統合
 │   └── SKILL.md
 ├── design-tracker/            # orchestra統合
@@ -365,7 +367,34 @@ AI画像生成を使用して図解を作成し、スライドに挿入します
 
 ---
 
-### 10. `/plan` - 実装前の計画作成 (orchestra統合)
+### 10. `/create-quiz` - 講義から確認テスト自動生成
+
+過去の講義スライドから確認テスト（クイズ）を自動生成し、解答付きMarkdownとPDFを出力します。
+
+**使用方法:**
+```
+/create-quiz
+```
+
+**引数:** なし（対話形式で講義・設定を選択）
+
+**成果物:**
+- クイズMarkdownファイル（`quizzes/{lecture-slug}-quiz-{YYYYMMDD}.md`）
+- PDFファイル（オプション、`quizzes/{lecture-slug}-quiz-{YYYYMMDD}.pdf`）
+- Gemini分析結果（`.claude/docs/research/quiz-generation-{slug}.md`）
+
+**機能:**
+- `previous_lecture/` から対象講義を選択
+- 問題数（10/15/20/25問）、形式（4択/○×/穴埋め/短答式）、難易度を指定可能
+- Gemini CLIで講義コンテンツを分析し、Slidevマークアップを除去して問題生成
+- 解答・解説セクションを赤字ハイライト付きで生成
+- Playwright経由でA4印刷用PDF出力（解答セクションは別ページ）
+
+**詳細:** `create-quiz/SKILL.md` を参照
+
+---
+
+### 11. `/plan` - 実装前の計画作成 (orchestra統合)
 
 複雑な講義作成や大規模な変更の前に、実装計画を立てます。
 
@@ -390,7 +419,7 @@ AI画像生成を使用して図解を作成し、スライドに挿入します
 
 ---
 
-### 11. `/design-tracker` - 設計決定の自動記録 (orchestra統合)
+### 12. `/design-tracker` - 設計決定の自動記録 (orchestra統合)
 
 スライド設計決定を自動的に `.claude/docs/DESIGN.md` に記録します。
 
@@ -418,7 +447,7 @@ AI画像生成を使用して図解を作成し、スライドに挿入します
 
 ---
 
-### 12. `/checkpointing` - ワークフローの保存とパターン発見 (orchestra統合)
+### 13. `/checkpointing` - ワークフローの保存とパターン発見 (orchestra統合)
 
 プレゼンテーション作成のワークフローを保存し、再利用可能なパターンを発見します。
 
@@ -451,7 +480,7 @@ AI画像生成を使用して図解を作成し、スライドに挿入します
 
 ---
 
-### 13. `/commit-push` - Conventional Commitでコミット・プッシュ
+### 14. `/commit-push` - Conventional Commitでコミット・プッシュ
 
 ステージされた変更から日本語のConventional Commitメッセージ候補を3つ生成し、選択後にコミット・プッシュを実行します。
 
@@ -476,7 +505,7 @@ AI画像生成を使用して図解を作成し、スライドに挿入します
 
 ---
 
-### 14. `/pr-generator` - PR自動生成
+### 15. `/pr-generator` - PR自動生成
 
 PRテンプレートと変更差分を元にPRの下書きを自動生成し、確認後ghコマンドでPRを作成します。
 
@@ -501,7 +530,7 @@ PRテンプレートと変更差分を元にPRの下書きを自動生成し、�
 
 ---
 
-### 15. `/student-review` - 初学者視点レビュー
+### 16. `/student-review` - 初学者視点レビュー
 
 学習教材（Markdownファイル）を初学者の視点で分析し、改善提案を行います。
 
@@ -527,7 +556,7 @@ PRテンプレートと変更差分を元にPRの下書きを自動生成し、�
 
 ---
 
-### 16. `/notebook-ask` - NotebookLMに質問
+### 17. `/notebook-ask` - NotebookLMに質問
 
 NotebookLMに質問し、自動的にフォローアップ質問を実行して完全な回答を得ます。
 
@@ -557,7 +586,7 @@ NotebookLMに質問し、自動的にフォローアップ質問を実行して�
 
 ---
 
-### 17. `/notebook-manage` - NotebookLM管理
+### 18. `/notebook-manage` - NotebookLM管理
 
 NotebookLMノートブックライブラリの管理操作を提供します。
 
@@ -591,7 +620,7 @@ NotebookLMノートブックライブラリの管理操作を提供します。
 
 ---
 
-### 18. `/notebook-add` - NotebookLM追加
+### 19. `/notebook-add` - NotebookLM追加
 
 NotebookLMのノートブックをライブラリに自動追加します。
 
@@ -698,6 +727,12 @@ NotebookLMのノートブックをライブラリに自動追加します。
 5. `/layout-fix pages/abstract-xxx.md`でレイアウト確認
 6. プレビューで内容確認
 7. `/prepare-pdf pages/abstract-xxx.md`でPDF出力
+
+### 講義後の確認テストを作成する場合
+1. `/archive-lecture`で講義をアーカイブ（未アーカイブの場合）
+2. `/create-quiz`で確認テストを自動生成
+3. 問題数・形式・難易度を選択
+4. PDF出力（オプション）で印刷用テストを生成
 
 ### スタイル改善のみを行う場合
 1. `/slide-style-rector slides.md`でスタイル整形

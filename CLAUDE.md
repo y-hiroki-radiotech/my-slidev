@@ -63,6 +63,7 @@ Task(subagent_type="general-purpose", prompt="Geminiで最新情報を調査し�
 | `/layout-fix` | レイアウト崩れ修正 | 修正されたスライド |
 | `/slide-test` | Playwright自動テスト＋オーバーフロー自動修正 | テストレポート + 自動修正 |
 | `/slidev-diagram` | 図解追加 | 図解画像 + スライド更新 |
+| `/create-quiz` | 講義後の確認テスト生成 | クイズMarkdown + PDF |
 | `/prepare-pdf` | 発表前 | PDF出力 |
 | `/plan` | 複雑なプレゼンの計画 | 実装計画 |
 | `/design-tracker` | 自動（設計決定時） | DESIGN.md更新 |
@@ -147,9 +148,9 @@ node scripts/fix-overflow.mjs slides.md 6 --dry-run    # ドライラン（変�
 
 ---
 
-## Skills Overview (20 Skills)
+## Skills Overview (21 Skills)
 
-### Slidev特化スキル (11)
+### Slidev特化スキル (12)
 
 | # | スキル | 説明 | 使用例 |
 |---|--------|------|--------|
@@ -164,35 +165,36 @@ node scripts/fix-overflow.mjs slides.md 6 --dry-run    # ドライラン（変�
 | 9 | `/prepare-pdf` | PDF出力用最適化 | `/prepare-pdf` |
 | 10 | `/archive-lecture` | プレゼンテーションアーカイブ | `/archive-lecture` |
 | 11 | `/add-notes` | スピーカーノート追加 | `/add-notes 3-10` |
+| 12 | `/create-quiz` | 講義から確認テスト自動生成 | `/create-quiz` |
 
 ### Git/PR スキル (2)
 
 | # | スキル | 説明 | 使用例 |
 |---|--------|------|--------|
-| 12 | `/commit-push` | Conventional Commitでコミット・プッシュ | `/commit-push` |
-| 13 | `/pr-generator` | PR自動生成 | `/pr-generator` |
+| 13 | `/commit-push` | Conventional Commitでコミット・プッシュ | `/commit-push` |
+| 14 | `/pr-generator` | PR自動生成 | `/pr-generator` |
 
 ### NotebookLM スキル (3)
 
 | # | スキル | 説明 | 使用例 |
 |---|--------|------|--------|
-| 14 | `/notebook-ask` | NotebookLMに質問 | `/notebook-ask 質問内容` |
-| 15 | `/notebook-manage` | NotebookLM管理 | `/notebook-manage list` |
-| 16 | `/notebook-add` | NotebookLM追加 | `/notebook-add URL` |
+| 15 | `/notebook-ask` | NotebookLMに質問 | `/notebook-ask 質問内容` |
+| 16 | `/notebook-manage` | NotebookLM管理 | `/notebook-manage list` |
+| 17 | `/notebook-add` | NotebookLM追加 | `/notebook-add URL` |
 
 ### レビュー・分析スキル (1)
 
 | # | スキル | 説明 | 使用例 |
 |---|--------|------|--------|
-| 17 | `/student-review` | 初学者視点レビュー | `/student-review docs/lecture.md` |
+| 18 | `/student-review` | 初学者視点レビュー | `/student-review docs/lecture.md` |
 
 ### Orchestra統合スキル (3)
 
 | # | スキル | 説明 | 使用例 |
 |---|--------|------|--------|
-| 18 | `/plan` | 実装前の計画作成 | `/plan` |
-| 19 | `/design-tracker` | 設計決定の自動記録（プロアクティブ） | 自動トリガー |
-| 20 | `/checkpointing` | ワークフローの保存 | `/checkpointing --full` |
+| 19 | `/plan` | 実装前の計画作成 | `/plan` |
+| 20 | `/design-tracker` | 設計決定の自動記録（プロアクティブ） | 自動トリガー |
+| 21 | `/checkpointing` | ワークフローの保存 | `/checkpointing --full` |
 
 → 詳細: `.claude/skills/README.md`
 
@@ -364,10 +366,11 @@ my-slidev/
 │   │   ├── dev-environment-slidev.md
 │   │   ├── language.md
 │   │   └── security.md
-│   ├── skills/                 # 19スキル
+│   ├── skills/                 # 20スキル
 │   │   ├── add-slide/
 │   │   ├── create-presentation/
 │   │   ├── create-document-summary/
+│   │   ├── create-quiz/
 │   │   ├── slide-style-rector/
 │   │   ├── layout-fix/
 │   │   ├── slide-test/
@@ -403,6 +406,7 @@ my-slidev/
 ├── slides.md                   # メインスライド
 ├── pages/                      # 個別スライドページ
 ├── public/                     # 静的アセット（画像等）
+├── quizzes/                    # 自動生成クイズ（Markdown + PDF）
 └── previous_lecture/           # アーカイブ済み講義
 ```
 
